@@ -1,0 +1,17 @@
+{
+    "name": "cvo-technologies/croogo-webshop-plugin",
+    "type": "croogo-plugin",
+    "require": {
+        "croogo/croogo": "2.1.0",
+        "cvo-technologies/croogo-webshop-payments-plugin": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Marlin Cremers",
+            "email": "m.cremers@cvo-technologies.com"
+        }
+    ],
+    "extra": {
+        "installer-name": "Webshop"
+    }
+}
