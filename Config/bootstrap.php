@@ -22,3 +22,17 @@ CroogoNav::add('sidebar', 'webshop', array(
 		)
 	)
 ));
+
+Configure::write('Webshop.customer_access_providers', array(
+
+));
+
+Croogo::mergeConfig('Routing.prefixes', array(
+	'panel'
+));
+
+Croogo::hookComponent('*', 'Webshop.CustomerAccess');
+
+App::build(array(
+	'CustomerAccessProvider' => array('%s' . 'CustomerAccessProvider' . DS)
+), App::REGISTER);

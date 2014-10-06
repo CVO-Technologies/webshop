@@ -1,0 +1,3 @@
+<?php
+
+CroogoRouter::contentType('product');

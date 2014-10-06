@@ -65,6 +65,10 @@ class Product extends WebshopAppModel {
 			'className' => 'Nodes.Node',
 			'foreignKey' => 'id',
 		),
+		'Tax' => array(
+			'className' => 'WebshopTaxes.Tax',
+			'foreignKey' => 'tax_id'
+		)
 	);
 
 	public $findMethods = array(
