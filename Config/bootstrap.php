@@ -16,12 +16,24 @@ CroogoNav::add('sidebar', 'webshop', array(
 	'url' => '#',
 	'weight' => 30,
 	'children' => array(
+		'products' => array(
+			'title' => __d('webshop', 'Products'),
+			'url' => array(
+				'plugin' => 'webshop',
+				'controller' => 'products',
+				'action' => 'index',
+			)
+		),
 		'configuration' => array(
 			'title' => __d('webshop', 'Configuration'),
 			'url' => '#',
 		)
 	)
 ));
+
+Croogo::hookHelper('*', 'Webshop.Product');
+
+//Croogo::hookBehavior('Node', 'Webshop.Product');
 
 Configure::write('Webshop.customer_access_providers', array(
 
@@ -32,6 +44,9 @@ Croogo::mergeConfig('Routing.prefixes', array(
 ));
 
 Croogo::hookComponent('*', 'Webshop.CustomerAccess');
+
+Croogo::hookAdminTab('Products/admin_edit', 'Configuration implementation', 'Pltfrm.admin/node_webhosting_product_tab');
+Croogo::hookAdminBox('Products/admin_edit', 'Configuration group', 'Webshop.admin/product/box_configuration_group_selector');
 
 App::build(array(
 	'CustomerAccessProvider' => array('%s' . 'CustomerAccessProvider' . DS)

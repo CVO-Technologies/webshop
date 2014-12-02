@@ -61,14 +61,15 @@ class Product extends WebshopAppModel {
 			'fields' => '',
 			'order' => '',
 		),
-		'Node' => array(
-			'className' => 'Nodes.Node',
-			'foreignKey' => 'id',
-		),
+//		'Node' => array(
+//			'className' => 'Nodes.Node',
+//			'foreignKey' => 'id',
+//		),
 		'Tax' => array(
 			'className' => 'WebshopTaxes.Tax',
 			'foreignKey' => 'tax_id'
-		)
+		),
+		'ProductConfigurationImplementation'
 	);
 
 	public $findMethods = array(
