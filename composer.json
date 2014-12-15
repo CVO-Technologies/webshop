@@ -2,7 +2,6 @@
   "name": "cvo-technologies/webshop-orders",
   "type": "croogo-plugin",
   "require": {
-    "croogo/croogo": "2.1.0",
     "cvo-technologies/croogo-webshop-plugin": "dev-master"
   },
   "extra": {
