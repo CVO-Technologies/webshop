@@ -3,6 +3,7 @@
     "type": "croogo-plugin",
     "require": {
         "croogo/croogo": "*",
+		"cvo-technologies/croogo-nodes-datasource-plugin": "dev-master",
         "cvo-technologies/croogo-webshop-payments-plugin": "dev-master"
     },
     "authors": [
