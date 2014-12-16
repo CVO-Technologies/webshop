@@ -5,7 +5,9 @@ App::uses('WebshopAppModel', 'Webshop.Model');
 class ConfigurationGroup extends WebshopAppModel {
 
 	public $hasMany = array(
-		'ConfigurationOption'
+		'ConfigurationOption' => array(
+			'className' => 'Webshop.ConfigurationOption'
+		)
 	);
 
 }

@@ -3,7 +3,8 @@
 $configurationGroups = $this->requestAction(array('controller' => 'configuration_groups', 'action' => 'listing'));
 
 echo $this->Form->input('ProductConfigurationImplementation.configuration_group_id', array(
-	'options' => $configurationGroups
+	'options' => $configurationGroups,
+	'default' => 'aa'
 ));
 
 echo $this->Html->link(

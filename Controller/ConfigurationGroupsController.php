@@ -6,8 +6,17 @@ class ConfigurationGroupsController extends AppController {
 		'Paginator'
 	);
 
+	public function view($id) {
+		$this->ConfigurationGroup->id = $id;
+		$this->ConfigurationGroup->recursive = 2;
+
+		return $this->ConfigurationGroup->read();
+	}
+
 	public function admin_index() {
-		debug($this->Paginator->paginate('ConfigurationGroup'));
+		$configurationGroups = $this->Paginator->paginate('ConfigurationGroup');
+
+		$this->set(compact('configurationGroups'));
 	}
 
 	public function admin_add() {
@@ -35,6 +44,15 @@ class ConfigurationGroupsController extends AppController {
 			$this->redirect(array(
 					'action' => 'index'
 			));
+		}
+	}
+
+	public function admin_delete($id) {
+		if ($this->ConfigurationGroup->delete($id)) {
+			$this->Session->setFlash(__d('webshop', 'Configuration group has been deleted'), 'flash', array('class' => 'success'));
+
+			$this->redirect(array('action' => 'index'));
+			return;
 		}
 	}
 

@@ -21,6 +21,22 @@ CroogoNav::add('sidebar', 'webshop', array(
 			'url' => array(
 				'plugin' => 'webshop',
 				'controller' => 'products',
+				'action0' => 'index',
+			)
+		),
+		'Configuration groups' => array(
+			'title' => __d('webshop', 'Configuration groups'),
+			'url' => array(
+				'plugin' => 'webshop',
+				'controller' => 'configuration_groups',
+				'action0' => 'index',
+			)
+		),
+		'Configuration options' => array(
+			'title' => __d('webshop', 'Configuration options'),
+			'url' => array(
+				'plugin' => 'webshop',
+				'controller' => 'configuration_options',
 				'action' => 'index',
 			)
 		),
@@ -32,6 +48,7 @@ CroogoNav::add('sidebar', 'webshop', array(
 ));
 
 Croogo::hookHelper('*', 'Webshop.Product');
+Croogo::hookHelper('*', 'Webshop.ConfigurationOption');
 
 //Croogo::hookBehavior('Node', 'Webshop.Product');
 
@@ -39,9 +56,18 @@ Configure::write('Webshop.customer_access_providers', array(
 
 ));
 
+Croogo::mergeConfig('Translate.models.ConfigurationOption', array(
+		'fields' => array(
+				'name' => 'nameTranslation',
+		),
+		'translateModel' => 'Webshop.ConfigurationOption',
+));
+
 Croogo::mergeConfig('Routing.prefixes', array(
 	'panel'
 ));
+
+Router::reload();
 
 Croogo::hookComponent('*', 'Webshop.CustomerAccess');
 

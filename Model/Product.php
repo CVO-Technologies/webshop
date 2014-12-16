@@ -69,7 +69,10 @@ class Product extends WebshopAppModel {
 			'className' => 'WebshopTaxes.Tax',
 			'foreignKey' => 'tax_id'
 		),
-		'ProductConfigurationImplementation'
+	);
+
+	public $hasMany = array(
+		'ProductConfigurationGroup'
 	);
 
 	public $findMethods = array(
