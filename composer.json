@@ -4,7 +4,8 @@
     "require": {
         "croogo/croogo": "*",
 		"cvo-technologies/croogo-nodes-datasource-plugin": "dev-master",
-        "cvo-technologies/croogo-webshop-payments-plugin": "dev-master"
+        "cvo-technologies/croogo-webshop-payments-plugin": "dev-master",
+        "cvo-technologies/webshop-taxes": "dev-master"
     },
     "authors": [
         {
