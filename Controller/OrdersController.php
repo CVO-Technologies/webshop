@@ -61,6 +61,40 @@ class OrdersController extends AppController {
 		$this->set(compact('order'));
 	}
 
+	public function admin_edit($id) {
+		$this->Order->id = $id;
+		$this->Order->recursive = 3;
+		if (!$this->Order->exists()) {
+			throw new NotFoundException();
+		}
+
+		$order = $this->Order->read();
+
+		if (empty($this->request->data)) {
+			$this->request->data = $order;
+		}
+
+		$this->set(compact('order'));
+
+		if (!$this->request->is('put')) {
+			return;
+		}
+
+		if (!$this->Order->save($this->request->data)) {
+			$this->Session->setFlash(__d('webshop_orders', 'Could not save the order'), 'alert', array(
+				'plugin' => 'BoostCake',
+				'class' => 'alert-danger'
+			));
+
+			return;
+		}
+
+		$this->Session->setFlash(__d('webshop_orders', 'The order has been saved'), 'alert', array(
+			'plugin' => 'BoostCake',
+			'class' => 'alert-success'
+		));
+	}
+
 	public function admin_mark_done($id) {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();

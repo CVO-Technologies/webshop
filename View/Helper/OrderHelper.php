@@ -38,4 +38,15 @@ class OrderHelper extends AppHelper {
 		return '';
 	}
 
+	public function statusOptions() {
+		return array(
+			'open' => $this->statusText('open'),
+			'cancelled' => $this->statusText('cancelled'),
+			'paid' => $this->statusText('paid'),
+			'sent' => $this->statusText('sent'),
+			'arrived' => $this->statusText('arrived'),
+			'done' => $this->statusText('done'),
+		);
+	}
+
 }
