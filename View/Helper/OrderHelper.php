@@ -24,4 +24,18 @@ class OrderHelper extends AppHelper {
 		return $status;
 	}
 
+	public function statusContext($status) {
+		switch ($status) {
+			case 'open':
+				return 'warning';
+			case 'paid':
+			case 'sent':
+				return 'info';
+			case 'arrived':
+				return 'success';
+		}
+
+		return '';
+	}
+
 }

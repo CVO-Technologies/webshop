@@ -1,20 +1,46 @@
 <?php
 
+/**
+ * Class OrdersController
+ *
+ * @property Order Order
+ */
 class OrdersController extends AppController {
 
 	public $components = array(
-		'Paginator'
-	);
-
-	public function admin_index() {
-		$this->Paginator->settings = array(
-			'Order' => array(
+		'Paginator' => array(
+			'settings' => array(
 				'order' => array(
 					'Order.modified' => 'DESC'
 				)
 			)
-		);
-		$orders = $this->Paginator->paginate('Order');
+		),
+		'Croogo.BulkProcess',
+		'Search.Prg' => array(
+			'presetForm' => array(
+				'paramType' => 'querystring',
+			),
+			'commonProcess' => array(
+				'paramType' => 'querystring',
+				'filterEmpty' => true,
+			),
+		),
+	);
+
+	public $presetVars = true;
+
+	public function admin_index() {
+		$this->Prg->commonProcess();
+
+		$conditions = $this->Order->parseCriteria($this->Prg->parsedParams());
+		if (!isset($conditions['Order.status'])) {
+			$conditions['Order.status !='] = array(
+				'cancelled',
+				'done'
+			);
+		}
+
+		$orders = $this->Paginator->paginate('Order', $conditions);
 
 		if ($this->request->is('requested')) {
 			return $orders;
@@ -69,12 +95,29 @@ class OrdersController extends AppController {
 		));
 	}
 
+	/**
+	 * Admin process
+	 *
+	 * @return void
+	 * @access public
+	 */
+	public function admin_process() {
+		list($action, $ids) = $this->BulkProcess->getRequestVars($this->{$this->modelClass}->alias);
+
+		$displayName = Inflector::pluralize(Inflector::humanize($this->{$this->modelClass}->alias));
+		$options = array(
+			'redirect' => $this->referer(),
+			'multiple' => array('copy' => false),
+			'messageMap' => array(
+				'cancel' => __d('webshop_orders', '%s cancelled', $displayName),
+			),
+		);
+		return $this->BulkProcess->process($this->{$this->modelClass}, $action, $ids, $options);
+	}
+
 	public function panel_index() {
-		$orders = $this->Order->find('all', array(
-			'conditions' => array(
-//				$this->Order->alias . '.customer_id' => $this->CustomerAccess->getAccessibleCustomers()
-				$this->Order->alias . '.customer_id' => $this->CustomerAccess->getCustomerId()
-			)
+		$orders = $this->Paginator->paginate('Order', array(
+			$this->Order->alias . '.customer_id' => $this->CustomerAccess->getCustomerId()
 		));
 
 		$this->set(compact('orders'));
@@ -99,6 +142,20 @@ class OrdersController extends AppController {
 		}
 
 		$order = $this->Order->read();
+
+		if ($order['Order']['remaining'] <= 0) {
+			$this->Session->setFlash(__d('webshop_orders', 'You\'ve already paid this order'), 'alert', array(
+				'plugin' => 'BoostCake',
+				'class' => 'alert-info'
+			));
+
+			$this->redirect(array(
+				'action' => 'view',
+				$id
+			));
+
+			return;
+		}
 
 		$this->set(compact('order'));
 

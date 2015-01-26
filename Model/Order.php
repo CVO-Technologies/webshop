@@ -13,13 +13,23 @@ class Order extends WebshopOrdersAppModel {
 				)
 			)
 		),
-		'Webshop.Status'
+		'Webshop.Status',
+		'Croogo.BulkProcess' => array(
+			'actionsMap' => array(
+				'cancel' => 'bulkCancel'
+			)
+		),
+		'Search.Searchable',
 	);
 
 	public $belongsTo = array(
 		'Customer' => array(
 			'className' => 'Webshop.Customer',
 			'foreignKey' => 'customer_id'
+		),
+		'InvoiceAddressDetail' => array(
+			'className' => 'Webshop.AddressDetail',
+			'foreignKey' => 'invoice_address_detail_id'
 		)
 	);
 
@@ -38,10 +48,18 @@ class Order extends WebshopOrdersAppModel {
 		)
 	);
 
+	public $filterArgs = array(
+		'status' => array('type' => 'value'),
+		'customer_id' => array('type' => 'value'),
+	);
+
 	public function createFromProductList($customerId, $productsList) {
 		$products = $this->OrderProduct->Product->find('all', array(
 			'conditions' => array(
 				'id' => array_keys($productsList)
+			),
+			'contain' => array(
+				'ProductConfigurationGroup'
 			)
 		));
 
@@ -205,5 +223,17 @@ class Order extends WebshopOrdersAppModel {
 //				->send();
 //		}
 //	}
+
+	public function bulkCancel($ids) {
+		foreach ($ids as $id) {
+			$success = $this->changeStatus('cancelled', $id);
+
+			if (!$success) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 
 }

@@ -1,5 +1,4 @@
 <?php $this->assign('title', __d('webshop_orders', 'Order #%1$d', $order['Order']['number'])); ?>
-<h1><?php echo h($this->fetch('title')); ?></h1>
 
 <strong><?php echo h(__d('webshop_orders', 'Amount')); ?>:</strong> <?php echo h($this->Number->currency($order['Order']['amount'], 'EUR')); ?><br>
 <strong><?php echo h(__d('webshop_orders', 'Remaining')); ?>:</strong> <?php echo h($this->Number->currency($order['Order']['remaining'], 'EUR')); ?><br>
