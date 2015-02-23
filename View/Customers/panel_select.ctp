@@ -1,15 +1,17 @@
-<?php echo $this->Form->create(false, array(
+<?php
+$this->Title->setPageTitle(__d('webshop', 'Select customer'));
+
+echo $this->Form->create(false, array(
 	'type' => 'get',
-	'class' => 'form-login form-wrapper form-narrow',
 	'inputDefaults' => array(
-		'div' => array(
-			'class' => 'form-group'
-		),
+		'div' => 'form-group',
 		'label' => array(
-			'class' => 'sr-only'
+			'class' => 'col col-md-3 control-label'
 		),
+		'wrapInput' => 'col col-md-9',
 		'class' => 'form-control'
 	),
+	'class' => 'well form-horizontal',
 	'url' => array(
 		'panel' => true,
 		'plugin' => 'webshop',
@@ -17,7 +19,6 @@
 		'action' => 'select'
 	)
 )); ?>
-	<h3 class="title-divider"><span><?php echo h(__d('webshop', 'Select customer')); ?></span></h3>
 <p>Select the customer you would like the act on behalf of</p>
 <?php echo $this->Form->input('customer', array('options' => $customers)); ?>
 

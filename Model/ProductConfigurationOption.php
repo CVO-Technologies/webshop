@@ -12,9 +12,9 @@ class ProductConfigurationOption extends AppModel {
 	);
 
 	public $hasMany = array(
-		'ConfigurationOptionItem' => array(
-			'className' => 'Webshop.ConfigurationOptionItem'
-		)
+//		'ConfigurationOptionItem' => array(
+//			'className' => 'Webshop.ConfigurationOptionItem'
+//		)
 	);
 
 }

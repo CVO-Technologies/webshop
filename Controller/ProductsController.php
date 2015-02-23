@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class ProductsController
+ *
+ * @property Product Product
+ */
 class ProductsController extends AppController {
 
 	public $components = array(
@@ -46,8 +51,23 @@ class ProductsController extends AppController {
 		$this->set('_serialize', array('product'));
 	}
 
+	public function calculate_price($id) {
+		return $this->Product->getPrice($id, $this->request->param('configuration'));
+	}
+
 	public function admin_index() {
 		$products = $this->Paginator->paginate('Product');
+
+		$this->set(compact('products'));
+	}
+
+	public function admin_listing() {
+		$this->Paginator->settings['Product']['type'] = 'list';
+		$products = $this->Paginator->paginate('Product');
+
+		if ($this->request->is('requested')) {
+			return $products;
+		}
 
 		$this->set(compact('products'));
 	}
@@ -56,24 +76,25 @@ class ProductsController extends AppController {
 		$this->Product->id = $id;
 		$this->Product->recursive = 2;
 
-		$this->request->data = $this->Product->read();
+		if (empty($this->request->data)) {
+			$this->request->data = $this->Product->read();
+		}
 
 		if (!$this->request->is('put')) {
 			return;
 		}
 
-//		debug($this->request->data?);
+		if (!$this->Product->saveAll($this->request->data, array(
+			'deep' => true
+		))) {
+			debug(':(');
+			debug($this->Product->validationErrors);
+			debug($this->Product->invalidFields());
 
-		$success = $this->Product->save($this->request->data);
-		debug($this->Product->validationErrors);
-		debug($success);
-//		$log = $this->Product->getDataSource()->getLog(false, false);
-//		debug($log);
-		debug($this->Product->invalidFields());
-		if ($success) {
-			$this->redirect(array('action' => 'index'));
 			return;
 		}
+
+		$this->redirect(array('action' => 'index'));
 	}
 
 }

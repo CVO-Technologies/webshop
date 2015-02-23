@@ -26,4 +26,36 @@ class CounterBehavior extends ModelBehavior {
 		return true;
 	}
 
+	public function increment(Model $Model, $id = null, $field = null) {
+		if ((!$field) && (key($this->settings[$Model->alias]['fields']))) {
+			$field = key($this->settings[$Model->alias]['fields']);
+		}
+
+		if (!$field) {
+			return false;
+		}
+
+		if ($id === null) {
+			$id = $Model->getID();
+		}
+
+		if ($id === false) {
+			return false;
+		}
+
+		$Model->id = $id;
+
+		$currentValue = $Model->field($field, array(
+			$Model->alias . '.id' => $id
+		));
+
+		$result = $Model->saveField($field, $currentValue + 1);
+
+		if (!$result) {
+			return false;
+		}
+
+		return $currentValue + 1;
+	}
+
 }

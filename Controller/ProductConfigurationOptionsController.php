@@ -7,6 +7,9 @@ class ProductConfigurationOptionsController extends AppController {
 			'conditions' => array(
 				'ProductConfigurationOption.product_id' => $id
 			),
+			'contain' => array(
+				'ConfigurationOption'
+			),
 			'recursive' => 1
 		));
 	}

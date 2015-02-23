@@ -1,7 +1,7 @@
 <?php
 
 echo $this->Form->input(
-		$inputOptions['prefix'] . $option['alias'],
+		$fieldName,
 		$this->ConfigurationOption->inputOptions(
 				$option['alias'],
 				array(

@@ -3,15 +3,31 @@
 class CustomerContactsController extends AppController {
 
 	public $components = array(
-		'Paginator'
+		'Paginator',
+		'Search.Prg' => array(
+			'presetForm' => array(
+				'paramType' => 'querystring',
+			),
+			'commonProcess' => array(
+				'paramType' => 'querystring',
+				'filterEmpty' => true,
+			),
+		)
 	);
 
 	public function panel_index() {
-		$customer_contacts = $this->Paginator->paginate('CustomerContact', array(
-			$this->CustomerContact->alias . '.customer_id' => $this->request->params['named']['customer']
-		));
+		$this->Prg->commonProcess();
 
-		$this->set(compact('customer_contacts'));
+		$conditions = $this->CustomerContact->parseCriteria($this->Prg->parsedParams());
+		$conditions['CustomerContact.customer_id'] = $this->CustomerAccess->getCustomerId();
+
+		$customerContacts = $this->Paginator->paginate('CustomerContact', $conditions);
+
+		if ($this->request->is('requested')) {
+			return $customerContacts;
+		}
+
+		$this->set(compact('customerContacts'));
 	}
 
 	public function panel_view($id) {
@@ -32,6 +48,31 @@ class CustomerContactsController extends AppController {
 		}
 
 		$this->request->data = $this->CustomerContact->read();
+	}
+
+	public function admin_index() {
+		$this->Prg->commonProcess();
+
+		$customerContacts = $this->Paginator->paginate('CustomerContact', $this->CustomerContact->parseCriteria($this->Prg->parsedParams()));
+
+		if ($this->request->is('requested')) {
+			return $customerContacts;
+		}
+
+		$this->set(compact('customerContacts'));
+	}
+
+	public function admin_listing() {
+		$this->Prg->commonProcess();
+
+		$this->Paginator->settings['CustomerContact']['type'] = 'list';
+		$customerContacts = $this->Paginator->paginate('CustomerContact', $this->CustomerContact->parseCriteria($this->Prg->parsedParams()));
+
+		if ($this->request->is('requested')) {
+			return $customerContacts;
+		}
+
+		$this->set(compact('customerContacts'));
 	}
 
 }

@@ -5,7 +5,7 @@ echo $this->Form->input(
 	$this->ConfigurationOption->inputOptions(
 		$option['alias'],
 		array(
-			'type' => 'number'
+			'type' => 'checkbox'
 		)
 	)
 );

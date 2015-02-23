@@ -24,6 +24,8 @@ class Product extends WebshopAppModel {
 	);
 
 	public $actsAs = array(
+		'Webshop.ConfigurableItem',
+		'Webshop.ConfigurationValueHost',
 		'Tree',
 		'Croogo.BulkProcess' => array(
 			'actionsMap' => array(
@@ -34,14 +36,22 @@ class Product extends WebshopAppModel {
 		'Croogo.Encoder',
 		'Croogo.Publishable',
 //		'Croogo.Trackable',
-		'Meta.Meta',
-		'Croogo.Url',
-		'Croogo.Cached' => array(
-			'groups' => array(
-				'nodes',
+//		'Meta.Meta',
+		'Croogo.Url' => array(
+			'url' => array(
+				'plugin' => 'webshop',
+				'controller' => 'products',
+				'action' => 'view',
 			),
+			'fields' => array(
+
+			),
+			'pass' => array(
+				'id'
+			)
 		),
 		'Search.Searchable',
+		'Containable'
 	);
 
 	public $filterArgs = array(
@@ -71,15 +81,33 @@ class Product extends WebshopAppModel {
 		),
 	);
 
-	public $hasMany = array(
-		'ProductConfigurationGroup'
-	);
-
 	public $findMethods = array(
 		'promoted' => true,
 		'viewBySlug' => true,
 		'viewById' => true,
 		'published' => true,
 	);
+
+	public function getPrice($productId, $configuration) {
+		$product = $this->find('first', array(
+			'conditions' => array(
+				'id' => $productId
+			),
+			'recursive' => 0
+		));
+
+//		debug($product);
+
+		return $product['CustomFields']['price'];
+
+		$productConfigurationOptions = $this->ProductConfigurationOption->find('all', array(
+			'conditions' => array(
+				'product_id' => $productId
+			),
+			'recursive' => -1
+		));
+
+		debug($productConfigurationOptions);
+	}
 
 }

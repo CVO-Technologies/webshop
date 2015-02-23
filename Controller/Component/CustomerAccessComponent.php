@@ -13,6 +13,10 @@ class CustomerAccessComponent extends Component {
 	}
 
 	public function beforeRender(Controller $Controller) {
+		if ($Controller->request->param('prefix') === 'admin') {
+			return;
+		}
+
 		$accessibleCustomers = $this->getAccessibleCustomers();
 
 		if (($this->getCustomerId(false)) && (!in_array($this->getCustomerId(false), $accessibleCustomers))) {

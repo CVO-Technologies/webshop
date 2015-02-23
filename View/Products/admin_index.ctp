@@ -4,7 +4,7 @@ $this->extend('/Common/admin_index');
 //$this->Croogo->adminScript(array('Nodes.admin'));
 
 $this->Html
-		->addCrumb('', '/admin', array('icon' => $_icons['home']))
+		->addCrumb('', '/admin', array('icon' => $this->Theme->getIcon['home']))
 		->addCrumb(__d('webshop', 'Webshop'))
 		->addCrumb(__d('webshop', 'Products'), '/' . $this->request->url);
 
@@ -42,19 +42,19 @@ $this->append('table-body');
 	<?php foreach ($products as $product): ?>
 		<tr>
 			<td><?php echo $product['Product']['id']; ?></td>
-			<td><?php echo $product['Product']['title']; ?></td>
+			<td><?php echo $this->Html->link($product['Product']['title'], array('admin' => false) + $product['Product']['url'], array('target' => '_blank')); ?></td>
 			<td>
 				<div class="item-actions">
 					<?php
 					echo $this->Croogo->adminRowActions($product['Product']['id']);
 					echo ' ' . $this->Croogo->adminRowAction('',
 									array('action' => 'edit', $product['Product']['id']),
-									array('icon' => $_icons['update'], 'tooltip' => __d('croogo', 'Edit this item'))
+									array('icon' => $this->Theme->getIcon('update'), 'tooltip' => __d('croogo', 'Edit this item'))
 							);
 					echo ' ' . $this->Croogo->adminRowAction('',
 									'#Node' . $product['Product']['id'] . 'Id',
 									array(
-											'icon' => $_icons['copy'],
+											'icon' => $this->Theme->getIcon('copy'),
 											'tooltip' => __d('croogo', 'Create a copy'),
 											'rowAction' => 'copy',
 									)
@@ -62,7 +62,7 @@ $this->append('table-body');
 					echo ' ' . $this->Croogo->adminRowAction('',
 									'#Node' . $product['Product']['id'] . 'Id',
 									array(
-											'icon' => $_icons['delete'],
+											'icon' => $this->Theme->getIcon('delete'),
 											'class' => 'delete',
 											'tooltip' => __d('croogo', 'Remove this item'),
 											'rowAction' => 'delete',
