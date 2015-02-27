@@ -18,6 +18,10 @@ class CounterBehavior extends ModelBehavior {
 				continue;
 			}
 
+			if (!empty($Model->data[$Model->alias][$field])) {
+				continue;
+			}
+
 			$Model->data[$Model->alias][$field] = $this->Counter->getNextValue($Model, $field);
 
 			$this->Counter->increaseValue($Model, $field);
