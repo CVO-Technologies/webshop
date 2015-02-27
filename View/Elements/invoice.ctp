@@ -8,7 +8,7 @@
 		</h1>
 	</div>
 	<div class="col-xs-6 text-right">
-		<h1><?php echo ($invoice['Invoice']['type']) ? 'PRO FORMA ' : ''; ?>INVOICE</h1>
+		<h1><?php echo ($invoice['Invoice']['type'] === 'proforma') ? 'PRO FORMA ' : ''; ?>INVOICE</h1>
 
 		<h1>
 			<small>Invoice #<?php echo h($invoice['Invoice']['number']); ?></small>
@@ -37,7 +37,7 @@
 			</div>
 			<div class="panel-body">
 				<p>
-					<?php echo $this->element('Webshop.address', array('addressDetail' => $invoice['Customer']['AddressDetail'][0])); ?>
+					<?php echo $this->element('Webshop.address_detail', array('addressDetail' => $invoice['AddressDetail'])); ?>
 				</p>
 			</div>
 		</div>
@@ -65,13 +65,13 @@
 	</tr>
 	</thead>
 	<tbody>
-	<?php foreach ($invoice['InvoiceProduct'] as $invoiceProduct): ?>
+	<?php foreach ($invoice['InvoiceLine'] as $invoiceLine): ?>
 	<tr>
-		<td><?php echo $this->Html->link($invoiceProduct['Product']['title'], $invoiceProduct['Product']['path']); ?></td>
-		<td><?php echo h($invoiceProduct['Product']['excerpt']); ?></td>
-		<td class="text-right"><?php echo h($invoiceProduct['amount']); ?></td>
-		<td class="text-right"><?php echo h($this->Number->currency($invoiceProduct['price'], 'EUR')); ?></td>
-		<td class="text-right"><?php echo h($this->Number->currency($invoiceProduct['amount'] * $invoiceProduct['price'], 'EUR')); ?></td>
+		<td><?php echo h($invoiceLine['title']); ?></td>
+		<td><?php echo h($invoiceLine['description']); ?></td>
+		<td class="text-right"><?php echo h($this->Number->precision($invoiceLine['amount'], 2)); ?></td>
+		<td class="text-right"><?php echo h($this->Number->currency($invoiceLine['individual_price'], 'EUR')); ?></td>
+		<td class="text-right"><?php echo h($this->Number->currency($invoiceLine['price'], 'EUR')); ?></td>
 	</tr>
 	<?php endforeach; ?>
 	</tbody>
@@ -80,14 +80,14 @@
 	<div class="col-xs-2 col-xs-offset-8">
 		<p>
 			<strong>
-				<?php foreach ($prices['shippingCosts'] as $shippingCost): ?>
+				<?php foreach ($invoice['Invoice']['prices']['shippingCosts'] as $shippingCost): ?>
 					Shipping: <br>
 				<?php endforeach; ?>
-				<?php foreach ($prices['transactionCosts'] as $transactionCosts): ?>
+				<?php foreach ($invoice['Invoice']['prices']['transactionCosts'] as $transactionCosts): ?>
 					Transactioncosts: <br>
 				<?php endforeach; ?>
 				Sub Total : <br>
-				<?php foreach ($prices['taxes'] as $tax): ?>
+				<?php foreach ($invoice['Invoice']['prices']['taxes'] as $tax): ?>
 				TAX <?php echo h($tax['percentage']); ?>% : <br>
 				<?php endforeach; ?>
 				Total : <br>
@@ -96,17 +96,17 @@
 	</div>
 	<div class="col-xs-2">
 		<strong>
-			<?php foreach ($prices['shippingCosts'] as $shippingCost): ?>
+			<?php foreach ($invoice['Invoice']['prices']['shippingCosts'] as $shippingCost): ?>
 				<?php echo h($this->Number->currency($shippingCost['amount'], 'EUR')); ?> <br>
 			<?php endforeach; ?>
-			<?php foreach ($prices['transactionCosts'] as $transactionCosts): ?>
+			<?php foreach ($invoice['Invoice']['prices']['transactionCosts'] as $transactionCosts): ?>
 				<?php echo h($this->Number->currency($transactionCosts['amount'], 'EUR')); ?> <br>
 			<?php endforeach; ?>
-			<?php echo h($this->Number->currency($prices['subTotal'], 'EUR')); ?> <br>
-			<?php foreach ($prices['taxes'] as $tax): ?>
+			<?php echo h($this->Number->currency($invoice['Invoice']['prices']['subTotal'], 'EUR')); ?> <br>
+			<?php foreach ($invoice['Invoice']['prices']['taxes'] as $tax): ?>
 				<?php echo h($this->Number->currency($tax['amount'], 'EUR')); ?><br>
 			<?php endforeach; ?>
-			<?php echo h($this->Number->currency($prices['total'], 'EUR')); ?> <br>
+			<?php echo h($this->Number->currency($invoice['Invoice']['prices']['total'], 'EUR')); ?> <br>
 		</strong>
 	</div>
 </div>
@@ -147,4 +147,3 @@
 		</div>
 	</div>
 </div>
-<?php debug($invoice); ?>

@@ -115,7 +115,7 @@ class InvoicesHandler implements CakeEventListener {
 				->emailFormat('html')
 				->to($contact['email'])
 				->from(Configure::read('Site.email'))
-				->subject(__d('webshop_orders', 'Status update for invoice #%1$d', $invoice['Invoice']['number']))
+				->subject(__d('webshop_invoices', 'Status update for invoice #%1$d', $invoice['Invoice']['number']))
 				->viewVars(compact('invoice', 'customer', 'contact'))
 				->send();
 		}

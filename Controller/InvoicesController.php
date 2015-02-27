@@ -3,16 +3,34 @@
 class InvoicesController extends AppController {
 
 	public $components = array(
-		'Paginator'
+		'Paginator' => array(
+			'settings' => array(
+				'Invoice' => array(
+					'contain' => array(
+						'Customer',
+						'AddressDetail',
+						'InvoiceLine' => array(
+							'TaxRevision'
+						)
+					),
+					'order' => array(
+						'created' => 'DESC'
+					)
+				)
+			)
+		),
+		'Search.Prg' => array(
+			'presetForm' => array(
+				'paramType' => 'querystring',
+			),
+			'commonProcess' => array(
+				'paramType' => 'querystring',
+				'filterEmpty' => true,
+			),
+		),
 	);
 
 	public function panel_index() {
-		$this->Paginator->settings = array(
-			'order' => array(
-				'created' => 'DESC'
-			)
-		);
-
 		$invoices = $this->Paginator->paginate('Invoice', array(
 			$this->Invoice->alias . '.customer_id' => $this->CustomerAccess->getCustomerId()
 		));
@@ -21,18 +39,25 @@ class InvoicesController extends AppController {
 	}
 
 	public function panel_view($id) {
-		$this->Invoice->id = $id;
-		$this->Invoice->recursive = 2;
-		if (!$this->Invoice->exists()) {
+		$invoice = $this->Invoice->find('first', array(
+			'conditions' => array(
+				'Invoice.id' => $id,
+				'Invoice.customer_id' => $this->CustomerAccess->getCustomerId()
+			),
+			'contain' => array(
+				'Customer',
+				'AddressDetail',
+				'InvoiceLine' => array(
+					'TaxRevision'
+				)
+			)
+		));
+		if (!$invoice) {
 			throw new NotFoundException();
 		}
 
-		$invoice = $this->Invoice->read();
-
-		$prices = $this->Invoice->getPrices();
-
-		$this->set(compact('invoice', 'prices'));
-		$this->set('_serialize', array('invoice', 'prices'));
+		$this->set(compact('invoice'));
+		$this->set('_serialize', array('invoice'));
 	}
 
 	public function get_prices($id) {
@@ -49,6 +74,39 @@ class InvoicesController extends AppController {
 		if ($this->request->is('requested')) {
 			return compact('total');
 		}
+	}
+
+	public function admin_index() {
+		$this->Prg->commonProcess();
+
+		$conditions = $this->Invoice->parseCriteria($this->Prg->parsedParams());
+
+		$invoices = $this->Paginator->paginate('Invoice', $conditions);
+
+		if ($this->request->is('requested')) {
+			return $invoices;
+		}
+
+		$this->set(compact('invoices'));
+	}
+
+	public function admin_view($id) {
+		$invoice = $this->Invoice->find('first', array(
+			'conditions' => array(
+				'Invoice.id' => $id
+			),
+			'contain' => array(
+				'Customer',
+				'AddressDetail',
+				'InvoiceLine' => array(
+					'TaxRevision' => array(
+						'Tax'
+					)
+				)
+			)
+		));
+
+		$this->set(compact('invoice'));
 	}
 
 }

@@ -10,19 +10,28 @@ class Invoice extends AppModel {
 				)
 			)
 		),
-		'Webshop.Status'
+		'Webshop.Status',
+		'Search.Searchable',
 	);
 
 	public $belongsTo = array(
 		'Customer' => array(
 			'className'  => 'Webshop.Customer',
 			'foreignKey' => 'customer_id'
+		),
+		'AddressDetail' => array(
+			'className' => 'Webshop.AddressDetail',
+			'foreignKey' => 'address_detail_id'
 		)
 	);
 
 	public $hasMany = array(
 		'InvoiceProduct' => array(
 			'className'  => 'WebshopInvoices.InvoiceProduct',
+			'foreignKey' => 'invoice_id'
+		),
+		'InvoiceLine' => array(
+			'className'  => 'WebshopInvoices.InvoiceLine',
 			'foreignKey' => 'invoice_id'
 		),
 		'InvoiceShippingCost' => array(
@@ -34,6 +43,74 @@ class Invoice extends AppModel {
 			'foreignKey' => 'invoice_id'
 		)
 	);
+
+	public $filterArgs = array(
+		'status' => array('type' => 'value'),
+		'customer_id' => array('type' => 'value'),
+	);
+
+	public function afterFind($results, $primary = false) {
+		if ($primary) {
+			foreach ($results as &$result) {
+				$subTotal = 0;
+				$total = 0;
+
+				$taxes = array();
+
+				if (!isset($result['InvoiceLine'])) {
+					continue;
+				}
+
+				foreach ($result['InvoiceLine'] as $invoiceLine) {
+					if (!isset($invoiceLine['TaxRevision'])) {
+						continue;
+					}
+
+					if (isset($invoiceLine['TaxRevision']['tax_id'])) {
+						if (!isset($taxes[$invoiceLine['TaxRevision']['tax_id']])) {
+							$taxes[$invoiceLine['TaxRevision']['tax_id']] = array(
+								'tax_id' => (int)$invoiceLine['TaxRevision']['tax_id'],
+								'percentage' => (float )$invoiceLine['TaxRevision']['percentage'],
+								'amount' => (float)$invoiceLine['price'] / 100 * $invoiceLine['TaxRevision']['percentage']
+							);
+						} else {
+							$taxes[$invoiceLine['TaxRevision']['tax_id']]['amount'] += $invoiceLine['price'] / 100 * $taxes[$invoiceLine['TaxRevision']['tax_id']]['percentage'];
+						}
+					}
+
+					$subTotal += $invoiceLine['price'];
+				}
+
+				if (isset($result['InvoiceTransactionCost'])) {
+					$transactionCosts = $result['InvoiceTransactionCost'];
+					foreach ($transactionCosts as $transactionCost) {
+						$subTotal += $transactionCost['amount'];
+					}
+				} else {
+					$transactionCosts = array();
+				}
+
+				if (isset($result['InvoiceShippingCost'])) {
+					$shippingCosts = $result['InvoiceShippingCost'];
+					foreach ($shippingCosts as $shippingCost) {
+						$subTotal += $shippingCost['amount'];
+					}
+				} else {
+					$shippingCosts = array();
+				}
+
+				$total += $subTotal;
+				foreach ($taxes as $tax) {
+					$total += $tax['amount'];
+				}
+
+				$result[$this->alias]['prices'] = compact('transactionCosts', 'shippingCosts', 'taxes', 'subTotal', 'total');
+			}
+		}
+
+		return $results;
+	}
+
 
 	public function getPrices($id = null) {
 		if ($id === null) {
