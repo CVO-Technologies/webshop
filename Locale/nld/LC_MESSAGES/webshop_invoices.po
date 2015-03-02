@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2015-02-27 15:34+0000\n"
-"PO-Revision-Date: 2015-03-02 11:47+0200\n"
+"PO-Revision-Date: 2015-03-02 22:02+0200\n"
 "Last-Translator: Marlin <m.cremers@mms-projects.net>\n"
 "Language-Team: nld (generated) <http://weblate.cvo-"
 "technologies.com/projects/webshop/webshop-invoices/nld/>\n"
@@ -79,7 +79,7 @@ msgstr "Gearriveerd"
 
 #: Plugin/WebshopInvoices/View/Helper/InvoicesHelper.php:22
 msgid "Done"
-msgstr "Afgehandeld"
+msgstr "Gedaan"
 
 #: Plugin/WebshopInvoices/View/Invoices/admin_index.ctp:26
 #: Plugin/WebshopInvoices/View/Invoices/panel_index.ctp:17
