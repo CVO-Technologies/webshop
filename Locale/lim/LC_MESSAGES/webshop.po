@@ -1,0 +1,294 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2015-03-02 11:15+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Plugin/Webshop/Config/bootstrap.php:7;51
+#: Plugin/Webshop/View/ConfigurationGroups/admin_form.ctp:9
+#: Plugin/Webshop/View/ConfigurationGroups/admin_index.ctp:8
+#: Plugin/Webshop/View/ConfigurationOptionItems/admin_index.ctp:8
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:9
+#: Plugin/Webshop/View/ConfigurationOptions/admin_index.ctp:8
+#: Plugin/Webshop/View/ProductConfigurationGroups/admin_index.ctp:8
+#: Plugin/Webshop/View/Products/admin_index.ctp:8
+msgid "Webshop"
+msgstr ""
+
+#: Plugin/Webshop/Config/bootstrap.php:12
+msgid "Customers"
+msgstr ""
+
+#: Plugin/Webshop/Config/bootstrap.php:20
+#: Plugin/Webshop/View/ProductConfigurationGroups/admin_index.ctp:9
+#: Plugin/Webshop/View/Products/admin_index.ctp:9
+msgid "Products"
+msgstr ""
+
+#: Plugin/Webshop/Config/bootstrap.php:28
+#: Plugin/Webshop/View/ConfigurationGroups/admin_form.ctp:10
+#: Plugin/Webshop/View/ConfigurationGroups/admin_index.ctp:9
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:10
+msgid "Configuration groups"
+msgstr ""
+
+#: Plugin/Webshop/Config/bootstrap.php:36
+#: Plugin/Webshop/View/ConfigurationOptions/admin_index.ctp:12
+msgid "Configuration options"
+msgstr ""
+
+#: Plugin/Webshop/Config/bootstrap.php:44
+msgid "Configuration"
+msgstr ""
+
+#: Plugin/Webshop/Config/bootstrap.php:56;67
+#: Plugin/Webshop/View/Customers/admin_view.ctp:43;54
+msgid "Edit"
+msgstr ""
+
+#: Plugin/Webshop/Controller/AddressDetailsController.php:78
+msgid "Could not save address details"
+msgstr ""
+
+#: Plugin/Webshop/Controller/ConfigurationGroupsController.php:52
+msgid "Configuration group has been deleted"
+msgstr ""
+
+#: Plugin/Webshop/Model/Behavior/StatusBehavior.php:28
+msgid ""
+"The status of %1$s with id %2$d is already set to %3$s. Not making a change"
+msgstr ""
+
+#: Plugin/Webshop/Model/Behavior/StatusBehavior.php:43
+msgid "Status change of %1$s with id %2$d is being forced to %3$s"
+msgstr ""
+
+#: Plugin/Webshop/Model/Behavior/StatusBehavior.php:58
+msgid "Changed status of %1$s with id %2$d to %3$s"
+msgstr ""
+
+#: Plugin/Webshop/View/AddressDetails/panel_add.ctp:2
+#: Plugin/Webshop/View/AddressDetails/panel_edit.ctp:2
+#: Plugin/Webshop/View/AddressDetails/panel_index.ctp:2
+msgid "Dashboard"
+msgstr ""
+
+#: Plugin/Webshop/View/AddressDetails/panel_add.ctp:3;31
+#: Plugin/Webshop/View/AddressDetails/panel_edit.ctp:3;31
+#: Plugin/Webshop/View/AddressDetails/panel_index.ctp:3
+#: Plugin/Webshop/View/Customers/panel_dashboard.ctp:15
+#: Plugin/Webshop/View/Elements/form/customer.ctp:36
+msgid "Address details"
+msgstr ""
+
+#: Plugin/Webshop/View/AddressDetails/panel_add.ctp:4
+#: Plugin/Webshop/View/AddressDetails/panel_edit.ctp:4
+msgid "Create address"
+msgstr ""
+
+#: Plugin/Webshop/View/AddressDetails/panel_add.ctp:15
+#: Plugin/Webshop/View/AddressDetails/panel_edit.ctp:15
+#: Plugin/Webshop/View/AddressDetails/panel_index.ctp:17
+msgid "Back"
+msgstr ""
+
+#: Plugin/Webshop/View/AddressDetails/panel_index.ctp:22
+#: Plugin/Webshop/View/Common/panel_index.ctp:25
+#: Plugin/Webshop/View/ConfigurationGroups/admin_form.ctp:13
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:13
+msgid "Create"
+msgstr ""
+
+#: Plugin/Webshop/View/AddressDetails/panel_index.ctp:33
+#: Plugin/Webshop/View/ConfigurationGroups/admin_form.ctp:33
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:34
+#: Plugin/Webshop/View/CustomerContacts/panel_index.ctp:7
+#: Plugin/Webshop/View/Customers/admin_form.ctp:17
+msgid "Name"
+msgstr ""
+
+#: Plugin/Webshop/View/AddressDetails/panel_index.ctp:37
+msgid "Address"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationGroups/admin_form.ctp:25
+msgid "Configuration group"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptionItems/admin_index.ctp:10
+#: Plugin/Webshop/View/ConfigurationOptions/admin_index.ctp:10
+msgid "Configuration group: %s"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptionItems/admin_index.ctp:11
+msgid "Configuration option: %s"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptionItems/admin_index.ctp:13
+msgid "Configuration option items"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:25
+msgid "Configuration option"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:26
+msgid "Validation"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:37;40
+msgid "Alias"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:50
+msgid "Amount"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:53
+msgid "Step size"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:56
+msgid "Step price"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:64
+msgid "minimum_length"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:67
+msgid "maximum_length"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:70
+msgid "Minimum"
+msgstr ""
+
+#: Plugin/Webshop/View/ConfigurationOptions/admin_form.ctp:73
+msgid "Maximum"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_form.ctp:20
+#: Plugin/Webshop/View/Customers/admin_view.ctp:22
+msgid "Type"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_form.ctp:22
+msgid "Individual"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_form.ctp:23
+msgid "Business"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_form.ctp:27
+#: Plugin/Webshop/View/Customers/admin_view.ctp:23
+msgid "VAT number"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_form.ctp:30
+msgid "Financial contact"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_form.ctp:33
+msgid "Invoice address"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_view.ctp:6
+msgid "Customer"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_view.ctp:44
+msgid "Contact"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/admin_view.ctp:55
+msgid "Make invoice address"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/panel_dashboard.ctp:2
+msgid "Dashboards"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/panel_dashboard.ctp:15
+msgid "View all"
+msgstr ""
+
+#: Plugin/Webshop/View/Customers/panel_select.ctp:2
+msgid "Select customer"
+msgstr ""
+
+#: Plugin/Webshop/View/Elements/customer_contact.ctp:3
+msgid "Email"
+msgstr ""
+
+#: Plugin/Webshop/View/Elements/admin/product/box_configuration_group_selector.ctp:11
+msgid "Add configuration group"
+msgstr ""
+
+#: Plugin/Webshop/View/Elements/form/customer.ctp:25
+msgid "Contact details"
+msgstr ""
+
+#: Plugin/Webshop/View/Helper/ProductHelper.php:7
+msgid "Open"
+msgstr ""
+
+#: Plugin/Webshop/View/Helper/ProductHelper.php:10
+msgid "Cancelled"
+msgstr ""
+
+#: Plugin/Webshop/View/Helper/ProductHelper.php:13
+msgid "Paid"
+msgstr ""
+
+#: Plugin/Webshop/View/Helper/ProductHelper.php:16
+msgid "Sent"
+msgstr ""
+
+#: Plugin/Webshop/View/Helper/ProductHelper.php:19
+msgid "Arrived"
+msgstr ""
+
+#: Plugin/Webshop/View/Helper/ProductHelper.php:22
+msgid "Done"
+msgstr ""
+
+#: Plugin/Webshop/View/ProductConfigurationGroups/admin_edit.ctp:46
+msgid "Product"
+msgstr ""
+
+#: Plugin/Webshop/View/ProductConfigurationGroups/admin_edit.ctp:47
+msgid "Options"
+msgstr ""
+
+#: Plugin/Webshop/View/Products/admin_edit.ctp:13
+msgid "Title"
+msgstr ""
+
+#: Plugin/Webshop/View/Products/admin_edit.ctp:16
+msgid "Slug"
+msgstr ""
+
+#: Plugin/Webshop/View/Products/admin_edit.ctp:19
+msgid "Excerpt"
+msgstr ""
+
+#: Plugin/Webshop/View/Products/admin_edit.ctp:22
+msgid "Body"
+msgstr ""
+
+#: Plugin/Webshop/View/Products/admin_edit.ctp:25
+msgid "Tax"
+msgstr ""
