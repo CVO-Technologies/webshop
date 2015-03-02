@@ -1,29 +1,31 @@
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2015-02-27 15:34+0000\n"
-"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
-"Last-Translator: NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-03-02 11:47+0200\n"
+"Last-Translator: Marlin <m.cremers@mms-projects.net>\n"
+"Language-Team: nld (generated) <http://weblate.cvo-"
+"technologies.com/projects/webshop/webshop-invoices/nld/>\n"
+"Language: nld\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.2-dev\n"
 
 #: Plugin/WebshopInvoices/Config/admin_dashboard.php:5
 msgid "Outstanding invoices"
-msgstr ""
+msgstr "Openstaande facturen"
 
 #: Plugin/WebshopInvoices/Config/bootstrap.php:4;14
 #: Plugin/WebshopInvoices/View/Invoices/admin_index.ctp:8
 #: Plugin/WebshopInvoices/View/Invoices/panel_index.ctp:3
 #: Plugin/WebshopInvoices/View/Invoices/panel_view.ctp:5
 msgid "Invoices"
-msgstr ""
+msgstr "Facturen"
 
 #: Plugin/WebshopInvoices/Event/InvoicesHandler.php:103
 msgid "Sending email about invoice status change to %1$s to contacts of customer %2$s"
@@ -31,11 +33,11 @@ msgstr ""
 
 #: Plugin/WebshopInvoices/Event/InvoicesHandler.php:118
 msgid "Status update for invoice #%1$d"
-msgstr ""
+msgstr "Status update voor factuur #%1$d"
 
 #: Plugin/WebshopInvoices/View/Elements/admin/invoices_search.ctp:17
 msgid "Customer id"
-msgstr ""
+msgstr "Klant id"
 
 #: Plugin/WebshopInvoices/View/Elements/admin/latest_customer_invoices.ctp:7
 msgid "#"
@@ -45,11 +47,11 @@ msgstr ""
 #: Plugin/WebshopInvoices/View/Invoices/admin_index.ctp:34
 #: Plugin/WebshopInvoices/View/Invoices/panel_index.ctp:27
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: Plugin/WebshopInvoices/View/Elements/admin/latest_customer_invoices.ctp:9
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: Plugin/WebshopInvoices/View/Emails/html/invoice_status_update.ctp:7
 msgid "On %1$s the status of invoice with number #%2$d has changed to <b>%3$s</b>."
@@ -57,51 +59,50 @@ msgstr ""
 
 #: Plugin/WebshopInvoices/View/Helper/InvoicesHelper.php:7
 msgid "Open"
-msgstr ""
+msgstr "Open"
 
 #: Plugin/WebshopInvoices/View/Helper/InvoicesHelper.php:10
 msgid "Cancelled"
-msgstr ""
+msgstr "Geannuleerd"
 
 #: Plugin/WebshopInvoices/View/Helper/InvoicesHelper.php:13
 msgid "Paid"
-msgstr ""
+msgstr "Betaald"
 
 #: Plugin/WebshopInvoices/View/Helper/InvoicesHelper.php:16
 msgid "Sent"
-msgstr ""
+msgstr "Verstuurd"
 
 #: Plugin/WebshopInvoices/View/Helper/InvoicesHelper.php:19
 msgid "Arrived"
-msgstr ""
+msgstr "Gearriveerd"
 
 #: Plugin/WebshopInvoices/View/Helper/InvoicesHelper.php:22
 msgid "Done"
-msgstr ""
+msgstr "Afgehandeld"
 
 #: Plugin/WebshopInvoices/View/Invoices/admin_index.ctp:26
 #: Plugin/WebshopInvoices/View/Invoices/panel_index.ctp:17
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #: Plugin/WebshopInvoices/View/Invoices/admin_index.ctp:30
 msgid "Customer"
-msgstr ""
+msgstr "Klant"
 
 #: Plugin/WebshopInvoices/View/Invoices/admin_index.ctp:38
 msgid "Price"
-msgstr ""
+msgstr "Prijs"
 
 #: Plugin/WebshopInvoices/View/Invoices/admin_index.ctp:42
 #: Plugin/WebshopInvoices/View/Invoices/panel_index.ctp:31
 msgid "Created"
-msgstr ""
+msgstr "Aangemaakt"
 
 #: Plugin/WebshopInvoices/View/Invoices/panel_view.ctp:6
 msgid "Invoice #%d"
-msgstr ""
+msgstr "Factuur #%d"
 
 #: Plugin/WebshopInvoices/View/Invoices/panel_view.ctp:17
 msgid "Invoice"
-msgstr ""
-
+msgstr "Factuur"
