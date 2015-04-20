@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2015-03-02 11:15+0000\n"
-"PO-Revision-Date: 2015-03-02 22:04+0200\n"
-"Last-Translator: Marlin <m.cremers@mms-projects.net>\n"
+"PO-Revision-Date: 2015-04-21 00:12+0200\n"
+"Last-Translator: Roderik Zandberg <rojodz@gmail.com>\n"
 "Language-Team: nld (generated) <http://weblate.cvo-"
 "technologies.com/projects/webshop/weblate/nld/>\n"
 "Language: nld\n"
@@ -70,14 +70,17 @@ msgstr "Configuratie groep is verwijderd"
 msgid ""
 "The status of %1$s with id %2$d is already set to %3$s. Not making a change"
 msgstr ""
+"De status van %1$s met id %2$d is al gezet op %3$s. Geen veranderingen "
+"gemaakt"
 
 #: Plugin/Webshop/Model/Behavior/StatusBehavior.php:43
 msgid "Status change of %1$s with id %2$d is being forced to %3$s"
 msgstr ""
+"De verandering van de status van %1$s met id %2$d is geforceerd naar %3$s"
 
 #: Plugin/Webshop/Model/Behavior/StatusBehavior.php:58
 msgid "Changed status of %1$s with id %2$d to %3$s"
-msgstr ""
+msgstr "Status van %1$s met id %2$d veranderd naar %3$s"
 
 #: Plugin/Webshop/View/AddressDetails/panel_add.ctp:2
 #: Plugin/Webshop/View/AddressDetails/panel_edit.ctp:2
@@ -284,7 +287,7 @@ msgstr "Slug"
 
 #: Plugin/Webshop/View/Products/admin_edit.ctp:19
 msgid "Excerpt"
-msgstr ""
+msgstr "Korte inhoud"
 
 #: Plugin/Webshop/View/Products/admin_edit.ctp:22
 msgid "Body"
