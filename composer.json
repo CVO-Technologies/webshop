@@ -1,11 +1,11 @@
 {
     "name": "cvo-technologies/croogo-webshop-plugin",
-    "type": "croogo-plugin",
+    "type": "cakephp-plugin",
     "require": {
-        "croogo/croogo": "*",
-		"cvo-technologies/croogo-nodes-datasource-plugin": "dev-master",
-        "cvo-technologies/croogo-webshop-payments-plugin": "dev-master",
-        "cvo-technologies/webshop-taxes": "dev-master"
+        "croogo/croogo": "dev-3.0-wip",
+        "cvo-technologies/croogo-nodes-datasource-plugin": "3.0.*@dev",
+        "cvo-technologies/croogo-webshop-payments-plugin": "3.0.*@dev",
+        "cvo-technologies/webshop-taxes": "3.0.*@dev"
     },
     "authors": [
         {
@@ -13,7 +13,14 @@
             "email": "m.cremers@cvo-technologies.com"
         }
     ],
-    "extra": {
-        "installer-name": "Webshop"
+    "autoload": {
+        "psr-4": {
+            "Webshop\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Webshop\\Test\\": "tests"
+        }
     }
 }
