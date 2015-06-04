@@ -5,7 +5,8 @@
         "croogo/croogo": "3.0.*@dev",
         "cvo-technologies/croogo-nodes-datasource-plugin": "3.0.*@dev",
         "cvo-technologies/croogo-webshop-payments-plugin": "3.0.*@dev",
-        "cvo-technologies/webshop-taxes": "3.0.*@dev"
+        "cvo-technologies/webshop-taxes": "3.0.*@dev",
+        "cvo-technologies/socialseo": "3.0.*@dev"
     },
     "authors": [
         {
