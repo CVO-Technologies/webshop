@@ -9,6 +9,11 @@ Router::prefix('admin', function (RouteBuilder $routeBuilder) {
       $routeBuilder->fallbacks();
    });
 });
+Router::prefix('panel', function (RouteBuilder $routeBuilder) {
+    $routeBuilder->plugin('Webshop', function (RouteBuilder $routeBuilder) {
+        $routeBuilder->fallbacks();
+    });
+});
 
 CroogoRouter::contentType('product');
 

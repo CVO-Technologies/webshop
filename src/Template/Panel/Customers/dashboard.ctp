@@ -1,8 +1,10 @@
 <?php
+use Croogo\Croogo\CroogoNav;
+
 $this->Title->setPageTitle(__d('webshop', 'Dashboards'));
 
 $this->Title->addCrumbs(array(
-	array('controller' => 'customers', 'action' => 'dashboard'),
+	['action' => 'dashboard'],
 ));
 ?>
 
@@ -12,7 +14,7 @@ $this->Title->addCrumbs(array(
 			<small><a href="clientarea?action=details">Werk uw gegevens bij</a></small>
 		</h3>
 		<span><strong><?php echo h($customer['Customer']['name']); ?></strong></span><br/>
-		<span><?php echo h(__d('webshop', 'Address details')); ?>: <?php echo $this->Html->link(__d('webshop', 'View all'), array('panel' => true, 'plugin' => 'webshop', 'controller' => 'address_details', 'action' => 'index'), array('escape' => false)); ?></span>
+		<span><?php echo h(__d('webshop', 'Address details')); ?>: <?php echo $this->Html->link(__d('webshop', 'View all'), array('controller' => 'AddressDetails', 'action' => 'index'), array('escape' => false)); ?></span>
 	</div>
 	<div class="col-md-6">
 		<h3 class="title-divider"><span>Account overzicht</span>
@@ -59,7 +61,7 @@ $this->Title->addCrumbs(array(
 	</div>
 </div>
 <div class="row">
-	<?php $announcements = $this->requestAction(array('panel' => false, 'plugin' => 'nodes', 'controller' => 'nodes', 'action' => 'index', 'type' => 'announcement')); ?>
+	<?php $announcements = $this->requestAction(array('prefix' => false, 'plugin' => 'Croogo/Nodes', 'controller' => 'Nodes', 'action' => 'index', 'type' => 'announcement')); ?>
 	<?php foreach ($announcements as $announcement): ?>
 		<?php $this->Nodes->set($announcement); ?>
 		<div class="col-md-6">

@@ -2,9 +2,9 @@
 
 namespace Webshop\Controller\Panel;
 
-use App\Controller\AppController;
+use Croogo\Croogo\Controller\CroogoAppController;
 
-class CustomersController extends AppController {
+class CustomersController extends CroogoAppController {
 
     public $helpers = [
         'SocialSeo.Title'
