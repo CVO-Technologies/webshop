@@ -1,40 +1,42 @@
 <?php
 
-App::uses('CustomerAccessProvider', 'Webshop.CustomerAccessProvider');
+namespace Webshop\Controller\Component;
+
+use Cake\Controller\Component;
+use Cake\Controller\Controller;
+use Cake\Core\Configure;
+use Cake\Event\Event;
+use Cake\Network\Exception\ForbiddenException;
+use Cake\ORM\TableRegistry;
 
 class CustomerAccessComponent extends Component {
 
-	public $components = array(
-		'Session'
-	);
+	public function beforeRender(Event $event) {
+        /** @var Controller $controller */
+        $controller = $event->subject();
 
-	public function initialize(Controller $Controller) {
-		$this->Controller = $Controller;
-	}
-
-	public function beforeRender(Controller $Controller) {
-		if ($Controller->request->param('prefix') === 'admin') {
+		if ($controller->request->param('prefix') === 'admin') {
 			return;
 		}
 
 		$accessibleCustomers = $this->getAccessibleCustomers();
 
-		if (($this->getCustomerId(false)) && (!in_array($this->getCustomerId(false), $accessibleCustomers))) {
+		if (($this->getCustomerId($controller, false)) && (!in_array($this->getCustomerId($controller, false), $accessibleCustomers))) {
 			throw new ForbiddenException();
 		}
 
-		$Customer = ClassRegistry::init('Webshop.Customer');
-		if ($this->getCustomerId()) {
-			$Controller->set('customer', $Customer->read(null, $this->getCustomerId(false)));
+		$Customer = TableRegistry::get('Webshop.Customers');
+		if ($this->getCustomerId($controller)) {
+			$controller->set('customer', $Customer->read(null, $this->getCustomerId($controller, false)));
 		}
 
-		$Controller->set('customers', $Customer->find('list', array(
+		$controller->set('customers', $Customer->find('list', array(
 			'conditions' => array(
 				'Customer.id' => $accessibleCustomers
 			)
 		)));
 
-		if ((!isset($Controller->request->params['prefix'])) || ($Controller->request->params['prefix'] !== 'panel')) {
+		if ((!isset($controller->request->params['prefix'])) || ($controller->request->params['prefix'] !== 'panel')) {
 			return;
 		}
 
@@ -43,14 +45,14 @@ class CustomerAccessComponent extends Component {
 		}
 	}
 
-	public function getCustomerId($redirect = true) {
+	public function getCustomerId(Controller $controller, $redirect = true) {
 		$customerId = false;
-		if (isset($this->Controller->request->params['named']['customer'])) {
-			$customerId = $this->Controller->request->params['named']['customer'];
+		if (isset($controller->request->params['named']['customer'])) {
+			$customerId = $controller->request->params['named']['customer'];
 		}
 
-		if ($this->Controller->Session->check('Customer.current')) {
-			$customerId = $this->Controller->Session->read('Customer.current');
+		if ($controller->request->session()->check('Customer.current')) {
+			$customerId = $controller->request->session()->read('Customer.current');
 		}
 
 		if (count($this->getAccessibleCustomers()) === 1) {
@@ -58,19 +60,19 @@ class CustomerAccessComponent extends Component {
 		}
 
 		if (($customerId !== false) && (!in_array($customerId, $this->getAccessibleCustomers()))) {
-			$this->Controller->Session->delete('Customer.current');
+			$controller->request->session()->delete('Customer.current');
 
-			return $this->getCustomerId($redirect);
+			return $this->getCustomerId($controller, $redirect);
 		}
 
 		if (($customerId === false) && ($redirect) && (count($this->getAccessibleCustomers()) > 1)) {
-			if (($this->Controller->request['prefix'] != 'admin') && ($this->Controller->request['action'] != 'panel_select') && (!$this->Controller->request->is(array('ajax', 'requested'))))  {
-//				debug($this->Controller->request);exit();
-//				debug($this->Controller->request)
-				if (!$this->Session->check('Customer.select.redirect')) {
-					$this->Session->write('Customer.select.redirect', $this->Controller->request->here);
+			if (($controller->request['prefix'] != 'admin') && ($controller->request['action'] != 'panel_select') && (!$controller->request->is(array('ajax', 'requested'))))  {
+//				debug($controller->request);exit();
+//				debug($controller->request)
+				if (!$this->request->session()->check('Customer.select.redirect')) {
+					$this->request->session()->write('Customer.select.redirect', $controller->request->here);
 				}
-				$this->Controller->redirect(array('panel' => true, 'plugin' => 'webshop', 'controller' => 'customers', 'action' => 'select'));
+				$controller->redirect(array('panel' => true, 'plugin' => 'webshop', 'controller' => 'customers', 'action' => 'select'));
 			}
 		}
 
@@ -82,7 +84,7 @@ class CustomerAccessComponent extends Component {
 		foreach (Configure::read('Webshop.customer_access_providers') as $alias => $options) {
 			$AccessProvider = CustomerAccessProvider::get($options['provider']);
 
-			$accessibleCustomersTemp = $AccessProvider->getAccessibleCustomers($this->Controller);
+			$accessibleCustomersTemp = $AccessProvider->getAccessibleCustomers($controller);
 
 			if (is_array($accessibleCustomersTemp)) {
 				$accessibleCustomers += $accessibleCustomersTemp;

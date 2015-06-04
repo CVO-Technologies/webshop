@@ -1,6 +1,11 @@
 <?php
 
 //region Menu's
+use Cake\Core\Configure;
+use Cake\Routing\Router;
+use Croogo\Croogo\Croogo;
+use Croogo\Croogo\CroogoNav;
+
 CroogoNav::add('sidebar', 'webshop', array(
 	'title' => __d('webshop', 'Webshop'),
 	'url' => '#',
@@ -9,32 +14,32 @@ CroogoNav::add('sidebar', 'webshop', array(
 		'customers' => array(
 			'title' => __d('webshop', 'Customers'),
 			'url' => array(
-				'plugin' => 'webshop',
-				'controller' => 'customers',
+				'plugin' => 'Webshop',
+				'controller' => 'Customers',
 				'action' => 'index',
 			)
 		),
 		'products' => array(
 			'title' => __d('webshop', 'Products'),
 			'url' => array(
-				'plugin' => 'webshop',
-				'controller' => 'products',
+				'plugin' => 'Webshop',
+				'controller' => 'Products',
 				'action' => 'index',
 			)
 		),
 		'Configuration groups' => array(
 			'title' => __d('webshop', 'Configuration groups'),
 			'url' => array(
-				'plugin' => 'webshop',
-				'controller' => 'configuration_groups',
+				'plugin' => 'Webshop',
+				'controller' => 'ConfigurationGroups',
 				'action0' => 'index',
 			)
 		),
 		'Configuration options' => array(
 			'title' => __d('webshop', 'Configuration options'),
 			'url' => array(
-				'plugin' => 'webshop',
-				'controller' => 'configuration_options',
+				'plugin' => 'Webshop',
+				'controller' => 'ConfigurationOptions',
 				'action' => 'index',
 			)
 		),
@@ -119,7 +124,3 @@ Croogo::hookAdminBox('Products/admin_edit', 'Configuration group', 'Webshop.admi
 //endregion
 
 //endregion
-
-App::build(array(
-	'CustomerAccessProvider' => array('%s' . 'CustomerAccessProvider' . DS)
-), App::REGISTER);

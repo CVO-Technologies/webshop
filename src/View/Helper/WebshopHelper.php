@@ -1,6 +1,10 @@
 <?php
 
-class WebshopHelper extends AppHelper {
+namespace Webshop\View\Helper;
+
+use Cake\View\Helper;
+
+class WebshopHelper extends Helper {
 
 	public $helpers = array('Html');
 

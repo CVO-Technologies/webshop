@@ -1,6 +1,10 @@
 <?php
 
-class ConfigurationOptionHelper extends AppHelper {
+namespace Webshop\View\Helper;
+
+use Cake\View\Helper;
+
+class ConfigurationOptionHelper extends Helper {
 
 	public $helpers = array(
 		'Number'

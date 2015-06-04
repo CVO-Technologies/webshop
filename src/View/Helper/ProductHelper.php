@@ -1,6 +1,10 @@
 <?php
 
-class ProductHelper extends AppHelper {
+namespace Webshop\View\Helper;
+
+use Cake\View\Helper;
+
+class ProductHelper extends Helper {
 
 	public function statusText($status) {
 		if ($status === 'open') {
