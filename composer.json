@@ -17,7 +17,7 @@
     "autoload": {
         "psr-4": {
             "Webshop\\": "src",
-            "Webshop\\Invoices": "plugins/Invoices/src"
+            "Webshop\\Invoices\\": "plugins/Invoices/src"
         }
     },
     "autoload-dev": {
