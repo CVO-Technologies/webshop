@@ -2,6 +2,7 @@
 
 namespace Webshop\Controller\Panel;
 
+use Cake\Routing\Router;
 use Croogo\Croogo\Controller\CroogoAppController;
 
 class CustomersController extends CroogoAppController {
@@ -16,17 +17,17 @@ class CustomersController extends CroogoAppController {
 
     public function select() {
         if ($this->request->query('customer')) {
-            $this->Session->write('Customer.current', $this->request->query('customer'));
+            $this->request->session()->write('Customer.current', $this->request->query('customer'));
 
             $redirectUrl = '/';
-            if ($this->Session->check('Customer.select.redirect')) {
-                $redirectUrl = $this->Session->read('Customer.select.redirect');
+            if ($this->request->session()->check('Customer.select.redirect')) {
+                $redirectUrl = $this->request->session()->read('Customer.select.redirect');
             }
-            if (($redirectUrl === '/') && (Router::parse($this->referer('/', true))['action'] !== 'panel_select')) {
+            if (($redirectUrl === '/') && (Router::parse($this->referer('/', true))['action'] !== 'select')) {
                 $redirectUrl = $this->referer('/', true);
             }
 
-            $this->Session->delete('Customer.select.redirect');
+            $this->request->session()->delete('Customer.select.redirect');
 
             $this->redirect($redirectUrl);
             return;
@@ -34,7 +35,7 @@ class CustomersController extends CroogoAppController {
     }
 
     public function unselect() {
-        $this->Session->delete('Customer.current');
+        $this->request->session()->delete('Customer.current');
 
         $this->redirect('/');
         return;

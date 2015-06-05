@@ -1,13 +1,18 @@
 <?php
 
-class CustomerAccessProvider extends Object {
+namespace Webshop\CustomerAccessProvider;
 
+use Cake\Controller\Controller;
+use Cake\Core\App;
+
+class CustomerAccessProvider {
+
+    /**
+     * @param $class
+     * @return CustomerAccessProvider
+     */
 	static public function get($class) {
-		list($plugin, $class) = pluginSplit($class, true);
-
-		$class .= 'AccessProvider';
-
-		App::uses($class, $plugin . 'CustomerAccessProvider');
+        $class = App::className($class, 'CustomerAccessProvider', 'AccessProvider');
 
 		return new $class;
 	}

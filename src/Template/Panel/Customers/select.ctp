@@ -12,12 +12,6 @@ echo $this->Form->create(false, array(
 		'class' => 'form-control'
 	),
 	'class' => 'well form-horizontal',
-	'url' => array(
-		'panel' => true,
-		'plugin' => 'webshop',
-		'controller' => 'customers',
-		'action' => 'select'
-	)
 )); ?>
 <p>Select the customer you would like the act on behalf of</p>
 <?php echo $this->Form->input('customer', array('options' => $customers)); ?>
