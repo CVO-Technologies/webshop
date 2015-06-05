@@ -53,7 +53,15 @@ class InvoicesTable extends Table {
 		'customer_id' => array('type' => 'value'),
 	);
 
-	public function afterFind($results, $primary = false) {
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        $this->addBehavior('Webshop.CustomerOwned');
+    }
+
+
+    public function afterFind($results, $primary = false) {
 		if ($primary) {
 			foreach ($results as &$result) {
 				$subTotal = 0;
