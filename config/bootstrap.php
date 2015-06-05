@@ -6,6 +6,15 @@ use Cake\Routing\Router;
 use Croogo\Croogo\Croogo;
 use Croogo\Croogo\CroogoNav;
 
+function addWebshopPluginPath($basePluginName) {
+    $pluginPaths = Configure::read('plugins');
+    $pluginPaths['Webshop/' . $basePluginName] = $pluginPaths['Webshop'] . 'plugins' . DS . $basePluginName . DS;
+
+    Configure::write('plugins', $pluginPaths);
+}
+
+addWebshopPluginPath('Invoices');
+
 CroogoNav::add('sidebar', 'webshop', array(
 	'title' => __d('webshop', 'Webshop'),
 	'url' => '#',
