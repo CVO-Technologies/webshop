@@ -1,6 +1,10 @@
 <?php
 
-class InvoicesHelper extends AppHelper {
+namespace Webshop\Invoices\View\helper;
+
+use Cake\View\Helper;
+
+class InvoicesHelper extends Helper {
 
 	public function statusText($status) {
 		if ($status === 'open') {
