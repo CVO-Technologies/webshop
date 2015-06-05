@@ -8,6 +8,9 @@
         "cvo-technologies/webshop-taxes": "3.0.*@dev",
         "cvo-technologies/socialseo": "3.0.*@dev"
     },
+    "replace": {
+        "cvo-technologies/webshop-invoices": "3.0.*@dev"
+    },
     "authors": [
         {
             "name": "Marlin Cremers",
