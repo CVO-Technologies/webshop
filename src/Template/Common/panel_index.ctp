@@ -1,5 +1,8 @@
 <?php
 
+use Cake\Utility\Hash;
+use Cake\Utility\Inflector;
+
 if (empty($modelClass)) {
 	$modelClass = Inflector::singularize($this->name);
 }
@@ -62,7 +65,7 @@ if (!$tableBody && isset($displayFields)):
 					'data-chooser_id' => $item[$modelClass]['id'],
 				));
 			else:
-				$actions[] = $this->element('Webshop.action_menu', array('id' => $item[$modelClass]['id'], 'model' => Inflector::tableize($modelClass)));
+//				$actions[] = $this->element('Webshop.action_menu', array('id' => $item[$modelClass]['id'], 'model' => Inflector::tableize($modelClass)));
 			endif;
 			$actions = $this->Html->div('item-actions', implode(' ', $actions));
 			$row = array();
@@ -106,12 +109,12 @@ $tableFooters = trim($this->fetch('table-footer'));
 			<?php
 			$searchBlock = $this->fetch('search');
 			if (!$searchBlock):
-				$searchBlock = $this->element('admin/search');
+				$searchBlock = $this->element('Croogo/Croogo.admin/search');
 			endif;
 			echo $searchBlock;
 
 			if ($contentBlock = trim($this->fetch('content'))):
-				echo $this->element('admin/search');
+				echo $this->element('Croogo/Croogo.admin/search');
 				echo $contentBlock;
 			else:
 
