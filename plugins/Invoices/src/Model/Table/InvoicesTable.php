@@ -1,6 +1,10 @@
 <?php
 
-class Invoice extends AppModel {
+namespace Webshop\Invoices\Model\Table;
+
+use Cake\ORM\Table;
+
+class InvoicesTable extends Table {
 
 	public $actsAs = array(
 		'Webshop.Counter' => array(
