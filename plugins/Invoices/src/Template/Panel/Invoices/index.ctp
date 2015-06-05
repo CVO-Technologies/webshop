@@ -7,7 +7,7 @@ $this->Title->addCrumbs(array(
 	array('action' => 'index')
 ));
 
-$this->extend('Webshop.Common/panel_index');
+$this->extend('Webshop./Common/panel_index');
 
 $this->start('actions');
 $this->end();

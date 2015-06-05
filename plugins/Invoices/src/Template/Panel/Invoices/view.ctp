@@ -3,15 +3,15 @@
 
 $this->Title->addTopSegment(__d('webshop', 'Dashboard'));
 $this->Title->addSegment(__d('webshop_invoices', 'Invoices'));
-$this->Title->setPageTitle(__d('webshop_invoices', 'Invoice #%d', $invoice['Invoice']['number']));
+$this->Title->setPageTitle(__d('webshop_invoices', 'Invoice #{0}', $invoice->number));
 
 $this->Title->addCrumbs(array(
-	array('plugin' => 'webshop', 'controller' => 'customers', 'action' => 'dashboard'),
+	array('plugin' => 'Webshop', 'controller' => 'Customers', 'action' => 'dashboard'),
 	array('action' => 'index'),
-	array('action' => 'view', $invoice['Invoice']['id'])
+	array('action' => 'view', $invoice->id)
 ));
 
-$this->extend('Webshop.Common/panel_view');
+//$this->extend('Webshop./Common/panel_view');
 
 $this->append('tab-heading');
 echo $this->Webshop->panelTab(__d('webshop_invoices', 'Invoice'), '#invoice-main');
@@ -21,7 +21,7 @@ $this->end();
 $this->append('tab-content');
 
 echo $this->Webshop->tabStart('invoice-main');
-echo $this->element('WebshopInvoices.invoice', array('invoice' => $invoice));
+echo $this->element('Webshop/Invoices.invoice', array('invoice' => $invoice));
 echo $this->Webshop->tabEnd();
 
 echo $this->Webshop->panelTabs();
