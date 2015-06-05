@@ -32,7 +32,7 @@ class CustomerAccessComponent extends Component {
 		}
 
 		$controller->set('customers', $Customer->find('list')->where([
-            'Customers.id' => $accessibleCustomers
+            'Customers.id IN' => $accessibleCustomers
         ])->toArray());
 
 		if ((!isset($controller->request->params['prefix'])) || ($controller->request->params['prefix'] !== 'panel')) {
