@@ -2,6 +2,7 @@
 
 //region Menu's
 use Cake\Core\Configure;
+use Cake\Core\Plugin;
 use Cake\Routing\Router;
 use Croogo\Croogo\Croogo;
 use Croogo\Croogo\CroogoNav;
@@ -97,6 +98,22 @@ Croogo::hookHelper('*', 'Webshop.Webshop');
 
 //region Behaviors
 Croogo::hookBehavior('Node', 'Webshop.Product');
+
+if (Plugin::loaded('Sites')) {
+    Croogo::hookBehavior('Webshop.Products', 'Sites.SiteFilter', array(
+        'relationship' => array(
+            'belongsToMany' => array(
+                'Sites' => array(
+                    'className' => 'Sites.Sites',
+                    'through' => 'Sites.SitesNodes',
+                    'foreignKey' => 'node_id',
+                    'targetForeignKey' => 'site_id',
+                    'unique' => 'keepExisting',
+                ),
+            ),
+        ),
+    ));
+}
 //endregion
 
 //region Components
@@ -126,6 +143,11 @@ Router::reload();
 
 //region Admin tabs
 Croogo::hookAdminTab('Products/admin_edit', 'Configuration implementation', 'Pltfrm.admin/node_webhosting_product_tab');
+
+if (Plugin::loaded('Sites')) {
+    Croogo::hookAdminTab('Admin/Products/add', __d('sites', 'Sites'), 'Sites.sites_selection');
+    Croogo::hookAdminTab('Admin/Products/edit', __d('sites', 'Sites'), 'Sites.sites_selection');
+}
 //endregion
 
 //region Admin hooks
