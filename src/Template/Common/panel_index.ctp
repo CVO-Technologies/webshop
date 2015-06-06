@@ -164,7 +164,7 @@ $tableFooters = trim($this->fetch('table-footer'));
 				echo $pagingBlock;
 			else:
 				if (isset($this->Paginator) && isset($this->request['paging'])):
-					echo $this->element('pagination');
+					echo $this->element('Webshop.pagination');
 				endif;
 			endif;
 			?>
