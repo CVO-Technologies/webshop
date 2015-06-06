@@ -28,6 +28,14 @@ class InvoicesTable extends Table {
         parent::initialize($config);
 
         $this->addBehavior('Webshop.CustomerOwned');
+//        $this->addBehavior('Webshop.Counter', [
+//            'fields' => [
+//                'number' => [
+//                    'count' => true
+//                ]
+//            ]
+//        ]);
+        $this->addBehavior('Webshop.Status');
         $this->belongsTo('Customers', [
             'className' => 'Webshop.Customers'
         ]);
