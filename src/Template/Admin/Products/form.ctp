@@ -1,11 +1,11 @@
 <?php
 
-$this->extend('/Common/admin_edit');
+$this->extend('Croogo/Croogo./Common/admin_edit');
 
 $this->Croogo->adminScript('Nodes.admin');
 
 $this->Html
-	->addCrumb('', '/admin', array('icon' => $this->Theme->getIcon('home')))
+	->addCrumb('', '/admin', array('icon' => 'home'))
 	->addCrumb(__d('croogo', 'Content'), array('controller' => 'nodes', 'action' => 'index'));
 
 $this->set('editFields', array(
@@ -21,6 +21,9 @@ $this->set('editFields', array(
 	'body' => array(
 		'label' => __d('webshop', 'Body'),
 	),
+    'price' => array(
+        'label' => __d('webshop', 'Price'),
+    ),
 	'tax_id' => array(
 		'label' => __d('webshop', 'Tax'),
 	),

@@ -1,10 +1,10 @@
 <?php
 
-$this->extend('/Common/admin_index');
+$this->extend('Croogo/Croogo./Common/admin_index');
 //$this->Croogo->adminScript(array('Nodes.admin'));
 
-$this->Html
-		->addCrumb('', '/admin', array('icon' => $this->Theme->getIcon['home']))
+$this->CroogoHtml
+		->addCrumb('', '/admin', array('icon' => 'home'))
 		->addCrumb(__d('webshop', 'Webshop'))
 		->addCrumb(__d('webshop', 'Products'), '/' . $this->request->url);
 
@@ -24,8 +24,10 @@ $this->Html
 //		)
 //));
 
-$this->start('table-heading');
-$tableHeaders = $this->Html->tableHeaders(array(
+?>
+<table class="table">
+<?php
+$tableHeaders = $this->CroogoHtml->tableHeaders(array(
 		$this->Paginator->sort('id', __d('croogo', 'Id')),
 		$this->Paginator->sort('title', __d('croogo', 'Title')),
 //		$this->Paginator->sort('type', __d('croogo', 'Type')),
@@ -33,36 +35,34 @@ $tableHeaders = $this->Html->tableHeaders(array(
 //		$this->Paginator->sort('status', __d('croogo', 'Status')),
 		''
 ));
-echo $this->Html->tag('thead', $tableHeaders);
-$this->end();
+echo $this->CroogoHtml->tag('thead', $tableHeaders);
 
-$this->append('table-body');
 ?>
 	<tbody>
 	<?php foreach ($products as $product): ?>
 		<tr>
-			<td><?php echo $product['Product']['id']; ?></td>
-			<td><?php echo $this->Html->link($product['Product']['title'], array('admin' => false) + $product['Product']['url'], array('target' => '_blank')); ?></td>
+			<td><?php echo $product->id; ?></td>
+			<td><?php echo $this->CroogoHtml->link($product->title, array('admin' => false) + $product->url->getArrayCopy(), array('target' => '_blank')); ?></td>
 			<td>
 				<div class="item-actions">
 					<?php
-					echo $this->Croogo->adminRowActions($product['Product']['id']);
+					echo $this->Croogo->adminRowActions($product->id);
 					echo ' ' . $this->Croogo->adminRowAction('',
-									array('action' => 'edit', $product['Product']['id']),
-									array('icon' => $this->Theme->getIcon('update'), 'tooltip' => __d('croogo', 'Edit this item'))
+									array('action' => 'edit', $product->id),
+									array('icon' => 'update', 'tooltip' => __d('croogo', 'Edit this item'))
 							);
 					echo ' ' . $this->Croogo->adminRowAction('',
-									'#Node' . $product['Product']['id'] . 'Id',
+									'#Node' . $product->id . 'Id',
 									array(
-											'icon' => $this->Theme->getIcon('copy'),
+											'icon' => 'copy',
 											'tooltip' => __d('croogo', 'Create a copy'),
 											'rowAction' => 'copy',
 									)
 							);
 					echo ' ' . $this->Croogo->adminRowAction('',
-									'#Node' . $product['Product']['id'] . 'Id',
+									'#Node' . $product->id . 'Id',
 									array(
-											'icon' => $this->Theme->getIcon('delete'),
+											'icon' => 'delete',
 											'class' => 'delete',
 											'tooltip' => __d('croogo', 'Remove this item'),
 											'rowAction' => 'delete',
@@ -75,8 +75,8 @@ $this->append('table-body');
 		</tr>
 	<?php endforeach ?>
 	</tbody>
+</table>
 <?php
-$this->end();
 
 $this->start('bulk-action');
 echo $this->Form->input('Node.action', array(
@@ -97,13 +97,13 @@ echo $this->Form->input('Node.action', array(
 		'empty' => true,
 ));
 
-$jsVarName = uniqid('confirmMessage_');
-$button = $this->Form->button(__d('croogo', 'Submit'), array(
-		'type' => 'button',
-		'onclick' => sprintf('return Nodes.confirmProcess(app.%s)', $jsVarName),
-));
-echo $this->Html->div('controls', $button);
-$this->Js->set($jsVarName, __d('croogo', '%s selected items?'));
+//$jsVarName = uniqid('confirmMessage_');
+//$button = $this->Form->button(__d('croogo', 'Submit'), array(
+//		'type' => 'button',
+//		'onclick' => sprintf('return Nodes.confirmProcess(app.%s)', $jsVarName),
+//));
+//echo $this->CroogoHtml->div('controls', $button);
+//$this->Js->set($jsVarName, __d('croogo', '%s selected items?'));
 
 $this->end();
 
