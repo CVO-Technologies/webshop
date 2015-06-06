@@ -18,6 +18,8 @@ echo $this->Webshop->panelTab(__d('webshop_invoices', 'Invoice'), '#invoice-main
 echo $this->Webshop->panelTabs();
 $this->end();
 
+echo $this->fetch('tab-heading');
+
 $this->append('tab-content');
 
 echo $this->Webshop->tabStart('invoice-main');
@@ -27,3 +29,5 @@ echo $this->Webshop->tabEnd();
 echo $this->Webshop->panelTabs();
 
 $this->end();
+
+echo $this->fetch('tab-content');
