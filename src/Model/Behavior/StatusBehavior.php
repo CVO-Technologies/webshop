@@ -1,80 +1,74 @@
 <?php
 
-class StatusBehavior extends ModelBehavior {
+namespace Webshop\Model\Behavior;
 
-	public function changeStatus(Model $Model, $status, $id = null, $force = false) {
-		if ($id === null) {
-			$id = $Model->getID();
-		}
+use Cake\Event\Event;
+use Cake\Event\EventManager;
+use Cake\Log\Log;
+use Cake\ORM\Behavior;
+use Cake\ORM\Entity;
+use Cake\Utility\Inflector;
 
-		if ($id === false) {
-			return false;
-		}
+class StatusBehavior extends Behavior
+{
 
-		$force = true;
+    public function changeStatus(Entity $entity, $status, $force = false)
+    {
+        if ($force !== true) {
+            if ($entity->status === $status) {
+                Log::write(
+                    LOG_WARNING,
+                    __d(
+                        'webshop',
+                        'The status of {0} with id {1} is already set to {3}. Not making a change',
+                        strtolower(Inflector::humanize($entity->source())),
+                        $entity->id,
+                        $status
+                    ),
+                    array('webshop')
+                );
 
-		$Model->id = $id;
+                return false;
+            }
+        } else {
+            Log::write(
+                LOG_WARNING,
+                __d(
+                    'webshop',
+                    'Status change of {0} with id {1} is being forced to {3}',
+                    strtolower(Inflector::humanize($entity->source())),
+                    $entity->id,
+                    $status
+                ),
+                array('webshop')
+            );
+        }
 
-		if (!$Model->exists()) {
-			throw new NotFoundException();
-		}
+        $entity->status = $status;
+        $entity = $this->_table->save($status);
 
-		if ($force !== true) {
-			$modelData = $Model->read();
+        Log::write(
+            LOG_INFO,
+            __d(
+                'webshop',
+                'Changed status of {0} with id {1} to {3}',
+                strtolower(Inflector::humanize($entity->source())),
+                $entity->id,
+                $status
+            ),
+            array('webshop')
+        );
 
-			if ($modelData[$Model->alias]['status'] === $status) {
-				CakeLog::write(
-					LOG_WARNING,
-					__d(
-						'webshop',
-						'The status of %1$s with id %2$d is already set to %3$s. Not making a change',
-						strtolower(Inflector::humanize(Inflector::underscore($Model->name))),
-						$id,
-						$status
-					),
-					array('webshop')
-				);
+        $eventData = array();
+        $eventData[$entity->source()]['entity'] = $entity;
+        $eventData[$entity->source()]['status'] = $status;
 
-				return false;
-			}
-		} else {
-			CakeLog::write(
-				LOG_WARNING,
-				__d(
-					'webshop',
-					'Status change of %1$s with id %2$d is being forced to %3$s',
-					strtolower(Inflector::humanize(Inflector::underscore($Model->name))),
-					$id,
-					$status
-				),
-				array('webshop')
-			);
-		}
+        $overallEvent = new Event($entity->source() . '.statusChanged', $this, $eventData);
+        $specificEvent = new Event($entity->source() . '.statusChangedTo' . Inflector::camelize($status), $this, $eventData);
+        EventManager::instance()->dispatch($overallEvent);
+        EventManager::instance()->dispatch($specificEvent);
 
-		$Model->saveField('status', $status);
-
-		CakeLog::write(
-			LOG_INFO,
-			__d(
-				'webshop',
-				'Changed status of %1$s with id %2$d to %3$s',
-				strtolower(Inflector::humanize(Inflector::underscore($Model->name))),
-				$id,
-				$status
-			),
-			array('webshop')
-		);
-
-		$eventData = array();
-		$eventData[Inflector::underscore($Model->name)]['id'] = $id;
-		$eventData[Inflector::underscore($Model->name)]['status'] = $status;
-
-		$overallEvent = new CakeEvent($Model->name . '.statusChanged', $this, $eventData);
-		$specificEvent = new CakeEvent($Model->name . '.statusChangedTo' . Inflector::camelize($status), $this, $eventData);
-		CakeEventManager::instance()->dispatch($overallEvent);
-		CakeEventManager::instance()->dispatch($specificEvent);
-
-		return true;
-	}
+        return $entity;
+    }
 
 }
