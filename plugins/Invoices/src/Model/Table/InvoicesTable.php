@@ -18,36 +18,6 @@ class InvoicesTable extends Table {
 		'Search.Searchable',
 	);
 
-	public $belongsTo = array(
-		'Customer' => array(
-			'className'  => 'Webshop.Customer',
-			'foreignKey' => 'customer_id'
-		),
-		'AddressDetail' => array(
-			'className' => 'Webshop.AddressDetail',
-			'foreignKey' => 'address_detail_id'
-		)
-	);
-
-	public $hasMany = array(
-		'InvoiceProduct' => array(
-			'className'  => 'WebshopInvoices.InvoiceProduct',
-			'foreignKey' => 'invoice_id'
-		),
-		'InvoiceLine' => array(
-			'className'  => 'WebshopInvoices.InvoiceLine',
-			'foreignKey' => 'invoice_id'
-		),
-		'InvoiceShippingCost' => array(
-			'className'  => 'WebshopInvoices.InvoiceShippingCost',
-			'foreignKey' => 'invoice_id'
-		),
-		'InvoiceTransactionCost' => array(
-			'className'  => 'WebshopInvoices.InvoiceTransactionCost',
-			'foreignKey' => 'invoice_id'
-		)
-	);
-
 	public $filterArgs = array(
 		'status' => array('type' => 'value'),
 		'customer_id' => array('type' => 'value'),
@@ -58,6 +28,24 @@ class InvoicesTable extends Table {
         parent::initialize($config);
 
         $this->addBehavior('Webshop.CustomerOwned');
+        $this->belongsTo('Customers', [
+            'className' => 'Webshop.Customers'
+        ]);
+        $this->belongsTo('AddressDetails', [
+            'className' => 'Webshop.AddressDetails'
+        ]);
+        $this->hasMany('InvoiceProducts', [
+            'className' => 'Webshop/Invoices.InvoiceProducts'
+        ]);
+        $this->hasMany('InvoiceLines', [
+            'className' => 'Webshop/Invoices.InvoiceLines'
+        ]);
+        $this->hasMany('InvoiceShippingCosts', [
+            'className' => 'Webshop/Invoices.InvoiceShippingCosts'
+        ]);
+        $this->hasMany('InvoiceTransactionCosts', [
+            'className' => 'Webshop/Invoices.InvoiceTransactionCosts'
+        ]);
     }
 
 

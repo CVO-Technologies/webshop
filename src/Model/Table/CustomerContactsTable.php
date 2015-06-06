@@ -1,28 +1,32 @@
 <?php
 
-App::uses('WebshopAppModel', 'Webshop.Model');
+namespace Webshop\Model\Table;
 
-class CustomerContact extends WebshopAppModel {
+use Cake\ORM\Table;
 
-	public $actsAs = array(
-		'Search.Searchable',
-	);
+class CustomerContactsTable extends Table
+{
 
-	public $belongsTo = array(
-		'Customer' => array(
-			'className' => 'Webshop.Customer',
-			'foreignKey' => 'customer_id'
-		),
-	);
+    public $validate = array(
+        'name' => array(
+            'rule' => 'notEmpty',
+        ),
+    );
 
-	public $validate = array(
-		'name' => array(
-			'rule' => 'notEmpty',
-		),
-	);
+    public $filterArgs = array(
+        'customer_id' => array('type' => 'value'),
+    );
 
-	public $filterArgs = array(
-		'customer_id' => array('type' => 'value'),
-	);
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        $this->addBehavior('Search.Searchable');
+
+        $this->belongsTo('Customers', [
+           'className' => 'Webshop.Customers'
+        ]);
+    }
+
 
 }

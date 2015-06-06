@@ -1,26 +1,32 @@
 <?php
 
-App::uses('WebshopAppModel', 'Webshop.Model');
+namespace Webshop\Model\Table;
 
-class AddressDetail extends WebshopAppModel {
+use Cake\ORM\Table;
 
-	public $belongsTo = array(
-		'Customer' => array(
-			'className' => 'Webshop.Customer',
-			'foreignKey' => 'customer_id'
-		)
-	);
+class AddressDetailsTable extends Table
+{
 
-	public $validate = array(
-		'address_line_1' => array(
-			'rule' => 'notEmpty',
-		),
-		'city' => array(
-			'rule' => 'notEmpty',
-		),
-		'country' => array(
-			'rule' => 'notEmpty',
-		),
-	);
+    public $validate = array(
+        'address_line_1' => array(
+            'rule' => 'notEmpty',
+        ),
+        'city' => array(
+            'rule' => 'notEmpty',
+        ),
+        'country' => array(
+            'rule' => 'notEmpty',
+        ),
+    );
+
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        $this->belongsTo('Customers', [
+           'className' => 'Webshop.Customers'
+        ]);
+    }
+
 
 }
