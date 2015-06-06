@@ -34,11 +34,13 @@ class InvoicesController extends CroogoAppController {
     public function view($id) {
         $invoice = $this->Invoices->get($id, [
             'contain' => [
-//                'Customer',
-//                'AddressDetail',
-//                'InvoiceLine' => array(
-//                    'TaxRevision'
-//                )
+                'Customers' => [
+                    'FinancialContacts'
+                ],
+                'AddressDetails',
+                'InvoiceLines' => [
+//                    'TaxRevisions'
+                ]
             ]
         ]);
 //        debug($invoice);exit();
