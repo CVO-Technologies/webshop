@@ -61,14 +61,5 @@ $this->Title->addCrumbs(array(
 	</div>
 </div>
 <div class="row">
-<!--	--><?php //$announcements = $this->requestAction(array('prefix' => false, 'plugin' => 'Croogo/Nodes', 'controller' => 'Nodes', 'action' => 'index', 'type' => 'announcement')); ?>
-<!--	--><?php //foreach ($announcements as $announcement): ?>
-<!--		--><?php //$this->Nodes->set($announcement); ?>
-<!--		<div class="col-md-6">-->
-<!--			<strong>--><?php //echo h($announcement['Node']['title']); ?><!--</strong> (10/10/2014)<br/>-->
-<!--			--><?php //echo $this->Nodes->excerpt(); ?>
-<!--			<br/><br/>-->
-<!--			--><?php //echo $this->Html->link('Meer...', $this->Nodes->field('url'), array('class' => 'btn btn-primary')); ?>
-<!--		</div>-->
-<!--	--><?php //endforeach; ?>
+    <?= $this->cell('Webshop.Announcements'); ?>
 </div>

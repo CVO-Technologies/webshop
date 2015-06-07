@@ -98,6 +98,7 @@ Croogo::hookHelper('*', 'Webshop.Webshop');
 
 //region Behaviors
 Croogo::hookBehavior('Node', 'Webshop.Product');
+Croogo::hookBehavior('Croogo/Nodes.Nodes', 'Webshop.Announcements');
 
 if (Plugin::loaded('Sites')) {
     Croogo::hookBehavior('Webshop.Products', 'Sites.SiteFilter', array(
