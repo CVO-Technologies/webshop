@@ -107,4 +107,5 @@ $(function () {
 		});
 		$('.modal-overall').modal();
 	});
+	$('.nav-tabs > li:first-child a').tab('show');
 });

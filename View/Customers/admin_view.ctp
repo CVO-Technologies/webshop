@@ -1,3 +1,17 @@
+<?php
+
+$this->extend('Webshop.Common/admin_view');
+
+$this->append('tab-heading');
+echo $this->Croogo->adminTab(__d('webshop', 'Customer'), '#customer-main');
+echo $this->Croogo->adminTabs();
+$this->end();
+
+$this->append('tab-content');
+
+echo $this->Html->tabStart('customer-main');
+?>
+
 <div class="row-fluid">
 	<div class="span9">
 		<div class="well">
@@ -9,19 +23,15 @@
 						<li><strong><?php echo h(__d('webshop', 'VAT number')); ?></strong>: <?php echo h($customer['Customer']['vat_number']); ?></li>
 					</ul>
 				</div>
-				<div class="span6">
+				<div class="span3">
 					<h2>Invoice address</h2>
 					<?php echo $this->element('Webshop.address_detail', array('addressDetail' => $customer['InvoiceAddressDetail'])); ?>
 				</div>
+				<div class="span3">
+					<h2>Financial contect</h2>
+					<?php echo $this->element('Webshop.customer_contact', array('customerContact' => $customer['FinancialContact'])); ?>
+				</div>
 			</div>
-		</div>
-		<div class="well">
-			<h2>Orders</h2>
-			<?php echo $this->element('WebshopOrders.admin/latest_customer_orders', array('id' => $customer['Customer']['id'])); ?>
-		</div>
-		<div class="well">
-			<h2>Invoices</h2>
-			<?php echo $this->element('WebshopInvoices.admin/latest_customer_invoices', array('id' => $customer['Customer']['id'])); ?>
 		</div>
 	</div>
 	<div class="span3">
@@ -49,3 +59,11 @@
 		</div>
 	</div>
 </div>
+
+<?php
+
+echo $this->Html->tabEnd();
+
+echo $this->Croogo->adminTabs();
+
+$this->end();
