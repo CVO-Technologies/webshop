@@ -11,14 +11,12 @@ $this->Title->addCrumbs(array(
 	array('action' => 'view', $invoice->id)
 ));
 
-//$this->extend('Webshop./Common/panel_view');
+$this->extend('Webshop./Common/panel_view');
 
 $this->append('tab-heading');
 echo $this->Webshop->panelTab(__d('webshop_invoices', 'Invoice'), '#invoice-main');
 echo $this->Webshop->panelTabs();
 $this->end();
-
-echo $this->fetch('tab-heading');
 
 $this->append('tab-content');
 
@@ -29,5 +27,3 @@ echo $this->Webshop->tabEnd();
 echo $this->Webshop->panelTabs();
 
 $this->end();
-
-echo $this->fetch('tab-content');
