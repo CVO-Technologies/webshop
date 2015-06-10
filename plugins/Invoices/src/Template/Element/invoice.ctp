@@ -8,10 +8,10 @@
 		</h1>
 	</div>
 	<div class="col-xs-6 text-right">
-		<h1><?php echo ($invoice['Invoice']['type'] === 'proforma') ? 'PRO FORMA ' : ''; ?>INVOICE</h1>
+		<h1><?php echo ($invoice->type === 'proforma') ? 'PRO FORMA ' : ''; ?>INVOICE</h1>
 
 		<h1>
-			<small>Invoice #<?php echo h($invoice['Invoice']['number']); ?></small>
+			<small>Invoice #<?php echo h($invoice->number); ?></small>
 		</h1>
 	</div>
 </div>
@@ -33,11 +33,11 @@
 	<div class="col-xs-5 col-xs-offset-2 text-right">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4>To : <a href="#"><?php echo h($invoice['Customer']['name']); ?></a></h4>
+				<h4>To : <a href="#"><?php echo h($invoice->customer->name); ?></a></h4>
 			</div>
 			<div class="panel-body">
 				<p>
-					<?php echo $this->element('Webshop.address_detail', array('addressDetail' => $invoice['AddressDetail'])); ?>
+					<?php echo $this->element('Webshop.address_detail', array('addressDetail' => $invoice->address_detail)); ?>
 				</p>
 			</div>
 		</div>
@@ -65,13 +65,13 @@
 	</tr>
 	</thead>
 	<tbody>
-	<?php foreach ($invoice['InvoiceLine'] as $invoiceLine): ?>
+	<?php foreach ($invoice->invoice_lines as $invoiceLine): ?>
 	<tr>
-		<td><?php echo h($invoiceLine['title']); ?></td>
-		<td><?php echo h($invoiceLine['description']); ?></td>
-		<td class="text-right"><?php echo h($this->Number->precision($invoiceLine['amount'], 2)); ?></td>
-		<td class="text-right"><?php echo h($this->Number->currency($invoiceLine['individual_price'], 'EUR')); ?></td>
-		<td class="text-right"><?php echo h($this->Number->currency($invoiceLine['price'], 'EUR')); ?></td>
+		<td><?php echo h($invoiceLine->title); ?></td>
+		<td><?php echo h($invoiceLine->description); ?></td>
+		<td class="text-right"><?php echo h($this->Number->precision($invoiceLine->amount, 2)); ?></td>
+		<td class="text-right"><?php echo h($this->Number->currency($invoiceLine->individual_price, 'EUR')); ?></td>
+		<td class="text-right"><?php echo h($this->Number->currency($invoiceLine->price, 'EUR')); ?></td>
 	</tr>
 	<?php endforeach; ?>
 	</tbody>
