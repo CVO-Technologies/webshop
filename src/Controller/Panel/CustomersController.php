@@ -3,7 +3,7 @@
 namespace Webshop\Controller\Panel;
 
 use Cake\Routing\Router;
-use Croogo\Croogo\Controller\CroogoAppController;
+use Croogo\Core\Controller\CroogoAppController;
 
 class CustomersController extends CroogoAppController {
 

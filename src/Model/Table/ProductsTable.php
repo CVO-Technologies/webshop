@@ -3,7 +3,7 @@
 namespace Webshop\Model\Table;
 
 use Cake\ORM\Table;
-use Croogo\Croogo\Model\Table\CroogoTable;
+use Croogo\Core\Model\Table\CroogoTable;
 
 class ProductsTable extends CroogoTable
 {

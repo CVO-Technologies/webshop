@@ -2,7 +2,7 @@
 
 namespace Webshop\Controller\Admin;
 
-use Croogo\Croogo\Controller\CroogoAppController;
+use Croogo\Core\Controller\CroogoAppController;
 use Crud\Controller\ControllerTrait;
 
 class ProductsController extends CroogoAppController

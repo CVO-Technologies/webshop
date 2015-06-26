@@ -2,7 +2,7 @@
 
 use Cake\Routing\RouteBuilder;
 use Cake\Routing\Router;
-use Croogo\Croogo\CroogoRouter;
+use Croogo\Core\CroogoRouter;
 
 Router::prefix('admin', function (RouteBuilder $routeBuilder) {
     $routeBuilder->plugin('Webshop/Invoices', function (RouteBuilder $routeBuilder) {

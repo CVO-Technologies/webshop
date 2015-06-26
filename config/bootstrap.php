@@ -4,8 +4,8 @@
 use Cake\Core\Configure;
 use Cake\Core\Plugin;
 use Cake\Routing\Router;
-use Croogo\Croogo\Croogo;
-use Croogo\Croogo\CroogoNav;
+use Croogo\Core\Croogo;
+use Croogo\Core\Nav;
 
 function addWebshopPluginPath($basePluginName) {
     $pluginPaths = Configure::read('plugins');
@@ -16,7 +16,7 @@ function addWebshopPluginPath($basePluginName) {
 
 addWebshopPluginPath('Invoices');
 
-CroogoNav::add('sidebar', 'webshop', array(
+Nav::add('sidebar', 'webshop', array(
 	'title' => __d('webshop', 'Webshop'),
 	'url' => '#',
 	'weight' => 30,
@@ -60,12 +60,12 @@ CroogoNav::add('sidebar', 'webshop', array(
 	)
 ));
 
-CroogoNav::add('sidebar', 'settings.children.webshop', array(
+Nav::add('sidebar', 'settings.children.webshop', array(
 	'title' => __d('webshop', 'Webshop'),
 	'url' => '#',
 ));
 
-CroogoNav::add('webshop-dashboard-address_details-actions', 'edit', array(
+Nav::add('webshop-dashboard-address_details-actions', 'edit', array(
 	'title' => __d('webshop', 'Edit'),
 	'url' => array(
 		'controller' => 'address_details',
@@ -76,7 +76,7 @@ CroogoNav::add('webshop-dashboard-address_details-actions', 'edit', array(
 		'class' => 'btn-primary'
 	)
 ));
-CroogoNav::add('webshop-dashboard-customer_contacts-actions', 'edit', array(
+Nav::add('webshop-dashboard-customer_contacts-actions', 'edit', array(
 	'title' => __d('webshop', 'Edit'),
 	'url' => array(
 		'controller' => 'customer_contacts',

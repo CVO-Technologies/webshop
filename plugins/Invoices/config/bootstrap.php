@@ -1,9 +1,9 @@
 <?php
 
-use Croogo\Croogo\Croogo;
-use Croogo\Croogo\CroogoNav;
+use Croogo\Core\Croogo;
+use Croogo\Core\Nav;
 
-CroogoNav::add('sidebar', 'webshop.children.invoices', array(
+Nav::add('sidebar', 'webshop.children.invoices', array(
 	'title' => __d('webshop_invoices', 'Invoices'),
 	'url' => array(
 		'admin' => true,
@@ -13,7 +13,7 @@ CroogoNav::add('sidebar', 'webshop.children.invoices', array(
 	),
 ));
 
-CroogoNav::add('webshop-customer-dashboard', 'invoices', array(
+Nav::add('webshop-customer-dashboard', 'invoices', array(
 	'title' => __d('webshop_invoices', 'Invoices'),
 	'url' => array(
 		'prefix' => 'panel',

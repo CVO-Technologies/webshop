@@ -2,7 +2,7 @@
 
 namespace Webshop\Invoices\Controller\Panel;
 
-use Croogo\Croogo\Controller\CroogoAppController;
+use Croogo\Core\Controller\CroogoAppController;
 use Webshop\Invoices\Model\Table\InvoicesTable;
 
 /**

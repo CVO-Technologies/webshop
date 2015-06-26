@@ -1,5 +1,5 @@
 <?php
-use Croogo\Croogo\CroogoNav;
+use Croogo\Core\Nav;
 
 $this->Title->setPageTitle(__d('webshop', 'Dashboards'));
 
@@ -20,7 +20,7 @@ $this->Title->addCrumbs(array(
 		<h3 class="title-divider"><span>Account overzicht</span>
 			<small>Een simpel account overzicht.</small>
 		</h3>
-		<?php foreach (CroogoNav::items('webshop-customer-dashboard') as $options): ?>
+		<?php foreach (Nav::items('webshop-customer-dashboard') as $options): ?>
 			<?php echo $this->Html->link($options['before'] . $options['title'] . $options['after'], $options['url'], array('escape' => false, 'class' => 'btn btn-default')); ?><br/>
 		<?php endforeach; ?>
 	</div>
