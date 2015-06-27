@@ -1,5 +1,5 @@
 <?php
-$invoices = $this->requestAction(array('plugin' => 'webshop_invoices', 'controller' => 'invoices', 'action' => 'index', '?' => array('status' => 'open')));
+$invoices = $this->requestAction(array('plugin' => 'Webshop/Invoices', 'controller' => 'Invoices', 'action' => 'index', '?' => array('status' => 'open')));
 ?>
 <table class="table">
 	<thead>
