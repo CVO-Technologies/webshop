@@ -16,10 +16,10 @@ class WebshopHelper extends Helper
 
     public $helpers = array('Html');
 
-    public function beforeRender($viewFile)
+    public function beforeRender()
     {
-        $this->Html->script('Webshop.webshop', array('inline' => false, 'block' => 'script'));
-        $this->Html->css('Webshop.webshop', array('inline' => false, 'block' => 'css'));
+        $this->Html->script('Webshop.webshop', ['block' => 'script']);
+        $this->Html->css('Webshop.webshop', ['block' => 'css']);
     }
 
     /**
