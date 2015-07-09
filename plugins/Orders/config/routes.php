@@ -22,8 +22,10 @@
 //	'action' => 'index'
 //));
 //
-//CroogoRouter::connect('/panel/orders/:action/*', array(
-//	'panel' => true,
-//	'plugin' => 'webshop_orders',
-//	'controller' => 'orders'
-//));
+use Croogo\Core\CroogoRouter;
+
+CroogoRouter::connect('/panel/orders/:action/*', array(
+	'prefix' => 'panel',
+	'plugin' => 'Webshop/Orders',
+	'controller' => 'Orders'
+));

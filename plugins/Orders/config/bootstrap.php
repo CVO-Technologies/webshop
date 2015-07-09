@@ -1,29 +1,32 @@
 <?php
 
-CroogoNav::add('sidebar', 'webshop.children.orders', array(
+use Croogo\Core\Croogo;
+use Croogo\Core\Nav;
+
+Nav::add('sidebar', 'webshop.children.orders', array(
 	'title' => __d('webshop_orders', 'Orders'),
 	'url' => array(
 		'admin' => true,
-		'plugin' => 'webshop_orders',
-		'controller' => 'orders',
+		'plugin' => 'Webshop/Orders',
+		'controller' => 'Orders',
 		'action' => 'index'
 	),
 ));
 
-CroogoNav::add('webshop-customer-dashboard', 'orders', array(
+Nav::add('webshop-customer-dashboard', 'orders', array(
 	'title' => __d('webshop_orders', 'Orders'),
 	'url' => array(
 		'prefix' => 'panel',
-		'plugin' => 'webshop_orders',
-		'controller' => 'orders',
+		'plugin' => 'Webshop/Orders',
+		'controller' => 'Orders',
 		'action' => 'index'
 	),
 ));
 
-CroogoNav::add('webshop-dashboard-order-actions', 'view', array(
+Nav::add('webshop-dashboard-order-actions', 'view', array(
 	'title' => __d('webshop_orders', 'View'),
 	'url' => array(
-		'controller' => 'orders',
+		'controller' => 'Orders',
 		'action' => 'view',
 		'_id'
 	),
@@ -32,10 +35,10 @@ CroogoNav::add('webshop-dashboard-order-actions', 'view', array(
 	)
 ));
 
-CroogoNav::add('webshop-dashboard-order-actions', 'pay', array(
+Nav::add('webshop-dashboard-order-actions', 'pay', array(
 	'title' => __d('webshop_orders', 'Pay'),
 	'url' => array(
-		'controller' => 'orders',
+		'controller' => 'Orders',
 		'action' => 'pay',
 		'_id'
 	),
@@ -44,6 +47,6 @@ CroogoNav::add('webshop-dashboard-order-actions', 'pay', array(
 	)
 ));
 
-Croogo::hookHelper('*', 'WebshopOrders.Order');
+Croogo::hookHelper('*', 'Webshop/Orders.Orders');
 
 Croogo::hookAdminTab('Customers/admin_view', __d('webshop_orders', 'Orders'), 'WebshopOrders.admin/tab/orders');
