@@ -57,5 +57,5 @@ $this->Title->addCrumbs(array(
 	</div>
 </div>
 <div class="row">
-    <?= $this->cell('Webshop.Announcements'); ?>
+    <?= $this->cell('Webshop.Announcements::panelDashboard', ['limit' => 2]); ?>
 </div>
