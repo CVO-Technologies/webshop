@@ -1,0 +1,10 @@
+{
+  "name": "cvo-technologies/webshop-orders",
+  "type": "croogo-plugin",
+  "require": {
+    "cvo-technologies/croogo-webshop-plugin": "dev-master"
+  },
+  "extra": {
+    "installer-name": "WebshopOrders"
+  }
+}
