@@ -4,7 +4,7 @@ namespace Webshop\Orders\Model\Table;
 
 use Cake\ORM\Table;
 
-class Order extends Table {
+class OrdersTable extends Table {
 
 	public $filterArgs = array(
 		'status' => array('type' => 'value'),
@@ -15,16 +15,16 @@ class Order extends Table {
     {
         parent::initialize($config);
 
-        $this->addBehavior('Webshop.Counter', [
-            'fields' => [
-                'number' => [
-                    'count' => true
-                ]
-            ]
-        ]);
+//        $this->addBehavior('Webshop.Counter', [
+//            'fields' => [
+//                'number' => [
+//                    'count' => true
+//                ]
+//            ]
+//        ]);
         $this->addBehavior('Webshop.Status');
         $this->addBehavior('Webshop.CustomerOwned');
-        $this->addBehavior('Croogo.BulkProcess', [
+        $this->addBehavior('Croogo/Core.BulkProcess', [
             'actionsMap' => [
                 'cancel' => 'bulkCancel'
             ]

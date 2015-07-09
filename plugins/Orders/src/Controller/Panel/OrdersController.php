@@ -7,12 +7,20 @@ use Croogo\Core\Controller\CroogoAppController;
 class OrdersController extends CroogoAppController
 {
 
-    public function index() {
-        $orders = $this->Paginator->paginate('Order', array(
-            $this->Order->alias . '.customer_id' => $this->CustomerAccess->getCustomerId()
-        ));
+    public function initialize()
+    {
+        parent::initialize();
 
-        $this->set(compact('orders'));
+        $this->loadComponent('Paginator');
+    }
+
+    public function index() {
+        $query = $this->Orders->find('customer', [
+            'customerId' => $this->CustomerAccess->getCustomerId()
+        ]);
+        $orders = $this->Paginator->paginate($query);
+
+        $this->set('orders', $orders);
     }
 
     public function view($id) {
