@@ -49,6 +49,12 @@ $this->Title->addCrumbs(array(
 
         <?= $this->cell('Webshop/Invoices.OutstandingInvoices::panelDashboard', ['limit' => 5]); ?>
 	</div>
+
+    <div class="col-md-6">
+        <h3><span>Lopende orders</span></h3>
+
+        <?= $this->cell('Webshop/Orders.CurrentOrders::panelDashboard', ['limit' => 5]); ?>
+    </div>
 </div>
 
 <div class="row">

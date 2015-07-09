@@ -2,6 +2,7 @@
 
 namespace Webshop\Orders\Model\Table;
 
+use Cake\ORM\Query;
 use Cake\ORM\Table;
 
 class OrdersTable extends Table
@@ -55,6 +56,12 @@ class OrdersTable extends Table
         ]);
     }
 
+    public function findCurrent(Query $query)
+    {
+        return $query->andWhere([
+            'status' => 'open'
+        ]);
+    }
 
     public function createFromProductList($customerId, $productsList)
     {
