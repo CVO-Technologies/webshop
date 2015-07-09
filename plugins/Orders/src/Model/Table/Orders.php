@@ -1,59 +1,61 @@
 <?php
 
-App::uses('WebshopOrdersAppModel', 'WebshopOrders.Model');
-App::uses('CakeEmail', 'Network/Email');
+namespace Webshop\Orders\Model\Table;
 
-class Order extends WebshopOrdersAppModel {
+use Cake\ORM\Table;
 
-	public $actsAs = array(
-		'Webshop.Counter' => array(
-			'fields' => array(
-				'number' => array(
-					'count' => true
-				)
-			)
-		),
-		'Webshop.Status',
-		'Croogo.BulkProcess' => array(
-			'actionsMap' => array(
-				'cancel' => 'bulkCancel'
-			)
-		),
-		'Search.Searchable',
-	);
-
-	public $belongsTo = array(
-		'Customer' => array(
-			'className' => 'Webshop.Customer',
-			'foreignKey' => 'customer_id'
-		),
-		'InvoiceAddressDetail' => array(
-			'className' => 'Webshop.AddressDetail',
-			'foreignKey' => 'invoice_address_detail_id'
-		)
-	);
-
-	public $hasMany = array(
-		'OrderProduct' => array(
-			'className' => 'WebshopOrders.OrderProduct',
-			'foreignKey' => 'order_id'
-		),
-		'OrderPayment' => array(
-			'className' => 'WebshopOrders.OrderPayment',
-			'foreignKey' => 'order_id'
-		),
-		'OrderShipment' => array(
-			'className' => 'WebshopOrders.OrderShipment',
-			'foreignKey' => 'order_id'
-		)
-	);
+class Order extends Table {
 
 	public $filterArgs = array(
 		'status' => array('type' => 'value'),
 		'customer_id' => array('type' => 'value'),
 	);
 
-	public function createFromProductList($customerId, $productsList) {
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        $this->addBehavior('Webshop.Counter', [
+            'fields' => [
+                'number' => [
+                    'count' => true
+                ]
+            ]
+        ]);
+        $this->addBehavior('Webshop.Status');
+        $this->addBehavior('Webshop.CustomerOwned');
+        $this->addBehavior('Croogo.BulkProcess', [
+            'actionsMap' => [
+                'cancel' => 'bulkCancel'
+            ]
+        ]);
+        $this->addBehavior('Search.Searchable');
+
+        $this->belongsTo('Customers', [
+            'className' => 'Webshop.Customers',
+            'foreignKey' => 'customer_id'
+        ]);
+        $this->belongsTo('InvoiceAddressDetail', [
+            'className' => 'Webshop.AddressDetails',
+            'foreignKey' => 'invoice_address_detail_id'
+        ]);
+
+        $this->hasMany('OrderProducts', [
+            'className' => 'WebshopOrders.OrderProducts',
+            'foreignKey' => 'order_id'
+        ]);
+        $this->hasMany('OrderPayments', [
+            'className' => 'WebshopOrders.OrderPayments',
+            'foreignKey' => 'order_id'
+        ]);
+        $this->hasMany('OrderShipments', [
+            'className' => 'WebshopOrders.OrderShipments',
+            'foreignKey' => 'order_id'
+        ]);
+    }
+
+
+    public function createFromProductList($customerId, $productsList) {
 		$products = $this->OrderProduct->Product->find('all', array(
 			'conditions' => array(
 				'id' => array_keys($productsList)
