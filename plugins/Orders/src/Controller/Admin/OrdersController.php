@@ -1,11 +1,15 @@
 <?php
 
+namespace Webshop\Orders\Controller\Admin;
+
+use Croogo\Core\Controller\CroogoAppController;
+
 /**
  * Class OrdersController
  *
  * @property Order Order
  */
-class OrdersController extends AppController {
+class OrdersController extends CroogoAppController {
 
 	public $components = array(
 		'Paginator' => array(
