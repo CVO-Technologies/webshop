@@ -1,19 +1,24 @@
 <?php
 
-App::uses('WebshopOrdersAppModel', 'WebshopOrders.Model');
+namespace Webshop\Orders\Model\Table;
 
-class OrderPayment extends WebshopOrdersAppModel
+use Cake\ORM\Table;
+
+class OrderPayment extends Table
 {
 
-    public $belongsTo = array(
-        'Order' => array(
-            'className' => 'WebshopOrders.Order',
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        $this->belongsTo('Orders', [
+            'className' => 'WebshopOrders.Orders',
             'foreignKey' => 'order_id'
-        ),
-        'Payment' => array(
-            'className' => 'WebshopPayments.Payment',
+        ]);
+        $this->belongsTo('Payments', [
+            'className' => 'WebshopPayments.Payments',
             'foreignKey' => 'payment_id'
-        ),
-    );
+        ]);
+    }
 
 }

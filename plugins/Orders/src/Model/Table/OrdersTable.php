@@ -42,15 +42,15 @@ class OrdersTable extends Table
         ]);
 
         $this->hasMany('OrderProducts', [
-            'className' => 'WebshopOrders.OrderProducts',
+            'className' => 'Webshop/Orders.OrderProducts',
             'foreignKey' => 'order_id'
         ]);
         $this->hasMany('OrderPayments', [
-            'className' => 'WebshopOrders.OrderPayments',
+            'className' => 'Webshop/Orders.OrderPayments',
             'foreignKey' => 'order_id'
         ]);
         $this->hasMany('OrderShipments', [
-            'className' => 'WebshopOrders.OrderShipments',
+            'className' => 'Webshop/Orders.OrderShipments',
             'foreignKey' => 'order_id'
         ]);
     }

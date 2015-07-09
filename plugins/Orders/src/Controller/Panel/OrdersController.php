@@ -26,15 +26,18 @@ class OrdersController extends CroogoAppController
 
     public function view($id)
     {
-        $this->Order->id = $id;
-        $this->Order->recursive = 3;
-        if (!$this->Order->exists()) {
-            throw new NotFoundException();
-        }
+        $order = $this->Orders->get($id, [
+            'contain' => [
+                'Customers',
+//                'OrderShipments',
+                'OrderProducts' => [
+                    'Products'
+                ],
+                'OrderPayments'
+            ]
+        ]);
 
-        $order = $this->Order->read();
-
-        $this->set(compact('order'));
+        $this->set('order', $order);
     }
 
     public function pay($id)
