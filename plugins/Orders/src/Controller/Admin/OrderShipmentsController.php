@@ -1,8 +1,12 @@
 <?php
 
-class OrderShipmentsController extends AppController {
+namespace Webshop\Orders\Controller\Admin;
 
-	public function admin_ship($id) {
+use Croogo\Core\Controller\CroogoAppController;
+
+class OrderShipmentsController extends CroogoAppController {
+
+	public function ship($id) {
 		$this->OrderShipment->id = $id;
 		$this->OrderShipment->recursive = 3;
 		if (!$this->OrderShipment->exists()) {

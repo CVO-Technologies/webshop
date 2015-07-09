@@ -1,8 +1,12 @@
 <?php
 
-class OrderProductsController extends AppController {
+namespace Webshop\Orders\Controller\Admin;
 
-	public function admin_assign_shipment($orderId, $orderShipmentId) {
+use Croogo\Core\Controller\CroogoAppController;
+
+class OrderProductsController extends CroogoAppController {
+
+	public function assign_shipment($orderId, $orderShipmentId) {
 		$orderProducts = $this->OrderProduct->find('all', array(
 			'conditions' => array(
 				$this->OrderProduct->alias . '.order_id' => $orderId
