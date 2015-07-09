@@ -45,3 +45,5 @@ CroogoNav::add('webshop-dashboard-order-actions', 'pay', array(
 ));
 
 Croogo::hookHelper('*', 'WebshopOrders.Order');
+
+Croogo::hookAdminTab('Customers/admin_view', __d('webshop_orders', 'Orders'), 'WebshopOrders.admin/tab/orders');
