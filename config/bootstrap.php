@@ -15,6 +15,7 @@ function addWebshopPluginPath($basePluginName) {
 }
 
 addWebshopPluginPath('Invoices');
+addWebshopPluginPath('Orders');
 
 Nav::add('sidebar', 'webshop', array(
 	'title' => __d('webshop', 'Webshop'),
