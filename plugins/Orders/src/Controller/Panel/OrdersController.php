@@ -14,7 +14,8 @@ class OrdersController extends CroogoAppController
         $this->loadComponent('Paginator');
     }
 
-    public function index() {
+    public function index()
+    {
         $query = $this->Orders->find('customer', [
             'customerId' => $this->CustomerAccess->getCustomerId()
         ]);
@@ -23,7 +24,8 @@ class OrdersController extends CroogoAppController
         $this->set('orders', $orders);
     }
 
-    public function view($id) {
+    public function view($id)
+    {
         $this->Order->id = $id;
         $this->Order->recursive = 3;
         if (!$this->Order->exists()) {
@@ -35,7 +37,8 @@ class OrdersController extends CroogoAppController
         $this->set(compact('order'));
     }
 
-    public function pay($id) {
+    public function pay($id)
+    {
         $this->Order->id = $id;
         if (!$this->Order->exists()) {
             throw new NotFoundException();
