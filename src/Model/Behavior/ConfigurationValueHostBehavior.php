@@ -1,57 +1,58 @@
 <?php
 
-class ConfigurationValueHostBehavior extends ModelBehavior {
+namespace Webshop\Model\Behavior;
 
-	public function setup(Model $Model, $config = array()) {
-		$Model->bindModel(array(
-			'hasMany' => array(
-				'ConfigurationValue' => array(
-					'className' => 'Webshop.ItemConfigurationValue',
-					'foreignKey' => 'foreign_key',
-					'conditions' => array(
-						'ConfigurationValue.model' => $Model->name
-					)
-				)
-			)
-		), false);
-	}
+use Cake\ORM\Behavior;
+use Cake\Utility\Hash;
 
-	public function afterFind(Model $model, $results, $primary = false) {
-		if ($primary) {
-			foreach ($results as $index => $entry) {
-				if (!isset($entry['ConfigurationValue'])) {
-					continue;
-				}
+class ConfigurationValueHostBehavior extends Behavior {
 
-				$results[$index][$model->alias]['configuration'] = $this->parseConfiguration($model, $entry['ConfigurationValue']);
-			}
-		} else {
-			if (!isset($entry['ConfigurationValue'])) {
-				return $results;
-			}
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
 
-			$results[$model->alias]['configuration'] = $this->parseConfiguration($model, $entry['ConfigurationValue']);
-		}
+        $this->_table->hasMany('ConfigurationValues', [
+            'className' => 'Webshop.ItemConfigurationValues',
+            'foreignKey' => 'foreign_key',
+            'conditions' => array(
+                'ConfigurationValues.model' => get_class($this->_table)
+            )
+        ]);
+    }
 
-		return $results;
-	}
+//	public function afterFind(Model $model, $results, $primary = false) {
+//		if ($primary) {
+//			foreach ($results as $index => $entry) {
+//				if (!isset($entry['ConfigurationValue'])) {
+//					continue;
+//				}
+//
+//				$results[$index][$model->alias]['configuration'] = $this->parseConfiguration($model, $entry['ConfigurationValue']);
+//			}
+//		} else {
+//			if (!isset($entry['ConfigurationValue'])) {
+//				return $results;
+//			}
+//
+//			$results[$model->alias]['configuration'] = $this->parseConfiguration($model, $entry['ConfigurationValue']);
+//		}
+//
+//		return $results;
+//	}
 
-	public function parseConfiguration(Model $Model, $configurationValues) {
-		$aliases = $Model->ConfigurationValue->ConfigurationOption->find('list', array(
-			'fields' => array(
-				'ConfigurationOption.alias'
-			),
-			'conditions' => array(
-				'ConfigurationOption.id' => Hash::extract($configurationValues, '{n}.configuration_option_id')
-			)
-		));
+	public function parseConfiguration(array $configurationValues) {
+		$aliases = $this->_table->ConfigurationValues->ConfigurationOptions->find('list', [
+            'valueField' => 'alias'
+        ])->where([
+            'ConfigurationOptions.id IN' => Hash::extract($configurationValues, '{n}.configuration_option_id')
+        ])->toArray();
 
 		$configuration = array();
 		foreach ($configurationValues as $configurationValue) {
-			if (!isset($aliases[$configurationValue['configuration_option_id']])) {
+			if (!isset($aliases[(int) $configurationValue['configuration_option_id']])) {
 				continue;
 			}
-			$alias = $aliases[$configurationValue['configuration_option_id']];
+			$alias = $aliases[(int) $configurationValue['configuration_option_id']];
 
 			$value = null;
 
@@ -63,7 +64,7 @@ class ConfigurationValueHostBehavior extends ModelBehavior {
 				$value = $configurationValue['configuration_option_item_id'];
 			}
 
-			if (!$value) {
+			if (is_null($value)) {
 				continue;
 			}
 

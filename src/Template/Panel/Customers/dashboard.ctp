@@ -10,14 +10,15 @@ $this->Title->addCrumbs(array(
 
 <div class="row">
 	<div class="col-md-6">
-		<h3 class="title-divider"><span>Account informatie</span>
+		<h3><span>Account informatie</span>
 			<small><a href="clientarea?action=details">Werk uw gegevens bij</a></small>
 		</h3>
-		<span><strong><?php echo h($customer['Customer']['name']); ?></strong></span><br/>
+		<span><strong><?php echo h($customer->name); ?></strong></span><br/>
 		<span><?php echo h(__d('webshop', 'Address details')); ?>: <?php echo $this->Html->link(__d('webshop', 'View all'), array('controller' => 'AddressDetails', 'action' => 'index'), array('escape' => false)); ?></span>
 	</div>
 	<div class="col-md-6">
-		<h3 class="title-divider"><span>Account overzicht</span>
+		<h3>
+            <span>Account overzicht</span>
 			<small>Een simpel account overzicht.</small>
 		</h3>
 		<?php foreach (Nav::items('webshop-customer-dashboard') as $options): ?>
@@ -34,7 +35,7 @@ $this->Title->addCrumbs(array(
 		<a class="btn btn-primary btn-xs pull-right" style="margin-top: 22px;" href="submitticket"><i
 				class="glyphicon glyphicon-comment"></i> Open ticket</a>
 
-		<h3 class="title-divider"><span style="font-weight: normal;">Open ticket</span></h3>
+		<h3><span>Open ticket</span></h3>
 
 		<ul class="list-group">
 			<li class="list-group-item">
@@ -44,7 +45,7 @@ $this->Title->addCrumbs(array(
 	</div>
 
 	<div class="col-md-6">
-		<h3 class="title-divider"><span style="font-weight: normal;">Verschuldigde facturen</span></h3>
+		<h3><span>Verschuldigde facturen</span></h3>
 
 		<ul class="list-group">
 			<li class="list-group-item">
@@ -57,7 +58,7 @@ $this->Title->addCrumbs(array(
 
 <div class="row">
 	<div class="col-md-12">
-		<h3 class="title-divider"><span style="font-weight: normal;">Ons laatste nieuws</span></h3>
+		<h3><span>Ons laatste nieuws</span></h3>
 	</div>
 </div>
 <div class="row">

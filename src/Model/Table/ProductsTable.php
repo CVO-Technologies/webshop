@@ -97,7 +97,7 @@ class ProductsTable extends CroogoTable
         $this->addBehavior('NodesDatasource.NodeContentType', [
             'type' => 'product'
         ]);
-        $this->addBehavior('Croogo/Croogo.Url', [
+        $this->addBehavior('Croogo/Core.Url', [
             'url' => array(
                 'plugin' => 'Webshop',
                 'controller' => 'Products',
@@ -108,6 +108,8 @@ class ProductsTable extends CroogoTable
                 'id'
             ]
         ]);
+        $this->addBehavior('Webshop.ConfigurableItem');
+        $this->addBehavior('Webshop.ConfigurationValueHost');
     }
 
     public function getPrice($productId, $configuration)

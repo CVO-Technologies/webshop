@@ -101,19 +101,19 @@ Croogo::hookBehavior('Node', 'Webshop.Product');
 Croogo::hookBehavior('Croogo/Nodes.Nodes', 'Webshop.Announcements');
 
 if (Plugin::loaded('Sites')) {
-    Croogo::hookBehavior('Webshop.Products', 'Sites.SiteFilter', array(
-        'relationship' => array(
-            'belongsToMany' => array(
-                'Sites' => array(
-                    'className' => 'Sites.Sites',
-                    'through' => 'Sites.SitesNodes',
-                    'foreignKey' => 'node_id',
-                    'targetForeignKey' => 'site_id',
-                    'unique' => 'keepExisting',
-                ),
-            ),
-        ),
-    ));
+//    Croogo::hookBehavior('Webshop.Products', 'Sites.SiteFilter', array(
+//        'relationship' => array(
+//            'belongsToMany' => array(
+//                'Sites' => array(
+//                    'className' => 'Sites.Sites',
+//                    'through' => 'Sites.SitesNodes',
+//                    'foreignKey' => 'node_id',
+//                    'targetForeignKey' => 'site_id',
+//                    'unique' => 'keepExisting',
+//                ),
+//            ),
+//        ),
+//    ));
 }
 //endregion
 

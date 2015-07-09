@@ -2,7 +2,11 @@
 
 namespace Webshop\View\Helper;
 
+use Cake\Collection\Collection;
+use Cake\ORM\Entity;
+use Cake\Utility\Hash;
 use Cake\View\Helper;
+use Webshop\Model\Entity\ConfigurationOption;
 
 class ConfigurationOptionHelper extends Helper {
 
@@ -29,15 +33,16 @@ class ConfigurationOptionHelper extends Helper {
 //		$this->__idAliasMapping = Hash::combine($details, 'ConfigurationOption.{n}.id', 'ConfigurationOption.{n}.alias');
 	}
 
-	public function setOptions(array $options) {
+	public function setOptions(Collection $options) {
 //		$this->_details = $details;
 
 		$this->_options = array();
-		foreach ($options as $option) {
-			$this->_options[$option['alias']] = $option;
+        /** @var Entity $option */
+        foreach ($options as $option) {
+			$this->_options[$option->alias] = $option;
 		}
 
-		$this->__idAliasMapping = Hash::combine($options, '{n}.id', '{n}.alias');
+		$this->__idAliasMapping = $options->combine('id', 'alias')->toList();
 	}
 
 //	public function setOverwrites(array $options) {
@@ -55,8 +60,8 @@ class ConfigurationOptionHelper extends Helper {
 		}
 	}
 
-	public function setValues(array $values) {
-		$this->_values = $values;
+	public function setValues(Collection $values) {
+		$this->_values = $values->toArray();
 	}
 
 	public function setValueStoreIds(array $valueStoreIds) {
@@ -152,6 +157,10 @@ class ConfigurationOptionHelper extends Helper {
 		return $options;
 	}
 
+    /**
+     * @param string $alias
+     * @return ConfigurationOption
+     */
 	public function configurationOption($alias) {
 		$optionSettings = $this->_options[$alias];
 

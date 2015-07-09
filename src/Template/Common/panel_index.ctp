@@ -109,12 +109,12 @@ $tableFooters = trim($this->fetch('table-footer'));
 			<?php
 			$searchBlock = $this->fetch('search');
 			if (!$searchBlock):
-				$searchBlock = $this->element('Croogo/Croogo.admin/search');
+				$searchBlock = $this->element('Croogo/Core.admin/search');
 			endif;
 			echo $searchBlock;
 
 			if ($contentBlock = trim($this->fetch('content'))):
-				echo $this->element('Croogo/Croogo.admin/search');
+				echo $this->element('Croogo/Core.admin/search');
 				echo $contentBlock;
 			else:
 

@@ -1,8 +1,10 @@
 <?php
 
-App::uses('WebshopAppModel', 'Webshop.Model');
+namespace Webshop\Model\Table;
 
-class ConfigurationGroup extends WebshopAppModel {
+use Cake\ORM\Table;
+
+class ConfigurationGroupsTable extends Table {
 
 	public $hasMany = array(
 		'ConfigurationOption' => array(
@@ -10,7 +12,17 @@ class ConfigurationGroup extends WebshopAppModel {
 		)
 	);
 
-	public function createGroup($alias, $schema) {
+    public function initialize(array $config)
+    {
+        parent::initialize($config);
+
+        $this->hasMany('ConfigurationOptions', [
+            'className' => 'Webshop.ConfigurationOptions'
+        ]);
+    }
+
+
+    public function createGroup($alias, $schema) {
 		$configurationGroupData = $schema;
 		unset($configurationGroupData['options']);
 
