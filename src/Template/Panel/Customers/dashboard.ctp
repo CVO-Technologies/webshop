@@ -47,12 +47,7 @@ $this->Title->addCrumbs(array(
 	<div class="col-md-6">
 		<h3><span>Verschuldigde facturen</span></h3>
 
-		<ul class="list-group">
-			<li class="list-group-item">
-				<i>Op dit moment zijn er geen openstaande facturen</i>
-			</li>
-
-		</ul>
+        <?= $this->cell('Webshop/Invoices.OutstandingInvoices::panelDashboard', ['limit' => 5]); ?>
 	</div>
 </div>
 

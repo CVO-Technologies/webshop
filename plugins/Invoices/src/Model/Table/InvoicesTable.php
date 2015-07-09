@@ -2,6 +2,7 @@
 
 namespace Webshop\Invoices\Model\Table;
 
+use Cake\ORM\Query;
 use Cake\ORM\Table;
 
 class InvoicesTable extends Table {
@@ -56,6 +57,12 @@ class InvoicesTable extends Table {
         ]);
     }
 
+    public function findOutstanding(Query $query)
+    {
+        return $query->andWhere([
+            'status' => 'open'
+        ]);
+    }
 
     public function afterFind($results, $primary = false) {
 		if ($primary) {
