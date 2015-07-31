@@ -1,16 +1,30 @@
 <?php
 
-class AddressDetailsController extends AppController {
+namespace Webshop\Controller\Panel;
 
-	public $components = array(
-		'RequestHandler',
-		'Paginator'
-	);
+use Croogo\Core\Controller\CroogoAppController;
+use Webshop\Model\Table\AddressDetailsTable;
 
-	public function panel_index() {
-		$addressDetails = $this->Paginator->paginate('AddressDetail', array(
-			'AddressDetail.customer_id' => $this->CustomerAccess->getCustomerId()
-		));
+/**
+ * @property AddressDetailsTable AddressDetails
+ */
+class AddressDetailsController extends CroogoAppController
+{
+
+    public function initialize()
+    {
+        parent::initialize();
+
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Paginator');
+    }
+
+    public function index() {
+        $query = $this->AddressDetails->find('ownedByCustomer', [
+            'customer' => $this->CustomerAccess->getCustomer()
+        ]);
+
+		$addressDetails = $this->Paginator->paginate($query);
 
 		if ($this->request->is('requested')) {
 			return $addressDetails;
@@ -20,70 +34,47 @@ class AddressDetailsController extends AppController {
 		$this->set('_serialize', array('addressDetails'));
 	}
 
-	public function panel_add() {
-		if ($this->request->query('modal')) {
-			$this->layout = 'modal';
+	public function add() {
+		$addressDetail = $this->AddressDetails->newEntity([
+            'customer_id' => $this->CustomerAccess->getCustomerId()
+        ]);
 
-			$this->set('modal', $this->request->query('modal'));
-		}
+        $this->set('addressDetail', $addressDetail);
 
 		if (!$this->request->is('post')) {
 			return;
 		}
 
-		$this->request->data['AddressDetail']['customer_id'] = $this->CustomerAccess->getCustomerId();
-
-		if (!$this->AddressDetail->save($this->request->data)) {
+        $addressDetail = $this->AddressDetails->patchEntity($addressDetail, $this->request->data());
+		if (!$this->AddressDetails->save($addressDetail)) {
 			return;
 		}
 
-		$this->redirect(array(
+		return $this->redirect(array(
 			'action' => 'index'
 		));
 	}
 
-	public function panel_edit($id) {
-		$addressDetail = $this->AddressDetail->find('first', array(
-			'conditions' => array(
-				'AddressDetail.id' => $id,
-				'AddressDetail.customer_id' => $this->CustomerAccess->getCustomerId()
-			)
-		));
-		if (!$addressDetail) {
-			throw new NotFoundException();
-		}
+	public function edit($id) {
+        $addressDetail = $this->AddressDetails->get($id, [
+            'finder' => 'ownedByCustomer',
+            'customer' => $this->CustomerAccess->getCustomer()
+        ]);
 
-		if (empty($this->request->data)) {
-			$this->request->data = $addressDetail;
-		}
-
-		debug($this->request->method());
+        $this->set('addressDetail', $addressDetail);
 
 		if (!$this->request->is('put')) {
 			return;
 		}
 
-		$this->AddressDetail->id = $id;
-		if (!$this->AddressDetail->save($this->request->data, array(
-			'AddressDetail.name',
-			'AddressDetail.street',
-			'AddressDetail.house_number',
-			'AddressDetail.house_number_addition',
-			'AddressDetail.postcode',
-			'AddressDetail.city',
-			'AddressDetail.municipality',
-			'AddressDetail.province',
-			'AddressDetail.country',
-		))) {
-			$this->Session->setFlash(__d('webshop', 'Could not save address details'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-danger'
-			));
+		$addressDetail = $this->AddressDetails->patchEntity($addressDetail, $this->request->data());
+		if (!$this->AddressDetails->save($addressDetail)) {
+			$this->Flash->error(__d('webshop', 'Could not save address details'));
 
 			return;
 		}
 
-		$this->redirect(array(
+		return $this->redirect(array(
 			'action' => 'index'
 		));
 	}

@@ -26,6 +26,7 @@ class AddressDetailsTable extends Table
         $this->belongsTo('Customers', [
            'className' => 'Webshop.Customers'
         ]);
+        $this->addBehavior('Webshop.CustomerOwned');
     }
 
 

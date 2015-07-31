@@ -3,15 +3,15 @@ $this->Title->addSegment(__d('webshop', 'Dashboard'));
 $this->Title->setPageTitle(__d('webshop', 'Address details'));
 
 $this->Title->addCrumbs(array(
-	array('controller' => 'customers', 'action' => 'dashboard'),
+	['_name' => 'panel_dashboard'],
 	array('action' => 'index')
 ));
 
-$this->extend('Webshop.Common/panel_index');
+$this->extend('Webshop./Common/panel_index');
 
 $this->start('actions');
 ?>
-<div class="btn-group">
+<div class="btn-group btn-group-justified">
 <?php
 echo $this->Html->link(
 	__d('webshop', 'Back'),
@@ -31,14 +31,15 @@ $this->end();
 $this->set('displayFields', array(
 	'name' => array(
 		'label' => __d('webshop', 'Name'),
-		'sort' => true
+		'sort' => true,
+        'type' => 'string'
 	),
 	'address' => array(
 		'label' => __d('webshop', 'Address'),
 		'element' => array(
 			'element' => 'Webshop.address',
 			'data' => array(
-				'addressDetail' => 'AddressDetail'
+				'addressDetail' => '.'
 			)
 		),
 		'sort' => false

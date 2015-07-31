@@ -69,7 +69,7 @@ Nav::add('sidebar', 'settings.children.webshop', array(
 Nav::add('webshop-dashboard-address_details-actions', 'edit', array(
 	'title' => __d('webshop', 'Edit'),
 	'url' => array(
-		'controller' => 'address_details',
+		'controller' => 'AddressDetails',
 		'action' => 'edit',
 		'_id'
 	),

@@ -76,11 +76,26 @@ class CustomerAccessComponent extends Component
                 if (!$this->request->session()->check('Customer.select.redirect')) {
                     $this->request->session()->write('Customer.select.redirect', $controller->request->here);
                 }
-                $controller->redirect(array('prefix' => 'panel', 'plugin' => 'Webshop', 'controller' => 'Customers', 'action' => 'select'));
+
+                return $controller->redirect(array('prefix' => 'panel', 'plugin' => 'Webshop', 'controller' => 'Customers', 'action' => 'select'));
             }
         }
 
         return $customerId;
+    }
+
+    /**
+     * @return Customer
+     */
+    public function getCustomer()
+    {
+        if ($this->getCustomerId() instanceof Response) {
+            return $this->getCustomerId();
+        }
+
+        $customers = TableRegistry::get('Webshop.Customers');
+
+        return $customers->get($this->getCustomerId());
     }
 
     public function getAccessibleCustomers()

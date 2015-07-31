@@ -19,7 +19,7 @@ endif;
 
 <?php if ($showActions): ?>
 	<div class="row">
-		<div class="actions col-lg-12">
+		<div class="actions col-sm-4 col-md-2">
 			<?php
 			if ($actionsBlock = $this->fetch('actions')):
 				echo $actionsBlock;
@@ -65,7 +65,7 @@ if (!$tableBody && isset($displayFields)):
 					'data-chooser_id' => $item[$modelClass]['id'],
 				));
 			else:
-//				$actions[] = $this->element('Webshop.action_menu', array('id' => $item[$modelClass]['id'], 'model' => Inflector::tableize($modelClass)));
+				$actions[] = $this->element('Webshop.action_menu', array('id' => $item->id, 'model' => Inflector::tableize($modelClass)));
 			endif;
 			$actions = $this->Html->div('item-actions', implode(' ', $actions));
 			$row = array();
@@ -80,8 +80,12 @@ if (!$tableBody && isset($displayFields)):
 				list($model, $field) = pluginSplit($val);
 				if (isset($element)):
 					$elementData = array();
-					foreach ($element['data'] as $key => $path):
-						$elementData[$key] = Hash::extract($item, $path);
+					foreach ($element['data'] as $dataKey => $path):
+                        if ($path !== '.'):
+                            $elementData[$dataKey] = $item->get($path);
+                        else:
+                            $elementData[$dataKey] = $item;
+                        endif;
 					endforeach;
 					$row[] = $this->element($element['element'], $elementData);
 
@@ -126,15 +130,17 @@ $tableFooters = trim($this->fetch('table-footer'));
 					echo $mainBlock;
 				else:
 					?>
-					<table class="table">
-						<?php
-						echo $tableHeaders;
-						echo $tableBody;
-						if ($tableFooters):
-							echo $tableFooters;
-						endif;
-						?>
-					</table>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <?php
+                            echo $tableHeaders;
+                            echo $tableBody;
+                            if ($tableFooters):
+                                echo $tableFooters;
+                            endif;
+                            ?>
+                        </table>
+                    </div>
 				<?php endif; ?>
 
 				<?php if ($bulkAction = trim($this->fetch('bulk-action'))): ?>

@@ -10,4 +10,8 @@ class CustomerOwnedBehavior extends \Cake\ORM\Behavior {
         return $query->where(['customer_id' => $options['customerId']]);
     }
 
+    public function findOwnedByCustomer(Query $query, array $options) {
+        return $query->where(['customer_id' => $options['customer']->id]);
+    }
+
 }
