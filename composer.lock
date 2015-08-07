@@ -1,70 +1,194 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dd1ced663c1b6a6aab904595b5f3d2c6",
+    "hash": "247f7f605af0839552687022c647f7ff",
     "packages": [
         {
-            "name": "cakedc/migrations",
-            "version": "2.3.5",
+            "name": "admad/cakephp-sequence",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/CakeDC/migrations.git",
-                "reference": "0d62dda64f4386fb29e68e3ba4d022aa90252aee"
+                "url": "https://github.com/ADmad/cakephp-sequence.git",
+                "reference": "34b8d1927b90ada1ba59321dfa8a4b3b1dd894fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CakeDC/migrations/zipball/0d62dda64f4386fb29e68e3ba4d022aa90252aee",
-                "reference": "0d62dda64f4386fb29e68e3ba4d022aa90252aee",
+                "url": "https://api.github.com/repos/ADmad/cakephp-sequence/zipball/34b8d1927b90ada1ba59321dfa8a4b3b1dd894fe",
+                "reference": "34b8d1927b90ada1ba59321dfa8a4b3b1dd894fe",
                 "shasum": ""
             },
             "require": {
-                "composer/installers": "*",
-                "php": ">=5.2.8"
+                "cakephp/cakephp": "~3.0",
+                "php": ">=5.4"
             },
             "type": "cakephp-plugin",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sequence\\": "src"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-            "authors": [
-                {
-                    "name": "Cake Development Corporation",
-                    "email": "team@cakedc.com",
-                    "homepage": "http://cakedc.com"
-                }
-            ],
-            "description": "Migrations Plugin for CakePHP",
-            "homepage": "http://cakedc.com",
-            "keywords": [
-                "cakephp",
-                "migrations"
-            ],
-            "time": "2014-10-18 08:52:31"
+            "description": "Sequence plugin for CakePHP 3.0+ to maintain ordered list of records",
+            "time": "2015-04-26 05:58:08"
         },
         {
-            "name": "cakedc/search",
-            "version": "2.5.1",
+            "name": "aura/installer-default",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/CakeDC/search.git",
-                "reference": "67632a54d69e840970fa64c31eb79936c59e5226"
+                "url": "https://github.com/auraphp/installer-default.git",
+                "reference": "52f8de3670cc1ef45a916f40f732937436d028c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CakeDC/search/zipball/67632a54d69e840970fa64c31eb79936c59e5226",
-                "reference": "67632a54d69e840970fa64c31eb79936c59e5226",
+                "url": "https://api.github.com/repos/auraphp/installer-default/zipball/52f8de3670cc1ef45a916f40f732937436d028c8",
+                "reference": "52f8de3670cc1ef45a916f40f732937436d028c8",
+                "shasum": ""
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "Aura\\Composer\\DefaultInstaller"
+            },
+            "autoload": {
+                "psr-0": {
+                    "Aura\\Composer\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul M. Jones",
+                    "email": "pmjones88@gmail.com",
+                    "homepage": "http://paul-m-jones.com"
+                }
+            ],
+            "description": "Installs Aura packages using the Composer defaults.",
+            "keywords": [
+                "aura",
+                "installer"
+            ],
+            "time": "2012-11-26 21:35:57"
+        },
+        {
+            "name": "aura/intl",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/auraphp/Aura.Intl.git",
+                "reference": "c5fe620167550ad6fa77dd3570fba2efc77a2a21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/auraphp/Aura.Intl/zipball/c5fe620167550ad6fa77dd3570fba2efc77a2a21",
+                "reference": "c5fe620167550ad6fa77dd3570fba2efc77a2a21",
                 "shasum": ""
             },
             "require": {
-                "composer/installers": "*",
-                "php": ">=5.3.0"
+                "aura/installer-default": "1.0.*",
+                "php": ">=5.4.0"
+            },
+            "type": "aura-package",
+            "extra": {
+                "aura": {
+                    "type": "library",
+                    "config": {
+                        "common": "Aura\\Intl\\_Config\\Common"
+                    }
+                },
+                "branch-alias": {
+                    "dev-develop": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Aura\\Intl": "src/"
+                },
+                "psr-4": {
+                    "Aura\\Intl\\_Config\\": "config/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Paul M. Jones",
+                    "email": "pmjones88@gmail.com",
+                    "homepage": "http://paul-m-jones.com"
+                },
+                {
+                    "name": "Aura.Intl Contributors",
+                    "homepage": "https://github.com/auraphp/Aura.Intl/contributors"
+                },
+                {
+                    "name": "Pascal Borreli",
+                    "email": "pascal@borreli.com"
+                },
+                {
+                    "name": "Mapthegod",
+                    "email": "mapthegod@gmail.com"
+                },
+                {
+                    "name": "Jose Lorenzo Rodriguez",
+                    "email": "jose.zap@gmail.com"
+                }
+            ],
+            "description": "The Aura.Intl package provides internationalization (I18N) tools, specifically\npackage-oriented per-locale message translation.",
+            "homepage": "http://auraphp.com/Aura.Intl",
+            "keywords": [
+                "g11n",
+                "globalization",
+                "i18n",
+                "internationalization",
+                "intl",
+                "l10n",
+                "localization"
+            ],
+            "time": "2014-08-24 00:00:00"
+        },
+        {
+            "name": "cakedc/search",
+            "version": "3.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CakeDC/search.git",
+                "reference": "c6e49e6f0e70e226181f41beaebfb295de60b65d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CakeDC/search/zipball/c6e49e6f0e70e226181f41beaebfb295de60b65d",
+                "reference": "c6e49e6f0e70e226181f41beaebfb295de60b65d",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/plugin-installer": "*",
+                "php": ">=5.4.16"
+            },
+            "require-dev": {
+                "cakephp/cakephp": "~3.0",
+                "phpunit/phpunit": "*"
             },
             "type": "cakephp-plugin",
-            "extra": {
-                "installer-name": "Search"
+            "autoload": {
+                "psr-4": {
+                    "Search\\": "src",
+                    "Search\\Test\\": "tests"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -86,20 +210,230 @@
                 "prg",
                 "search"
             ],
-            "time": "2014-08-07 18:13:40"
+            "time": "2015-04-15 18:47:32"
         },
         {
-            "name": "composer/installers",
-            "version": "v1.0.18",
+            "name": "cakephp/acl",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/composer/installers.git",
-                "reference": "74fb0a7a1a23696d9c8cc2fba5903f6711cdd067"
+                "url": "https://github.com/cakephp/acl.git",
+                "reference": "681fc5565fcf853b5c2a3f555ff4025b127c1acc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/74fb0a7a1a23696d9c8cc2fba5903f6711cdd067",
-                "reference": "74fb0a7a1a23696d9c8cc2fba5903f6711cdd067",
+                "url": "https://api.github.com/repos/cakephp/acl/zipball/681fc5565fcf853b5c2a3f555ff4025b127c1acc",
+                "reference": "681fc5565fcf853b5c2a3f555ff4025b127c1acc",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.0"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "master-dev",
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Acl\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/acl/graphs/contributors"
+                }
+            ],
+            "description": "Acl Plugin for CakePHP 3.x framework",
+            "homepage": "http://cakephp.org",
+            "keywords": [
+                "acl",
+                "cakephp"
+            ],
+            "time": "2015-06-23 17:59:31"
+        },
+        {
+            "name": "cakephp/cakephp",
+            "version": "3.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/cakephp.git",
+                "reference": "52c3617817729756d4fd083342f2fb7d15a0f4ee"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/52c3617817729756d4fd083342f2fb7d15a0f4ee",
+                "reference": "52c3617817729756d4fd083342f2fb7d15a0f4ee",
+                "shasum": ""
+            },
+            "require": {
+                "aura/intl": "1.1.*",
+                "ext-intl": "*",
+                "ext-mbstring": "*",
+                "ircmaxell/password-compat": "1.0.*",
+                "nesbot/carbon": "1.13.*",
+                "php": ">=5.4.16",
+                "psr/log": "1.0"
+            },
+            "replace": {
+                "cakephp/cache": "self.version",
+                "cakephp/collection": "self.version",
+                "cakephp/core": "self.version",
+                "cakephp/database": "self.version",
+                "cakephp/datasource": "self.version",
+                "cakephp/event": "self.version",
+                "cakephp/filesystem": "self.version",
+                "cakephp/i18n": "self.version",
+                "cakephp/log": "self.version",
+                "cakephp/orm": "self.version",
+                "cakephp/utility": "self.version",
+                "cakephp/validation": "self.version"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "dev-master",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cake\\": "src"
+                },
+                "files": [
+                    "src/Core/functions.php",
+                    "src/Collection/functions.php",
+                    "src/I18n/functions.php",
+                    "src/Utility/bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/cakephp/graphs/contributors"
+                }
+            ],
+            "description": "The CakePHP framework",
+            "homepage": "http://cakephp.org",
+            "keywords": [
+                "framework"
+            ],
+            "time": "2015-08-06 02:01:23"
+        },
+        {
+            "name": "cakephp/migrations",
+            "version": "1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/migrations.git",
+                "reference": "2c0bec392cc77d5a8656dde9482c869153bfd615"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/migrations/zipball/2c0bec392cc77d5a8656dde9482c869153bfd615",
+                "reference": "2c0bec392cc77d5a8656dde9482c869153bfd615",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3.0",
+                "php": ">=5.4",
+                "robmorgan/phinx": ">=0.4.2 <1.0"
+            },
+            "require-dev": {
+                "cakephp/bake": "@stable",
+                "phpunit/phpunit": "*"
+            },
+            "suggest": {
+                "cakephp/bake": "Required if you want to generate migrations."
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Migrations\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "https://github.com/cakephp/migrations/graphs/contributors"
+                }
+            ],
+            "description": "Database Migration plugin for CakePHP 3.0 based on Phinx",
+            "homepage": "https://github.com/cakephp/migrations",
+            "keywords": [
+                "cakephp",
+                "migrations"
+            ],
+            "time": "2015-07-31 13:26:04"
+        },
+        {
+            "name": "cakephp/plugin-installer",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cakephp/plugin-installer.git",
+                "reference": "f51c135fb6cffef88a58467bb820a7cb9e77b0fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cakephp/plugin-installer/zipball/f51c135fb6cffef88a58467bb820a7cb9e77b0fe",
+                "reference": "f51c135fb6cffef88a58467bb820a7cb9e77b0fe",
+                "shasum": ""
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "dev-master",
+                "composer/composer": "1.0.*@dev"
+            },
+            "type": "composer-installer",
+            "extra": {
+                "class": "Cake\\Composer\\Installer\\PluginInstaller"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cake\\Composer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "CakePHP Community",
+                    "homepage": "http://cakephp.org"
+                }
+            ],
+            "description": "A composer installer for CakePHP 3.0+ plugins.",
+            "time": "2015-07-13 11:28:05"
+        },
+        {
+            "name": "composer/installers",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/installers.git",
+                "reference": "e420b539e8d7b38b7c6f3f99dccc0386bd3dfe41"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/composer/installers/zipball/e420b539e8d7b38b7c6f3f99dccc0386bd3dfe41",
+                "reference": "e420b539e8d7b38b7c6f3f99dccc0386bd3dfe41",
                 "shasum": ""
             },
             "replace": {
@@ -141,8 +475,11 @@
                 "Hurad",
                 "MODX Evo",
                 "OXID",
+                "SMF",
+                "Thelia",
                 "WolfCMS",
                 "agl",
+                "aimeos",
                 "annotatecms",
                 "bitrix",
                 "cakephp",
@@ -150,9 +487,11 @@
                 "codeigniter",
                 "concrete5",
                 "croogo",
+                "dokuwiki",
                 "drupal",
                 "elgg",
                 "fuelphp",
+                "grav",
                 "installer",
                 "joomla",
                 "kohana",
@@ -176,28 +515,82 @@
                 "zend",
                 "zikula"
             ],
-            "time": "2014-08-18 20:00:12"
+            "time": "2015-06-13 15:30:38"
         },
         {
-            "name": "croogo/ckeditor",
-            "version": "2.0.3",
+            "name": "croogo/croogo",
+            "version": "3.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/croogo/Ckeditor.git",
-                "reference": "67f86bc7d5abaf9e87991dd8a9892444826941ff"
+                "url": "https://github.com/croogo/croogo.git",
+                "reference": "1cd3899c7d600b4ac2b10d15cd9e3a4db9328186"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/croogo/Ckeditor/zipball/67f86bc7d5abaf9e87991dd8a9892444826941ff",
-                "reference": "67f86bc7d5abaf9e87991dd8a9892444826941ff",
+                "url": "https://api.github.com/repos/croogo/croogo/zipball/1cd3899c7d600b4ac2b10d15cd9e3a4db9328186",
+                "reference": "1cd3899c7d600b4ac2b10d15cd9e3a4db9328186",
                 "shasum": ""
             },
             "require": {
+                "admad/cakephp-sequence": "dev-master",
+                "cakedc/search": "3.0.x-dev",
+                "cakephp/acl": "dev-master",
+                "cakephp/cakephp": "~3.0",
+                "cakephp/migrations": "~1.0",
+                "cakephp/plugin-installer": "*",
                 "composer/installers": "~1.0",
-                "croogo/croogo": "~2.0",
-                "php": ">=5.3.0"
+                "php": ">=5.3.10"
+            },
+            "replace": {
+                "croogo/acl": "self.version",
+                "croogo/blocks": "self.version",
+                "croogo/comments": "self.version",
+                "croogo/contacts": "self.version",
+                "croogo/core": "self.version",
+                "croogo/dashboards": "self.version",
+                "croogo/example": "self.version",
+                "croogo/extensions": "self.version",
+                "croogo/filemanaer": "self.version",
+                "croogo/install": "self.version",
+                "croogo/menus": "self.version",
+                "croogo/meta": "self.version",
+                "croogo/nodes": "self.version",
+                "croogo/settings": "self.version",
+                "croogo/taxonomy": "self.version",
+                "croogo/users": "self.version",
+                "croogo/wysiwyg": "self.version"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8@dev"
+            },
+            "suggest": {
+                "croogo/locale": "Localization for Croogo"
             },
             "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Croogo\\": "src",
+                    "Croogo\\Acl\\": "Acl/src",
+                    "Croogo\\Blocks\\": "Blocks/src",
+                    "Croogo\\Comments\\": "Comments/src",
+                    "Croogo\\Contacts\\": "Contacts/src",
+                    "Croogo\\Contacts\\Test\\": "Contacts/tests",
+                    "Croogo\\Core\\": "Core/src",
+                    "Croogo\\Dashboards\\": "Dashboards/src",
+                    "Croogo\\Example\\": "Example/src",
+                    "Croogo\\Extensions\\": "Extensions/src",
+                    "Croogo\\FileManager\\": "FileManager/src",
+                    "Croogo\\Install\\": "Install/src",
+                    "Croogo\\Menus\\": "Menus/src",
+                    "Croogo\\Meta\\": "Meta/src",
+                    "Croogo\\Nodes\\": "Nodes/src",
+                    "Croogo\\Settings\\": "Settings/src",
+                    "Croogo\\Taxonomy\\": "Taxonomy/src",
+                    "Croogo\\Translate\\": "Translate/src",
+                    "Croogo\\Users\\": "Users/src",
+                    "Croogo\\Wysiwyg\\": "Wysiwyg/src"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
@@ -212,28 +605,583 @@
                     "name": "Fahad Ibnay Heylall",
                     "email": "contact@fahad19.com",
                     "homepage": "http://fahad19.com"
+                },
+                {
+                    "name": "Kyle Robinson Young",
+                    "email": "kyle@dontkry.com",
+                    "homepage": "http://dontkry.com"
+                },
+                {
+                    "name": "Marlin Cremers",
+                    "email": "m.cremers@cvo-technologies.com",
+                    "homepage": "https://cvo-technologies.com"
                 }
             ],
-            "description": "Integrate Ckeditor with Croogo",
-            "homepage": "http://github.com/croogo/Ckeditor",
-            "time": "2014-10-16 06:21:58"
+            "description": "Croogo - Open Source CMS built for everyone",
+            "homepage": "http://github.com/croogo/croogo",
+            "time": "2015-08-04 10:48:05"
+        },
+        {
+            "name": "cvo-technologies/croogo-nodes-datasource-plugin",
+            "version": "3.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cvo-technologies/croogo-nodes-datasource-plugin.git",
+                "reference": "630bb3c91565c81a66bb62cb73234a322244dbfb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cvo-technologies/croogo-nodes-datasource-plugin/zipball/630bb3c91565c81a66bb62cb73234a322244dbfb",
+                "reference": "630bb3c91565c81a66bb62cb73234a322244dbfb",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "croogo/nodes": "3.0.*@dev",
+                "cvo-technologies/custom-fields": "dev-master"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "NodesDatasource\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marlin Cremers",
+                    "email": "m.cremers@cvo-technologies.com"
+                }
+            ],
+            "description": "A way to have models that use the nodes as source",
+            "time": "2015-07-01 07:22:44"
+        },
+        {
+            "name": "cvo-technologies/croogo-webshop-payments-plugin",
+            "version": "3.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cvo-technologies/croogo-webshop-payments-plugin.git",
+                "reference": "f18480d84e6cf06ef58ac5ecb3fe4421dad77592"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cvo-technologies/croogo-webshop-payments-plugin/zipball/f18480d84e6cf06ef58ac5ecb3fe4421dad77592",
+                "reference": "f18480d84e6cf06ef58ac5ecb3fe4421dad77592",
+                "shasum": ""
+            },
+            "require": {
+                "cvo-technologies/croogo-webshop-plugin": "3.0.*@dev"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Webshop\\Payments\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2015-06-26 16:42:20"
+        },
+        {
+            "name": "cvo-technologies/custom-fields",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cvo-technologies/custom-fields.git",
+                "reference": "474eb6747440e9fb15f2fae9cbc4b444b084a1a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cvo-technologies/custom-fields/zipball/474eb6747440e9fb15f2fae9cbc4b444b084a1a2",
+                "reference": "474eb6747440e9fb15f2fae9cbc4b444b084a1a2",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "*",
+                "croogo/croogo": "*"
+            },
+            "type": "croogo-plugin",
+            "extra": {
+                "installer-name": "CustomFields"
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Marlin Cremers",
+                    "email": "m.cremers@cvo-technologies.com"
+                }
+            ],
+            "time": "2014-12-16 19:18:59"
+        },
+        {
+            "name": "cvo-technologies/socialseo",
+            "version": "3.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cvo-technologies/cakephp-socialseo.git",
+                "reference": "bfee6c03fdddc7ad27eded09bd4415e0509a2680"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cvo-technologies/cakephp-socialseo/zipball/bfee6c03fdddc7ad27eded09bd4415e0509a2680",
+                "reference": "bfee6c03fdddc7ad27eded09bd4415e0509a2680",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "~3",
+                "composer/installers": "~1.0"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "SocialSeo\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Marlin Cremers",
+                    "email": "m.cremers@cvo-technologies.com"
+                }
+            ],
+            "description": "Social and SEO plugin",
+            "time": "2015-06-04 16:15:40"
+        },
+        {
+            "name": "cvo-technologies/webshop-taxes",
+            "version": "3.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cvo-technologies/webshop-taxes.git",
+                "reference": "d63ff01a6e7c8fc13ef627833f01f359eed4311d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cvo-technologies/webshop-taxes/zipball/d63ff01a6e7c8fc13ef627833f01f359eed4311d",
+                "reference": "d63ff01a6e7c8fc13ef627833f01f359eed4311d",
+                "shasum": ""
+            },
+            "require": {
+                "cvo-technologies/croogo-webshop-plugin": "3.0.*@dev"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Webshop\\Taxes\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2015-05-24 15:59:07"
+        },
+        {
+            "name": "ircmaxell/password-compat",
+            "version": "1.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ircmaxell/password_compat.git",
+                "reference": "9b99377557a33a4129c9194e60a97a685fab21e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ircmaxell/password_compat/zipball/9b99377557a33a4129c9194e60a97a685fab21e0",
+                "reference": "9b99377557a33a4129c9194e60a97a685fab21e0",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/password.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Ferrara",
+                    "email": "ircmaxell@php.net",
+                    "homepage": "http://blog.ircmaxell.com"
+                }
+            ],
+            "description": "A compatibility library for the proposed simplified password hashing algorithm: https://wiki.php.net/rfc/password_hash",
+            "homepage": "https://github.com/ircmaxell/password_compat",
+            "keywords": [
+                "hashing",
+                "password"
+            ],
+            "time": "2014-11-20 19:18:42"
+        },
+        {
+            "name": "nesbot/carbon",
+            "version": "1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/briannesbitt/Carbon.git",
+                "reference": "5cb6e71055f7b0b57956b73d324cc4de31278f42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/5cb6e71055f7b0b57956b73d324cc4de31278f42",
+                "reference": "5cb6e71055f7b0b57956b73d324cc4de31278f42",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Carbon": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brian Nesbitt",
+                    "email": "brian@nesbot.com",
+                    "homepage": "http://nesbot.com"
+                }
+            ],
+            "description": "A simple API extension for DateTime.",
+            "homepage": "https://github.com/briannesbitt/Carbon",
+            "keywords": [
+                "date",
+                "datetime",
+                "time"
+            ],
+            "time": "2014-09-26 02:52:02"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
+        },
+        {
+            "name": "robmorgan/phinx",
+            "version": "v0.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/robmorgan/phinx.git",
+                "reference": "b4b7d1e045d679278d4cb9ab18fd513f15f4797e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/robmorgan/phinx/zipball/b4b7d1e045d679278d4cb9ab18fd513f15f4797e",
+                "reference": "b4b7d1e045d679278d4cb9ab18fd513f15f4797e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/config": "~2.7",
+                "symfony/console": "~2.7",
+                "symfony/yaml": "~2.7"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "squizlabs/php_codesniffer": "dev-phpcs-fixer"
+            },
+            "bin": [
+                "bin/phinx"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phinx\\": "src/Phinx"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Morgan",
+                    "email": "robbym@gmail.com",
+                    "homepage": "http://robmorgan.id.au",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Woody Gilk",
+                    "email": "woody.gilk@gmail.com",
+                    "homepage": "http://shadowhand.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
+            "homepage": "https://phinx.org",
+            "keywords": [
+                "database",
+                "database migrations",
+                "db",
+                "migrations",
+                "phinx"
+            ],
+            "time": "2015-06-14 13:02:38"
+        },
+        {
+            "name": "symfony/config",
+            "version": "2.8.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Config.git",
+                "reference": "3f495530550377a55c0cced5ddf8f58cfcd9ce5b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Config/zipball/3f495530550377a55c0cced5ddf8f58cfcd9ce5b",
+                "reference": "3f495530550377a55c0cced5ddf8f58cfcd9ce5b",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/filesystem": "~2.3|~3.0.0"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7|~3.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Config\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Config Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-08-03 08:27:53"
+        },
+        {
+            "name": "symfony/console",
+            "version": "2.8.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Console.git",
+                "reference": "eb0fcf6f58054ac9d07539451e27aa4e17aebfe0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/eb0fcf6f58054ac9d07539451e27aa4e17aebfe0",
+                "reference": "eb0fcf6f58054ac9d07539451e27aa4e17aebfe0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1|~3.0.0",
+                "symfony/phpunit-bridge": "~2.7|~3.0.0",
+                "symfony/process": "~2.1|~3.0.0"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/process": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Console\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-08-04 15:59:05"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Filesystem.git",
+                "reference": "8b4a1ddbdcaf3b163443168c8f49c1c14a584ddf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Filesystem/zipball/8b4a1ddbdcaf3b163443168c8f49c1c14a584ddf",
+                "reference": "8b4a1ddbdcaf3b163443168c8f49c1c14a584ddf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.8|~3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Filesystem\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Filesystem Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-09 16:12:34"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "2.8.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "6eef1477f3c4451b6024fadb1254009be4602908"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6eef1477f3c4451b6024fadb1254009be4602908",
+                "reference": "6eef1477f3c4451b6024fadb1254009be4602908",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7|~3.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-07-29 07:12:56"
         }
     ],
-    "packages-dev": [
-
-    ],
-    "aliases": [
-
-    ],
-    "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
-    "prefer-stable": false,
-    "platform": {
-        "php": ">=5.3.0"
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "croogo/croogo": 20,
+        "cvo-technologies/croogo-nodes-datasource-plugin": 20,
+        "cvo-technologies/croogo-webshop-payments-plugin": 20,
+        "cvo-technologies/webshop-taxes": 20,
+        "cvo-technologies/socialseo": 20
     },
-    "platform-dev": [
-
-    ]
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
 }
