@@ -7,6 +7,9 @@ use Cake\ORM\Table;
 class ItemConfigurationGroupsTable extends Table
 {
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -15,5 +18,4 @@ class ItemConfigurationGroupsTable extends Table
             'className' => 'Webshop.ConfigurationGroups'
         ]);
     }
-
 }

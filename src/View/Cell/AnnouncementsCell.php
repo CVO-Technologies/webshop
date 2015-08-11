@@ -11,6 +11,11 @@ use Croogo\Nodes\Model\Table\NodesTable;
 class AnnouncementsCell extends Cell
 {
 
+    /**
+     * @param int $limit limit of announcements
+     *
+     * @return void
+     */
     public function panelDashboard($limit = null)
     {
         $this->loadModel('Croogo/Nodes.Nodes');
@@ -22,5 +27,4 @@ class AnnouncementsCell extends Cell
 
         $this->set(compact('announcements'));
     }
-
 }

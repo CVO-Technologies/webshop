@@ -2,6 +2,7 @@
 
 namespace Webshop\Controller\Panel;
 
+use Cake\Network\Exception\NotFoundException;
 use Cake\Routing\Router;
 use Croogo\Core\Controller\CroogoAppController;
 
@@ -12,11 +13,21 @@ class CustomersController extends CroogoAppController
         'SocialSeo.Title'
     ];
 
+    /**
+     * Shows the customer dashboard
+     *
+     * @return null
+     */
     public function dashboard()
     {
-
+        return null;
     }
 
+    /**
+     * Used to select a customer
+     *
+     * @return void
+     */
     public function select()
     {
         if ($this->request->query('customer')) {
@@ -37,14 +48,26 @@ class CustomersController extends CroogoAppController
         }
     }
 
+    /**
+     * Used to unselect a customer
+     *
+     * @return void
+     */
     public function unselect()
     {
         $this->request->session()->delete('Customer.current');
 
         $this->redirect('/');
-        return;
     }
 
+    /**
+     * Used to view a customer
+     *
+     * @param int $id ID of the customer to view
+     * @return mixed
+     *
+     * @throws NotFoundException
+     */
     public function view($id)
     {
         $this->Customer->id = $id;
@@ -58,5 +81,4 @@ class CustomersController extends CroogoAppController
             return $customer;
         }
     }
-
 }

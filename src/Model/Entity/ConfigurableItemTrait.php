@@ -15,7 +15,7 @@ trait ConfigurableItemTrait
     public function configuration()
     {
         $configuration = [];
-        /** @var ItemConfigurationValue $configurationValue */
+        /* @var ItemConfigurationValue $configurationValue */
         foreach ($this->configuration_values as $configurationValue) {
             $alias = $configurationValue->configuration_option->alias;
 
@@ -30,9 +30,9 @@ trait ConfigurableItemTrait
      */
     public function configurationValueIds()
     {
-        $ids = array();
+        $ids = [];
 
-        /** @var ItemConfigurationValue $configurationValue */
+        /* @var ItemConfigurationValue $configurationValue */
         foreach ($this->configuration_values as $configurationValue) {
             $alias = $configurationValue->configuration_option->alias;
 
@@ -49,7 +49,7 @@ trait ConfigurableItemTrait
     {
         $priceContainer = PriceContainer::construct();
 
-        /** @var ItemConfigurationValue $configurationValue */
+        /* @var ItemConfigurationValue $configurationValue */
         foreach ($this->configuration_values as $configurationValue) {
             $priceContainer->add($configurationValue->price());
         }
@@ -57,13 +57,20 @@ trait ConfigurableItemTrait
         return $priceContainer;
     }
 
+    /**
+     * Applies configuration to a empty
+     *
+     * @param Entity $entity Entity to apply the configuration to
+     *
+     * @return void
+     */
     public function applyConfiguration(Entity $entity)
     {
-        /** @var ConfigurableItemTrait $entity */
+        /* @var ConfigurableItemTrait $entity */
 
         $this->configuration_values = [];
 
-        /** @var ItemConfigurationValue $sourceConfigurationValue */
+        /* @var ItemConfigurationValue $sourceConfigurationValue */
         foreach ($entity->configuration_values as $sourceConfigurationValue) {
             $configurationValue = clone $sourceConfigurationValue;
 
@@ -78,5 +85,4 @@ trait ConfigurableItemTrait
 
 //        $entity->
     }
-
 }

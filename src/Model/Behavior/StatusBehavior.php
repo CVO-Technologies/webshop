@@ -12,6 +12,15 @@ use Cake\Utility\Inflector;
 class StatusBehavior extends Behavior
 {
 
+    /**
+     * Changes the status of a particular entity
+     *
+     * @param Entity $entity Entity to change the status of
+     * @param string $status Status to change to
+     * @param bool|false $force To force yes or no
+     *
+     * @return bool|\Cake\Datasource\EntityInterface|Entity
+     */
     public function changeStatus(Entity $entity, $status, $force = false)
     {
         if ($force !== true) {
@@ -25,7 +34,7 @@ class StatusBehavior extends Behavior
                         $entity->id,
                         $status
                     ),
-                    array('webshop')
+                    ['webshop']
                 );
 
                 return false;
@@ -40,7 +49,7 @@ class StatusBehavior extends Behavior
                     $entity->id,
                     $status
                 ),
-                array('webshop')
+                ['webshop']
             );
         }
 
@@ -56,10 +65,10 @@ class StatusBehavior extends Behavior
                 $entity->id,
                 $status
             ),
-            array('webshop')
+            ['webshop']
         );
 
-        $eventData = array();
+        $eventData = [];
         $eventData[$entity->source()]['entity'] = $entity;
         $eventData[$entity->source()]['status'] = $status;
 
@@ -70,5 +79,4 @@ class StatusBehavior extends Behavior
 
         return $entity;
     }
-
 }

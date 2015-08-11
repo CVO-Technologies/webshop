@@ -7,15 +7,18 @@ use Cake\ORM\Table;
 class CustomersTable extends Table
 {
 
-    public $validate = array(
-        'name' => array(
+    public $validate = [
+        'name' => [
             'rule' => 'notEmpty',
-        ),
-        'type' => array(
-            'rule' => array('inList', array('individual', 'company')),
-        ),
-    );
+        ],
+        'type' => [
+            'rule' => ['inList', ['individual', 'company']],
+        ],
+    ];
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -34,6 +37,4 @@ class CustomersTable extends Table
             'className' => 'Webshop.AddressDetails',
         ]);
     }
-
-
 }

@@ -14,8 +14,18 @@ use Cake\View\Helper\HtmlHelper;
 class WebshopHelper extends Helper
 {
 
-    public $helpers = array('Html');
+    /**
+     * @var array List of helpers to include
+     */
+    public $helpers = [
+        'Html'
+    ];
 
+    /**
+     * Adds required scripts and css files
+     *
+     * @return void
+     */
     public function beforeRender()
     {
         $this->Html->script('Webshop.webshop', ['block' => 'script']);
@@ -24,14 +34,18 @@ class WebshopHelper extends Helper
 
     /**
      * Create a tab title/link
+     *
+     * @param string $title Title of panel
+     * @param string|array $url Url of panel
+     * @param array $options Options
+     *
+     * @return string List item for panel
      */
-    public function panelTab($title, $url, $options = array())
+    public function panelTab($title, $url, array $options = [])
     {
-        return $this->Html->tag('li',
-            $this->Html->link($title, $url, Hash::merge(array(
-                'data-toggle' => 'tab',
-            ), $options)
-            )
+        return $this->Html->tag(
+            'li',
+            $this->Html->link($title, $url, Hash::merge(['data-toggle' => 'tab'], $options))
         );
     }
 
@@ -40,7 +54,7 @@ class WebshopHelper extends Helper
      *
      * @return string
      */
-    public function panelTabs($show = null)
+    public function panelTabs()
     {
         if (!isset($this->adminTabs)) {
             $this->adminTabs = false;
@@ -50,21 +64,21 @@ class WebshopHelper extends Helper
         $tabs = Configure::read('Webshop.panel.tabs.' . Inflector::camelize($this->request->params['controller']) . '/' . $this->request->params['action']);
         if (is_array($tabs)) {
             foreach ($tabs as $title => $tab) {
-                $tab = Hash::merge(array(
-                    'options' => array(
-                        'linkOptions' => array(),
-                        'elementData' => array(),
-                        'elementOptions' => array(),
-                    ),
-                ), $tab);
+                $tab = Hash::merge([
+                    'options' => [
+                        'linkOptions' => [],
+                        'elementData' => [],
+                        'elementOptions' => [],
+                    ],
+                ], $tab);
 
                 if (!isset($tab['options']['type']) || (isset($tab['options']['type']) && (in_array($this->_View->viewVars['typeAlias'], $tab['options']['type'])))) {
                     $domId = strtolower(Inflector::singularize($this->request->params['controller'])) . '-' . strtolower(Inflector::slug($title, '-'));
                     if ($this->adminTabs) {
                         list($plugin, $element) = pluginSplit($tab['element']);
-                        $elementOptions = Hash::merge(array(
+                        $elementOptions = Hash::merge([
                             'plugin' => $plugin,
-                        ), $tab['options']['elementOptions']);
+                        ], $tab['options']['elementOptions']);
                         $output .= '<div id="' . $domId . '" class="tab-pane">';
                         $output .= $this->_View->element($element, $tab['options']['elementData'], $elementOptions);
                         $output .= '</div>';
@@ -84,14 +98,16 @@ class WebshopHelper extends Helper
      *
      * @param string $id Tab pane id
      * @param array $options Options array
+     *
      * @return string
      */
-    public function tabStart($id, $options = array())
+    public function tabStart($id, array $options = [])
     {
-        $options = Hash::merge(array(
+        $options = Hash::merge([
             'id' => $id,
             'class' => 'tab-pane',
-        ), $options);
+        ], $options);
+
         return $this->Html->formatTemplate('blockstart', [
             'attrs' => $this->Html->templater()->formatAttributes($options)
         ]);
@@ -106,5 +122,4 @@ class WebshopHelper extends Helper
     {
         return $this->Html->formatTemplate('blockend', []);
     }
-
 }

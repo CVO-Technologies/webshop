@@ -11,11 +11,21 @@ use Webshop\Price;
 class ItemConfigurationValue extends Entity
 {
 
+    /**
+     * Returns the base price of an item
+     *
+     * @return null|Price
+     */
     public function basePrice()
     {
         return $this->configuration_option->price($this->value());
     }
 
+    /**
+     * Returns the value of an item
+     *
+     * @return mixed
+     */
     public function value()
     {
         switch ($this->configuration_option->type) {
@@ -41,5 +51,4 @@ class ItemConfigurationValue extends Entity
             ->basePrice($configurationPrice)
             ->subject($this);
     }
-
 }

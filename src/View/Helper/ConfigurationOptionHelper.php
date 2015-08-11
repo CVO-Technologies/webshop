@@ -11,36 +11,29 @@ use Webshop\Model\Entity\ConfigurationOption;
 class ConfigurationOptionHelper extends Helper
 {
 
-    public $helpers = array(
+    public $helpers = [
         'Number'
-    );
+    ];
 
-    private $_details = array();
-    private $_options = array();
-    private $_overwrites = array();
-    private $_values = array();
-    private $__defaults = array();
-    private $__idAliasMapping = array();
+    private $_details = [];
+    private $_options = [];
+    private $_overwrites = [];
+    private $_values = [];
+    private $__defaults = [];
+    private $__idAliasMapping = [];
     private $valueStoreIds;
 
-    public function setConfigurationGroupDetails(array $details)
-    {
-//		$this->_details = $details;
-//
-//		$this->_options = array();
-//		foreach ($details['ConfigurationOption'] as $configurationOptions) {
-//			$this->_options[$configurationOptions['alias']] = $configurationOptions;
-//		}
-//
-//		$this->__idAliasMapping = Hash::combine($details, 'ConfigurationOption.{n}.id', 'ConfigurationOption.{n}.alias');
-    }
-
+    /**
+     * @param Collection $options Set the options
+     *
+     * @return void
+     */
     public function setOptions(Collection $options)
     {
 //		$this->_details = $details;
 
-        $this->_options = array();
-        /** @var Entity $option */
+        $this->_options = [];
+        /* @var Entity $option */
         foreach ($options as $option) {
             $this->_options[$option->alias] = $option;
         }
@@ -48,15 +41,11 @@ class ConfigurationOptionHelper extends Helper
         $this->__idAliasMapping = $options->combine('id', 'alias')->toList();
     }
 
-//	public function setOverwrites(array $options) {
-//		$this->_overwrites = array();
-//
-//		foreach ($options as $option) {
-//			debug($option);
-//			$this->_overwrites[$option['ConfigurationOption']['alias']] = $option['ProductConfigurationOption'];
-//		}
-//	}
-
+    /**
+     * @param array $defaults Defaults
+     *
+     * @return void
+     */
     public function setProductDefaults(array $defaults)
     {
         foreach ($defaults as $default) {
@@ -64,28 +53,52 @@ class ConfigurationOptionHelper extends Helper
         }
     }
 
+    /**
+     * Set the current values
+     *
+     * @param Collection $values Collection of values
+     *
+     * @return void
+     */
     public function setValues(Collection $values)
     {
         $this->_values = $values->toArray();
     }
 
+    /**
+     * @param array $valueStoreIds Sets an array of ids of current values
+     *
+     * @return void
+     */
     public function setValueStoreIds(array $valueStoreIds)
     {
         $this->valueStoreIds = $valueStoreIds;
     }
 
-    public function form(array $options = array())
+    /**
+     * @param array $options Form options
+     *
+     * @return string
+     */
+    public function form(array $options = [])
     {
         return $this->_View->element(
             'Webshop.configuration_options/form',
-            array(
+            [
                 'configurationOptions' => $this->_options,
                 'options' => $options,
                 'valueStoreIds' => $this->valueStoreIds
-            )
+            ]
         );
     }
 
+    /**
+     * @param string $alias String alias of option
+     * @param string $fieldPrefix Field prefix
+     * @param array $inputOptions Options for input
+     *
+     * @return string
+     */
     public function input($alias, $fieldPrefix, $inputOptions)
     {
         $option = $this->configurationOption($alias);
@@ -95,12 +108,12 @@ class ConfigurationOptionHelper extends Helper
             case 'float':
                 return $this->_View->element(
                     'Webshop.configuration_options/type/number',
-                    array('option' => $option, 'inputOptions' => $inputOptions, 'fieldName' => $fieldPrefix . '.value')
+                    ['option' => $option, 'inputOptions' => $inputOptions, 'fieldName' => $fieldPrefix . '.value']
                 );
             case 'string':
                 return $this->_View->element(
                     'Webshop.configuration_options/type/string',
-                    array('option' => $option, 'inputOptions' => $inputOptions, 'fieldName' => $fieldPrefix . '.value')
+                    ['option' => $option, 'inputOptions' => $inputOptions, 'fieldName' => $fieldPrefix . '.value']
                 );
             case 'boolean':
 //				$option['label'] = $option['title'];
@@ -108,19 +121,27 @@ class ConfigurationOptionHelper extends Helper
 
                 return $this->_View->element(
                     'Webshop.configuration_options/type/checkbox',
-                    array('option' => $option, 'inputOptions' => $inputOptions, 'fieldName' => $fieldPrefix . '.value')
+                    ['option' => $option, 'inputOptions' => $inputOptions, 'fieldName' => $fieldPrefix . '.value']
                 );
             case 'list':
                 if ($option['maximum_length'] <= 1) {
                     return $this->_View->element(
                         'Webshop.' . ((count($option['ConfigurationOptionItem']) > 5) ? 'configuration_options/type/list/dropdown' : 'configuration_options/type/list/radio'),
-                        array('option' => $option, 'inputOptions' => $inputOptions, 'fieldName' => $fieldPrefix . '.configuration_option_item_id')
+                        ['option' => $option, 'inputOptions' => $inputOptions, 'fieldName' => $fieldPrefix . '.configuration_option_item_id']
                     );
                 }
         }
     }
 
-    public function inputOptions($alias, $options = array())
+    /**
+     * Returns the options of an input
+     *
+     * @param string $alias Alias of option
+     * @param array $options Options to be merged
+     *
+     * @return array
+     */
+    public function inputOptions($alias, array $options = [])
     {
         $optionSettings = $this->configurationOption($alias);
 
@@ -144,7 +165,7 @@ class ConfigurationOptionHelper extends Helper
             $options['disabled'] = true;
         }
 
-        $options = array_merge(array(
+        $options = array_merge([
             'label' => $optionSettings['title'],
             'legend' => $optionSettings['title'],
             'min' => $optionSettings['minimum'],
@@ -152,10 +173,10 @@ class ConfigurationOptionHelper extends Helper
             'maxlength' => $optionSettings['maximum_length'],
             'step' => $optionSettings['step'],
             'value' => $this->convertValue($alias, $value)
-        ), $options);
+        ], $options);
 
         if ($optionSettings['type'] === 'list') {
-            $listOptions = array();
+            $listOptions = [];
             foreach ($optionSettings['ConfigurationOptionItem'] as $item) {
                 $listOptions[$item['id']] = $item['name'] . ' - ' . $this->Number->currency($item['price'], 'EUR');
             }
@@ -167,7 +188,8 @@ class ConfigurationOptionHelper extends Helper
     }
 
     /**
-     * @param string $alias
+     * @param string $alias Alias of option
+     *
      * @return ConfigurationOption
      */
     public function configurationOption($alias)
@@ -181,9 +203,14 @@ class ConfigurationOptionHelper extends Helper
         return $optionSettings;
     }
 
+    /**
+     * @param bool $fixed Something
+     *
+     * @return array
+     */
     public function optionValues($fixed = false)
     {
-        $optionValues = array();
+        $optionValues = [];
         foreach ($this->_options as $alias => $optionSettings) {
             if (isset($this->_overwrites[$alias])) {
                 $optionSettings = array_merge($optionSettings, $this->_overwrites[$alias]);
@@ -205,6 +232,14 @@ class ConfigurationOptionHelper extends Helper
         return $optionValues;
     }
 
+    /**
+     * Converts a value
+     *
+     * @param string $alias Alias of option
+     * @param mixed $value Value to be converted
+     *
+     * @return float|int
+     */
     public function convertValue($alias, $value)
     {
         $option = $this->configurationOption($alias);
@@ -219,6 +254,14 @@ class ConfigurationOptionHelper extends Helper
         return $value;
     }
 
+    /**
+     * Returns the display value of a item
+     *
+     * @param string $alias Alias of option
+     * @param string $value Value to be displayed
+     *
+     * @return mixed
+     */
     public function valueDisplayText($alias, $value)
     {
         $option = $this->_options[$alias];
@@ -240,6 +283,12 @@ class ConfigurationOptionHelper extends Helper
         return $value;
     }
 
+    /**
+     * @param string $alias Alias of option
+     * @param int $itemId ID of item
+     *
+     * @return mixed
+     */
     public function configurationOptionItem($alias, $itemId)
     {
         $option = $this->configurationOption($alias);
@@ -253,6 +302,11 @@ class ConfigurationOptionHelper extends Helper
         }
     }
 
+    /**
+     * @param string $alias Alias of option
+     *
+     * @return float
+     */
     public function getPrice($alias)
     {
         $option = $this->configurationOption($alias);
@@ -268,9 +322,13 @@ class ConfigurationOptionHelper extends Helper
         }
     }
 
+    /**
+     * @param int $configurationOptionId Option id to get alias of
+     *
+     * @return string
+     */
     public function getAlias($configurationOptionId)
     {
         return $this->__idAliasMapping[$configurationOptionId];
     }
-
 }

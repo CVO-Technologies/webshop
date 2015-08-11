@@ -1,5 +1,7 @@
 <?php
 
+// @codingStandardsIgnoreStart
+
 class ProductConfigurationOption extends AppModel
 {
 

@@ -17,12 +17,27 @@ class Price
     protected $_repeat = 1;
     protected $_subject = null;
 
+    /**
+     * Creates a price object from a direct value
+     *
+     * @param float $directInput Direct value
+     *
+     * @return $this|null|Price
+     */
     public static function fromDirectInput($directInput)
     {
         return static::create()
             ->directInput($directInput);
     }
 
+    /**
+     * Gets or sets the direct va;ie
+     *
+     * @param float|null $directInput Direct value
+     *
+     *
+     * @return $this|null
+     */
     public function directInput($directInput = null)
     {
         if (is_null($directInput)) {
@@ -46,7 +61,10 @@ class Price
     }
 
     /**
-     * @param TaxInformation|null $taxInformation
+     * Gets or sets a tax information object
+     *
+     * @param TaxInformation|null $taxInformation Object to set
+     *
      * @return TaxInformation|$this
      */
     public function taxInformation(TaxInformation $taxInformation = null)
@@ -60,12 +78,24 @@ class Price
         return $this;
     }
 
+    /**
+     * Returns an empty price object
+     *
+     * @return $this|bool|Price
+     */
     public static function emptyPrice()
     {
         return static::create()
             ->emptyMark(true);
     }
 
+    /**
+     * Marks a object as empty
+     *
+     * @param bool $empty Boolean
+     *
+     * @return $this|bool
+     */
     public function emptyMark($empty = null)
     {
         if (is_null($empty)) {
@@ -77,12 +107,26 @@ class Price
         return $this;
     }
 
+    /**
+     * Returns a price object from a price collection
+     *
+     * @param PriceContainer $collection Container add
+     *
+     * @return Price
+     */
     public static function createFromCollection(PriceContainer $collection)
     {
         return static::create()
             ->addCollection($collection);
     }
 
+    /**
+     * Adds a price container
+     *
+     * @param PriceContainer $collection Container to add
+     *
+     * @return $this
+     */
     public function addCollection(PriceContainer $collection)
     {
         $this->_collections[] = $collection;
@@ -90,6 +134,13 @@ class Price
         return $this;
     }
 
+    /**
+     * Adds a VAT percentage
+     *
+     * @param float $percentage Percentage to add
+     *
+     * @return $this
+     */
     public function addVat($percentage)
     {
         $this->taxInformation()->addVat($percentage);
@@ -97,38 +148,11 @@ class Price
         return $this;
     }
 
-    public function __debugInfo()
-    {
-        if ($this->emptyMark()) {
-            return [
-                'markedEmpty' => true,
-                'subject' => get_class($this->subject()),
-            ];
-        }
-
-        if ($this->directInput()) {
-            return [
-                'directInput' => $this->directInput(),
-                'repeat' => $this->_repeat,
-                'subject' => get_class($this->subject()),
-                'taxes' => $this->taxes(),
-                'total' => $this->total()
-            ];
-        }
-
-        return [
-            'collections' => $this->_collections,
-            'basePrice' => $this->_basePrice,
-            'repeat' => $this->_repeat,
-            'subject' => get_class($this->subject()),
-            'taxes' => $this->taxes(),
-            'subtotal' => $this->subTotal(),
-            'total' => $this->total()
-        ];
-    }
-
     /**
-     * @param Entity|null $entity
+     * Sets or gets an entity as subject
+     *
+     * @param Entity|null $entity Subject to set
+     *
      * @return Entity|$this|null
      */
     public function subject(Entity $entity = null)
@@ -142,6 +166,11 @@ class Price
         return $this;
     }
 
+    /**
+     * Returns an object with tax information
+     *
+     * @return $this|Price|TaxInformation
+     */
     public function taxes()
     {
         $taxes = clone $this->taxInformation();
@@ -152,7 +181,7 @@ class Price
             $taxes->merge($this->basePrice()->taxes());
         }
 
-        /** @var PriceContainer $collection */
+        /* @var PriceContainer $collection */
         foreach ($this->_collections as $collection) {
             $collectionTaxes = $collection->taxes();
 
@@ -183,9 +212,9 @@ class Price
             $subtotal += $this->basePrice()->total();
         }
 
-        /** @var PriceContainer $collection */
+        /* @var PriceContainer $collection */
         foreach ($this->_collections as $collection) {
-            /** @var Price $price */
+            /* @var Price $price */
             foreach ($collection->prices() as $price) {
                 $subtotal += $price->subTotal();
             }
@@ -194,6 +223,13 @@ class Price
         return $subtotal;
     }
 
+    /**
+     * Gets or sets the base price
+     *
+     * @param Price|null $basePrice Base price
+     *
+     * @return $this|null
+     */
     public function basePrice(Price $basePrice = null)
     {
         if (!$basePrice) {
@@ -223,6 +259,13 @@ class Price
         return $total;
     }
 
+    /**
+     * Sets or gets the amount of time the price needs to be repeated
+     *
+     * @param float $repeat Amount of times to repeat
+     *
+     * @return $this|int
+     */
     public function repeat($repeat = null)
     {
         if (is_null($repeat)) {
@@ -234,4 +277,38 @@ class Price
         return $this;
     }
 
+    /**
+     * Returns useful debug data
+     *
+     * @return array
+     */
+    public function __debugInfo()
+    {
+        if ($this->emptyMark()) {
+            return [
+                'markedEmpty' => true,
+                'subject' => get_class($this->subject()),
+            ];
+        }
+
+        if ($this->directInput()) {
+            return [
+                'directInput' => $this->directInput(),
+                'repeat' => $this->_repeat,
+                'subject' => get_class($this->subject()),
+                'taxes' => $this->taxes(),
+                'total' => $this->total()
+            ];
+        }
+
+        return [
+            'collections' => $this->_collections,
+            'basePrice' => $this->_basePrice,
+            'repeat' => $this->_repeat,
+            'subject' => get_class($this->subject()),
+            'taxes' => $this->taxes(),
+            'subtotal' => $this->subTotal(),
+            'total' => $this->total()
+        ];
+    }
 }

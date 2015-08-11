@@ -8,6 +8,9 @@ use Cake\Utility\Hash;
 class ConfigurationValueHostBehavior extends Behavior
 {
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -15,9 +18,9 @@ class ConfigurationValueHostBehavior extends Behavior
         $this->_table->hasMany('ConfigurationValues', [
             'className' => 'Webshop.ItemConfigurationValues',
             'foreignKey' => 'foreign_key',
-            'conditions' => array(
+            'conditions' => [
                 'ConfigurationValues.model' => get_class($this->_table)
-            )
+            ]
         ]);
     }
 
@@ -41,6 +44,13 @@ class ConfigurationValueHostBehavior extends Behavior
 //		return $results;
 //	}
 
+    /**
+     * Parses configuration
+     *
+     * @param array $configurationValues Configuration values
+     *
+     * @return array
+     */
     public function parseConfiguration(array $configurationValues)
     {
         $aliases = $this->_table->ConfigurationValues->ConfigurationOptions->find('list', [
@@ -49,7 +59,7 @@ class ConfigurationValueHostBehavior extends Behavior
             'ConfigurationOptions.id IN' => Hash::extract($configurationValues, '{n}.configuration_option_id')
         ])->toArray();
 
-        $configuration = array();
+        $configuration = [];
         foreach ($configurationValues as $configurationValue) {
             if (!isset($aliases[(int)$configurationValue['configuration_option_id']])) {
                 continue;
@@ -75,5 +85,4 @@ class ConfigurationValueHostBehavior extends Behavior
 
         return $configuration;
     }
-
 }

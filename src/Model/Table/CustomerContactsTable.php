@@ -7,16 +7,19 @@ use Cake\ORM\Table;
 class CustomerContactsTable extends Table
 {
 
-    public $validate = array(
-        'name' => array(
+    public $validate = [
+        'name' => [
             'rule' => 'notEmpty',
-        ),
-    );
+        ],
+    ];
 
-    public $filterArgs = array(
-        'customer_id' => array('type' => 'value'),
-    );
+    public $filterArgs = [
+        'customer_id' => ['type' => 'value'],
+    ];
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -27,6 +30,4 @@ class CustomerContactsTable extends Table
             'className' => 'Webshop.Customers'
         ]);
     }
-
-
 }

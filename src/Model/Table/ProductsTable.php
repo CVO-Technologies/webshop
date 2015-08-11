@@ -10,86 +10,89 @@ class ProductsTable extends CroogoTable
 
     public $useDbConfig = 'nodes';
 
-    public $validate = array(
-        'title' => array(
+    public $validate = [
+        'title' => [
             'rule' => 'notEmpty',
             'message' => 'This field cannot be left blank.',
-        ),
-        'slug' => array(
-            'isUniquePerType' => array(
+        ],
+        'slug' => [
+            'isUniquePerType' => [
                 'rule' => 'isUnique',
                 'message' => 'This slug has already been taken.',
-            ),
-            'minLength' => array(
-                'rule' => array('minLength', 1),
+            ],
+            'minLength' => [
+                'rule' => ['minLength', 1],
                 'message' => 'Slug cannot be empty.',
-            ),
-        ),
-    );
+            ],
+        ],
+    ];
 
-    public $actsAs = array(
+    public $actsAs = [
         'Webshop.ConfigurableItem',
         'Webshop.ConfigurationValueHost',
         'Tree',
-        'Croogo.BulkProcess' => array(
-            'actionsMap' => array(
+        'Croogo.BulkProcess' => [
+            'actionsMap' => [
                 'promote' => 'bulkPromote',
                 'unpromote' => 'bulkUnpromote',
-            ),
-        ),
+            ],
+        ],
         'Croogo.Encoder',
         'Croogo.Publishable',
 //		'Croogo.Trackable',
 //		'Meta.Meta',
-        'Croogo.Url' => array(
-            'url' => array(
+        'Croogo.Url' => [
+            'url' => [
                 'plugin' => 'webshop',
                 'controller' => 'products',
                 'action' => 'view',
-            ),
-            'fields' => array(),
-            'pass' => array(
+            ],
+            'fields' => [],
+            'pass' => [
                 'id'
-            )
-        ),
+            ]
+        ],
         'Search.Searchable',
         'Containable'
-    );
+    ];
 
-    public $filterArgs = array(
-        'q' => array('type' => 'query', 'method' => 'filterPublishedNodes'),
-        'filter' => array('type' => 'query', 'method' => 'filterNodes'),
-        'title' => array('type' => 'like'),
-        'type' => array('type' => 'value'),
-        'status' => array('type' => 'value'),
-        'promote' => array('type' => 'value'),
-    );
+    public $filterArgs = [
+        'q' => ['type' => 'query', 'method' => 'filterPublishedNodes'],
+        'filter' => ['type' => 'query', 'method' => 'filterNodes'],
+        'title' => ['type' => 'like'],
+        'type' => ['type' => 'value'],
+        'status' => ['type' => 'value'],
+        'promote' => ['type' => 'value'],
+    ];
 
-    public $belongsTo = array(
-        'User' => array(
+    public $belongsTo = [
+        'User' => [
             'className' => 'Users.User',
             'foreignKey' => 'user_id',
             'conditions' => '',
             'fields' => '',
             'order' => '',
-        ),
+        ],
 //		'Node' => array(
 //			'className' => 'Nodes.Node',
 //			'foreignKey' => 'id',
 //		),
-        'Tax' => array(
+        'Tax' => [
             'className' => 'WebshopTaxes.Tax',
             'foreignKey' => 'tax_id'
-        ),
-    );
+        ],
+    ];
 
-    public $findMethods = array(
+    public $findMethods = [
         'promoted' => true,
         'viewBySlug' => true,
         'viewById' => true,
         'published' => true,
-    );
+    ];
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -98,11 +101,11 @@ class ProductsTable extends CroogoTable
             'type' => 'product'
         ]);
         $this->addBehavior('Croogo/Core.Url', [
-            'url' => array(
+            'url' => [
                 'plugin' => 'Webshop',
                 'controller' => 'Products',
                 'action' => 'view',
-            ),
+            ],
             'fields' => [],
             'pass' => [
                 'id'
@@ -112,27 +115,26 @@ class ProductsTable extends CroogoTable
         $this->addBehavior('Webshop.ConfigurationValueHost');
     }
 
-    public function getPrice($productId, $configuration)
-    {
-        $product = $this->find('first', array(
-            'conditions' => array(
-                'id' => $productId
-            ),
-            'recursive' => 0
-        ));
-
-//		debug($product);
-
-        return $product['CustomFields']['price'];
-
-        $productConfigurationOptions = $this->ProductConfigurationOption->find('all', array(
-            'conditions' => array(
-                'product_id' => $productId
-            ),
-            'recursive' => -1
-        ));
-
-        debug($productConfigurationOptions);
-    }
-
+//    public function getPrice($productId, $configuration)
+//    {
+//        $product = $this->find('first', array(
+//            'conditions' => array(
+//                'id' => $productId
+//            ),
+//            'recursive' => 0
+//        ));
+//
+////		debug($product);
+//
+//        return $product['CustomFields']['price'];
+//
+//        $productConfigurationOptions = $this->ProductConfigurationOption->find('all', array(
+//            'conditions' => array(
+//                'product_id' => $productId
+//            ),
+//            'recursive' => -1
+//        ));
+//
+//        debug($productConfigurationOptions);
+//    }
 }

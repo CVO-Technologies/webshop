@@ -10,6 +10,9 @@ class ProductsController extends CroogoAppController
 
     use ControllerTrait;
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize()
     {
         parent::initialize();
@@ -30,6 +33,4 @@ class ProductsController extends CroogoAppController
             ]
         ]);
     }
-
-
 }

@@ -1,5 +1,7 @@
 <?php
 
+// @codingStandardsIgnoreStart
+
 class ConfigurationGroupsController extends AppController
 {
 

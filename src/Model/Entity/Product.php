@@ -9,9 +9,15 @@ class Product extends Entity
 
     use ConfigurationOptionTrait;
 
+    /**
+     * Unknown method
+     *
+     * @deprecated
+     *
+     * @return void
+     */
     public function price()
     {
         debug($this);
     }
-
 }

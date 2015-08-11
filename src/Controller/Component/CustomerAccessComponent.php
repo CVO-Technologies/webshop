@@ -18,9 +18,16 @@ use Webshop\Model\Entity\Customer;
 class CustomerAccessComponent extends Component
 {
 
+    /**
+     * Redirects when no customer has been selected
+     *
+     * @param Event $event Event to use
+     *
+     * @return Response|void
+     */
     public function beforeFilter(Event $event)
     {
-        /** @var Controller $controller */
+        /* @var Controller $controller */
         $controller = $event->subject();
 
         if ($controller->request->param('prefix') !== 'panel') {
@@ -63,6 +70,11 @@ class CustomerAccessComponent extends Component
 //        }
 //    }
 
+    /**
+     * Returns the id of the currently selected customer
+     *
+     * @return bool|mixed
+     */
     public function getCustomerId()
     {
         $controller = $this->_registry->getController();
@@ -103,11 +115,16 @@ class CustomerAccessComponent extends Component
         return $customers->get($this->getCustomerId());
     }
 
+    /**
+     * Returns an array of ids of accessible customers
+     *
+     * @return array
+     */
     public function getAccessibleCustomers()
     {
         $controller = $this->_registry->getController();
 
-        $accessibleCustomers = array();
+        $accessibleCustomers = [];
         foreach (Configure::read('Webshop.customer_access_providers') as $alias => $options) {
             $AccessProvider = CustomerAccessProvider::get($options['provider']);
 

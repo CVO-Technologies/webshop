@@ -7,18 +7,21 @@ use Cake\ORM\Table;
 class AddressDetailsTable extends Table
 {
 
-    public $validate = array(
-        'address_line_1' => array(
+    public $validate = [
+        'address_line_1' => [
             'rule' => 'notEmpty',
-        ),
-        'city' => array(
+        ],
+        'city' => [
             'rule' => 'notEmpty',
-        ),
-        'country' => array(
+        ],
+        'country' => [
             'rule' => 'notEmpty',
-        ),
-    );
+        ],
+    ];
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -28,6 +31,4 @@ class AddressDetailsTable extends Table
         ]);
         $this->addBehavior('Webshop.CustomerOwned');
     }
-
-
 }

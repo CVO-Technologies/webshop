@@ -7,6 +7,9 @@ use Cake\ORM\Table;
 class ConfigurationOptionsTable extends Table
 {
 
+    /**
+     * }{@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -22,5 +25,4 @@ class ConfigurationOptionsTable extends Table
             'className' => 'Webshop.ConfigurationOptionItems'
         ]);
     }
-
 }

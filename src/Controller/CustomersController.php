@@ -1,23 +1,40 @@
 <?php
 
+// @codingStandardsIgnoreStart
+
 class CustomersController extends AppController
 {
 
-    public $components = array(
+    public $components = [
         'Paginator'
-    );
+    ];
 
+    /**
+     * Does nothing at the moment
+     *
+     * @return void
+     */
     public function add()
     {
         debug($this->request->data);
     }
 
+    /**
+     * Returns the amount of available customers
+     *
+     * @return int
+     */
     public function count()
     {
         return $this->Customer->find('count');
     }
 
-    public function admin_index()
+    /**
+     * @return array
+     *
+     * @deprecated
+     */
+    public function adminIndex()
     {
         $customers = $this->Paginator->paginate('Customer');
 
@@ -28,7 +45,12 @@ class CustomersController extends AppController
         $this->set(compact('customers'));
     }
 
-    public function admin_listing()
+    /**
+     * @return array
+     *
+     * @deprecated
+     */
+    public function adminListing()
     {
         $this->Paginator->settings['Customer']['type'] = 'list';
         $customers = $this->Paginator->paginate('Customer');
@@ -40,7 +62,14 @@ class CustomersController extends AppController
         $this->set(compact('customers'));
     }
 
-    public function admin_view($id)
+    /**
+     * @param int $id ID of customer to view
+     *
+     * @return void
+     *
+     * @deprecated
+     */
+    public function adminView($id)
     {
         $this->Customer->id = $id;
         $customer = $this->Customer->read();
@@ -48,7 +77,7 @@ class CustomersController extends AppController
         $this->set(compact('customer'));
     }
 
-    public function admin_edit($id)
+    public function adminEdit($id)
     {
         $this->Customer->id = $id;
         $customer = $this->Customer->read();

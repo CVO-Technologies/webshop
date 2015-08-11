@@ -1,5 +1,7 @@
 <?php
 
+// @codingStandardsIgnoreStart
+
 class ConfigurationOptionItemsController extends AppController
 {
 

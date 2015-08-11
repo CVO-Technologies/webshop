@@ -11,6 +11,9 @@ use Webshop\Model\Table\AddressDetailsTable;
 class AddressDetailsController extends CroogoAppController
 {
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize()
     {
         parent::initialize();
@@ -19,6 +22,9 @@ class AddressDetailsController extends CroogoAppController
         $this->loadComponent('Paginator');
     }
 
+    /**
+     * @return array
+     */
     public function index()
     {
         $query = $this->AddressDetails->find('ownedByCustomer', [
@@ -32,9 +38,12 @@ class AddressDetailsController extends CroogoAppController
         }
 
         $this->set(compact('addressDetails'));
-        $this->set('_serialize', array('addressDetails'));
+        $this->set('_serialize', ['addressDetails']);
     }
 
+    /**
+     * @return \Cake\Network\Response|void
+     */
     public function add()
     {
         $addressDetail = $this->AddressDetails->newEntity([
@@ -52,11 +61,15 @@ class AddressDetailsController extends CroogoAppController
             return;
         }
 
-        return $this->redirect(array(
+        return $this->redirect([
             'action' => 'index'
-        ));
+        ]);
     }
 
+    /**
+     * @param int $id ID of customer to edit
+     * @return \Cake\Network\Response|void
+     */
     public function edit($id)
     {
         $addressDetail = $this->AddressDetails->get($id, [
@@ -77,68 +90,78 @@ class AddressDetailsController extends CroogoAppController
             return;
         }
 
-        return $this->redirect(array(
+        return $this->redirect([
             'action' => 'index'
-        ));
+        ]);
     }
 
-    public function check($modelName)
-    {
-        $this->loadModel($modelName);
+//    /**
+//     * @param string $modelName Model name
+//     *
+//     * @return void
+//     */
+//    public function check($modelName)
+//    {
+//        $this->loadModel($modelName);
+//
+//        $transformedFields = [];
+//        foreach ($this->request->query['data'] as $association => $fields) {
+//            $Model = ($association === $modelName) ? $this->{$modelName} : $this->{$modelName}->{$association};
+//            if (!$Model) {
+//                continue;
+//            }
+//
+//            $transformedFields[$Model->name] = $this->__transformFields($Model, [$Model->alias], $fields);
+//        }
+//
+//        $ChangeEvent = new CakeEvent('Form.change', $this, [
+//            'fields' => $transformedFields
+//        ]);
+//
+//        $this->getEventManager()->dispatch($ChangeEvent);
+//
+//        $fields = [];
+//        foreach (Hash::flatten($ChangeEvent->data['fields']) as $key => $value) {
+//            $fieldParts = explode('.', $key);
+//            $lastPart = array_pop($fieldParts);
+//            if (is_numeric($lastPart)) {
+//                $lastPart = array_pop($fieldParts);
+//                $fields[implode('.', $fieldParts)][$lastPart][] = $value;
+//            } else {
+//                $fields[implode('.', $fieldParts)][$lastPart] = $value;
+//            }
+//        }
+//
+//        $this->set('fields', $fields);
+//        $this->set('_serialize', ['fields']);
+//    }
 
-        $transformedFields = array();
-        foreach ($this->request->query['data'] as $association => $fields) {
-            $Model = ($association === $modelName) ? $this->{$modelName} : $this->{$modelName}->{$association};
-            if (!$Model) {
-                continue;
-            }
+//    private function __transformFields(Model $Model, array $stack, $fields)
+//    {
+//        $transformedFields = [];
+//
+//        foreach ($fields as $fieldName => $fieldValue) {
+//            $fieldStack = $stack;
+//            $fieldStack[] = $fieldName;
+//
+//            $transformedFields[$fieldName] = [
+//                'name' => 'data[' . implode('][', $fieldStack) . ']',
+//                'disabled' => null,
+//                'errors' => [],
+//                'value' => $fieldValue,
+//                'changed' => false
+//            ];
+//        }
+//
+//        return $transformedFields;
+//    }
 
-            $transformedFields[$Model->name] = $this->__transformFields($Model, array($Model->alias), $fields);
-        }
-
-        $ChangeEvent = new CakeEvent('Form.change', $this, array(
-            'fields' => $transformedFields
-        ));
-
-        $this->getEventManager()->dispatch($ChangeEvent);
-
-        $fields = array();
-        foreach (Hash::flatten($ChangeEvent->data['fields']) as $key => $value) {
-            $fieldParts = explode('.', $key);
-            $lastPart = array_pop($fieldParts);
-            if (is_numeric($lastPart)) {
-                $lastPart = array_pop($fieldParts);
-                $fields[implode('.', $fieldParts)][$lastPart][] = $value;
-            } else {
-                $fields[implode('.', $fieldParts)][$lastPart] = $value;
-            }
-        }
-
-        $this->set('fields', $fields);
-        $this->set('_serialize', array('fields'));
-    }
-
-    private function __transformFields(Model $Model, array $stack, $fields)
-    {
-        $transformedFields = array();
-
-        foreach ($fields as $fieldName => $fieldValue) {
-            $fieldStack = $stack;
-            $fieldStack[] = $fieldName;
-
-            $transformedFields[$fieldName] = array(
-                'name' => 'data[' . implode('][', $fieldStack) . ']',
-                'disabled' => null,
-                'errors' => array(),
-                'value' => $fieldValue,
-                'changed' => false
-            );
-        }
-
-        return $transformedFields;
-    }
-
-    public function admin_listing()
+    /**
+     * @return array
+     *
+     * @deprecated
+     */
+    public function adminListing()
     {
         $this->Paginator->settings['AddressDetail']['type'] = 'list';
         $addressDetails = $this->Paginator->paginate('AddressDetail');
@@ -149,5 +172,4 @@ class AddressDetailsController extends CroogoAppController
 
         $this->set(compact('addressDetails'));
     }
-
 }

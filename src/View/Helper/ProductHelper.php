@@ -7,6 +7,11 @@ use Cake\View\Helper;
 class ProductHelper extends Helper
 {
 
+    /**
+     * @param string $status Status from database
+     *
+     * @return string Status text
+     */
     public function statusText($status)
     {
         if ($status === 'open') {
@@ -27,7 +32,7 @@ class ProductHelper extends Helper
         if ($status === 'done') {
             return __d('webshop', 'Done');
         }
+
         return $status;
     }
-
 }

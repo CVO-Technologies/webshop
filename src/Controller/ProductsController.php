@@ -1,5 +1,7 @@
 <?php
 
+// @codingStandardsIgnoreStart
+
 /**
  * Class ProductsController
  *

@@ -9,7 +9,7 @@ class ConfigurationOption extends Entity
 {
 
     /**
-     * @param $value
+     * @param mixed $value Input value
      * @return Price|null
      */
     public function price($value)
@@ -32,5 +32,4 @@ class ConfigurationOption extends Entity
             ->repeat($value / $this->step)
             ->subject($this);
     }
-
 }

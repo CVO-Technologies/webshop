@@ -7,12 +7,15 @@ use Cake\ORM\Table;
 class ItemConfigurationOptionOverwritesTable extends Table
 {
 
-    public $belongsTo = array(
-        'ConfigurationOption' => array(
+    public $belongsTo = [
+        'ConfigurationOption' => [
             'className' => 'Webshop.ConfigurationOption'
-        )
-    );
+        ]
+    ];
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -21,6 +24,4 @@ class ItemConfigurationOptionOverwritesTable extends Table
             'className' => 'Webshop.ConfigurationOptions'
         ]);
     }
-
-
 }

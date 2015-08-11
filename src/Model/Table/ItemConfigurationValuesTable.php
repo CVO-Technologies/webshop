@@ -9,6 +9,9 @@ use Webshop\Model\Entity\ConfigurationOption;
 class ItemConfigurationValuesTable extends Table
 {
 
+    /**
+     * {@inheritDoc}
+     */
     public function initialize(array $config)
     {
         parent::initialize($config);
@@ -21,6 +24,16 @@ class ItemConfigurationValuesTable extends Table
         ]);
     }
 
+    /**
+     * Generates a array with value data
+     *
+     * @param string $modelName Model name
+     * @param array $configurationGroupIds Group ids
+     * @param array $configuration Configuration array
+     * @param array $nonOverridableConfiguration Array with options that can't be overriden
+     *
+     * @return array
+     */
     public function generateValueData($modelName, $configurationGroupIds, $configuration, $nonOverridableConfiguration)
     {
         $combinedConfigurations = Hash::merge($configuration, $nonOverridableConfiguration);
@@ -35,17 +48,17 @@ class ItemConfigurationValuesTable extends Table
             $configurationOptions[$configurationOption->alias] = $configurationOption;
         }
 
-        $valueData = array();
+        $valueData = [];
         foreach ($combinedConfigurations as $alias => $value) {
-            /** @var ConfigurationOption $configurationOption */
+            /* @var ConfigurationOption $configurationOption */
             $configurationOption = $configurationOptions[$alias];
 
-            $valueEntry = array(
+            $valueEntry = [
                 'configuration_option_id' => $configurationOption->id,
                 'model' => $modelName,
                 'price' => $configurationOption->price($value)->subTotal(),
                 'overridable' => true
-            );
+            ];
             if (isset($nonOverridableConfiguration[$alias])) {
                 $valueEntry['overridable'] = false;
             }
@@ -60,5 +73,4 @@ class ItemConfigurationValuesTable extends Table
 
         return $valueData;
     }
-
 }

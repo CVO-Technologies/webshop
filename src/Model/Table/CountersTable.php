@@ -1,6 +1,8 @@
 <?php
 
-App::uses('WebshopAppModel', 'Webshop.Model');
+// @codingStandardsIgnoreStart
+
+//App::uses('WebshopAppModel', 'Webshop.Model');
 
 class Counter extends WebshopAppModel
 {

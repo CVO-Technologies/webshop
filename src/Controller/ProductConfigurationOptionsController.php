@@ -1,5 +1,7 @@
 <?php
 
+// @codingStandardsIgnoreStart
+
 class ProductConfigurationOptionsController extends AppController
 {
 
