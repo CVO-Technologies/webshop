@@ -24,7 +24,7 @@ class CustomerContactsTable extends Table
         $this->addBehavior('Search.Searchable');
 
         $this->belongsTo('Customers', [
-           'className' => 'Webshop.Customers'
+            'className' => 'Webshop.Customers'
         ]);
     }
 

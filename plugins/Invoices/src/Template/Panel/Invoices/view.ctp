@@ -6,9 +6,9 @@ $this->Title->addSegment(__d('webshop_invoices', 'Invoices'));
 $this->Title->setPageTitle(__d('webshop_invoices', 'Invoice #{0}', $invoice->number));
 
 $this->Title->addCrumbs(array(
-	array('plugin' => 'Webshop', 'controller' => 'Customers', 'action' => 'dashboard'),
-	array('action' => 'index'),
-	array('action' => 'view', $invoice->id)
+    array('plugin' => 'Webshop', 'controller' => 'Customers', 'action' => 'dashboard'),
+    array('action' => 'index'),
+    array('action' => 'view', $invoice->id)
 ));
 
 $this->extend('Webshop./Common/panel_view');

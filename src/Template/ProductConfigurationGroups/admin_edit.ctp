@@ -5,9 +5,9 @@ $this->extend('/Common/admin_edit');
 $this->Croogo->adminScript('Nodes.admin');
 
 $this->Html
-		->addCrumb('', '/admin', array('icon' => $_icons['home']))
-		->addCrumb(__d('croogo', 'Content'), array('controller' => 'nodes', 'action' => 'index'))
-		->addCrumb($this->request->data['Product']['title'] . ': ' . $this->request->data['ConfigurationGroup']['name'], array('controller' => 'nodes', 'action' => 'index'));
+    ->addCrumb('', '/admin', array('icon' => $_icons['home']))
+    ->addCrumb(__d('croogo', 'Content'), array('controller' => 'nodes', 'action' => 'index'))
+    ->addCrumb($this->request->data['Product']['title'] . ': ' . $this->request->data['ConfigurationGroup']['name'], array('controller' => 'nodes', 'action' => 'index'));
 
 //if ($this->request->params['action'] == 'admin_add') {
 //	$formUrl = array('action' => 'add', $typeAlias);
@@ -37,7 +37,7 @@ $this->Html
 //));
 
 $this->append('form-start', $this->Form->create('ProductConfigurationGroup', array(
-		'class' => 'protected-form',
+    'class' => 'protected-form',
 )));
 $inputDefaults = $this->Form->inputDefaults();
 $inputClass = isset($inputDefaults['class']) ? $inputDefaults['class'] : null;
@@ -59,20 +59,20 @@ echo $this->Html->tabStart('node-options');
 $this->ConfigurationOption->setConfigurationGroupDetails($this->request->data['ConfigurationGroup']);
 
 foreach ($this->request->data['ProductConfigurationOption'] as $index => $productConfigurationOption):
-	echo $this->Form->inputs(
-			array(
-					'legend' => $productConfigurationOption['ConfigurationOption']['name'],
-					'ProductConfigurationOption.' . $index . '.id' => array(
-							'value' => $productConfigurationOption['id']
-					),
-					'ProductConfigurationOption.' . $index . '.value' => $this->ConfigurationOption->inputOptions($productConfigurationOption['ConfigurationOption']['alias'], array(
-							'label' => 'Value',
-					)),
-					'ProductConfigurationOption.' . $index . '.allow_user_input' => array(
-							'label' => 'Allow user input'
-					)
-			)
-	);
+    echo $this->Form->inputs(
+        array(
+            'legend' => $productConfigurationOption['ConfigurationOption']['name'],
+            'ProductConfigurationOption.' . $index . '.id' => array(
+                'value' => $productConfigurationOption['id']
+            ),
+            'ProductConfigurationOption.' . $index . '.value' => $this->ConfigurationOption->inputOptions($productConfigurationOption['ConfigurationOption']['alias'], array(
+                'label' => 'Value',
+            )),
+            'ProductConfigurationOption.' . $index . '.allow_user_input' => array(
+                'label' => 'Allow user input'
+            )
+        )
+    );
 endforeach;
 
 echo $this->Html->tabEnd();
@@ -82,14 +82,14 @@ echo $this->Croogo->adminTabs();
 $this->end();
 
 $username = isset($this->request->data['User']['username']) ?
-		$this->request->data['User']['username'] :
-		$this->Session->read('Auth.User.username');
+    $this->request->data['User']['username'] :
+    $this->Session->read('Auth.User.username');
 
 $this->start('panels');
 echo $this->Html->beginBox(__d('croogo', 'Publishing')) .
-		$this->Form->button(__d('croogo', 'Apply'), array('name' => 'apply')) .
-		$this->Form->button(__d('croogo', 'Save'), array('button' => 'success')) .
-		$this->Html->link(__d('croogo', 'Cancel'), array('action' => 'index'), array('class' => 'cancel btn btn-danger'));
+    $this->Form->button(__d('croogo', 'Apply'), array('name' => 'apply')) .
+    $this->Form->button(__d('croogo', 'Save'), array('button' => 'success')) .
+    $this->Html->link(__d('croogo', 'Cancel'), array('action' => 'index'), array('class' => 'cancel btn btn-danger'));
 //		$this->Form->input('status', array(
 //			'legend' => false,
 //			'type' => 'radio',

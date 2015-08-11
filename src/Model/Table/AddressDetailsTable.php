@@ -24,7 +24,7 @@ class AddressDetailsTable extends Table
         parent::initialize($config);
 
         $this->belongsTo('Customers', [
-           'className' => 'Webshop.Customers'
+            'className' => 'Webshop.Customers'
         ]);
         $this->addBehavior('Webshop.CustomerOwned');
     }

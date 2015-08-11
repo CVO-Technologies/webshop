@@ -21,10 +21,11 @@ class ItemConfigurationValuesTable extends Table
         ]);
     }
 
-    public function generateValueData($modelName, $configurationGroupIds, $configuration, $nonOverridableConfiguration) {
-		$combinedConfigurations = Hash::merge($configuration, $nonOverridableConfiguration);
+    public function generateValueData($modelName, $configurationGroupIds, $configuration, $nonOverridableConfiguration)
+    {
+        $combinedConfigurations = Hash::merge($configuration, $nonOverridableConfiguration);
 
-		$configurationOptionsQuery = $this->ConfigurationOptions->find()->where([
+        $configurationOptionsQuery = $this->ConfigurationOptions->find()->where([
             'ConfigurationOptions.configuration_group_id IN' => $configurationGroupIds,
             'ConfigurationOptions.alias IN' => array_keys($combinedConfigurations)
         ]);
@@ -34,30 +35,30 @@ class ItemConfigurationValuesTable extends Table
             $configurationOptions[$configurationOption->alias] = $configurationOption;
         }
 
-		$valueData = array();
-		foreach ($combinedConfigurations as $alias => $value) {
+        $valueData = array();
+        foreach ($combinedConfigurations as $alias => $value) {
             /** @var ConfigurationOption $configurationOption */
             $configurationOption = $configurationOptions[$alias];
 
-			$valueEntry = array(
-				'configuration_option_id' => $configurationOption->id,
-				'model' => $modelName,
-				'price' => $configurationOption->price($value)->subTotal(),
-				'overridable' => true
-			);
-			if (isset($nonOverridableConfiguration[$alias])) {
-				$valueEntry['overridable'] = false;
-			}
-			if ($configurationOption->type === 'list') {
-				$valueEntry['configuration_option_item_id'] = $value;
-			} else {
-				$valueEntry['value'] = $value;
-			}
+            $valueEntry = array(
+                'configuration_option_id' => $configurationOption->id,
+                'model' => $modelName,
+                'price' => $configurationOption->price($value)->subTotal(),
+                'overridable' => true
+            );
+            if (isset($nonOverridableConfiguration[$alias])) {
+                $valueEntry['overridable'] = false;
+            }
+            if ($configurationOption->type === 'list') {
+                $valueEntry['configuration_option_item_id'] = $value;
+            } else {
+                $valueEntry['value'] = $value;
+            }
 
-			$valueData[] = $valueEntry;
-		}
+            $valueData[] = $valueEntry;
+        }
 
-		return $valueData;
-	}
+        return $valueData;
+    }
 
 }

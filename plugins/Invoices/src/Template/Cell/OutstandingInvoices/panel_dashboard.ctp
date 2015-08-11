@@ -15,7 +15,8 @@
                         <span data-toggle="tooltip" title="Totaal">€ 6.05</span>
 
                         </span>
-                <?= $this->Html->link('#' . $invoice->number, ['plugin' => 'Webshop/Invoices', 'controller' => 'Invoices', 'action' => 'view', $invoice->id, '_ext' => 'pdf']) ?> - <?= $this->Html->link(__d('webshop/invoices', 'Pay invoice'), ['plugin' => 'Webshop/Invoices', 'controller' => 'Invoices', 'action' => 'view', $invoice->id]) ?>
+                <?= $this->Html->link('#' . $invoice->number, ['plugin' => 'Webshop/Invoices', 'controller' => 'Invoices', 'action' => 'view', $invoice->id, '_ext' => 'pdf']) ?>
+                - <?= $this->Html->link(__d('webshop/invoices', 'Pay invoice'), ['plugin' => 'Webshop/Invoices', 'controller' => 'Invoices', 'action' => 'view', $invoice->id]) ?>
             </li>
         <?php endforeach; ?>
     <?php endif; ?>

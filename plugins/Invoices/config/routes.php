@@ -16,14 +16,14 @@ Router::prefix('panel', function (RouteBuilder $routeBuilder) {
 });
 
 CroogoRouter::connect('/panel/invoices', array(
-	'prefix' => 'panel',
-	'plugin' => 'Webshop/Invoices',
-	'controller' => 'Invoices',
-	'action' => 'index'
+    'prefix' => 'panel',
+    'plugin' => 'Webshop/Invoices',
+    'controller' => 'Invoices',
+    'action' => 'index'
 ));
 
 CroogoRouter::connect('/panel/invoices/:action/*', array(
-	'prefix' => 'panel',
-	'plugin' => 'Webshop/Invoices',
-	'controller' => 'Invoices'
+    'prefix' => 'panel',
+    'plugin' => 'Webshop/Invoices',
+    'controller' => 'Invoices'
 ));

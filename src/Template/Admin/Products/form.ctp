@@ -5,28 +5,28 @@ $this->extend('Croogo/Croogo./Common/admin_edit');
 $this->Croogo->adminScript('Nodes.admin');
 
 $this->Html
-	->addCrumb('', '/admin', array('icon' => 'home'))
-	->addCrumb(__d('croogo', 'Content'), array('controller' => 'nodes', 'action' => 'index'));
+    ->addCrumb('', '/admin', array('icon' => 'home'))
+    ->addCrumb(__d('croogo', 'Content'), array('controller' => 'nodes', 'action' => 'index'));
 
 $this->set('editFields', array(
-	'title' => array(
-		'label' => __d('webshop', 'Title'),
-	),
-	'slug' => array(
-		'label' => __d('webshop', 'Slug'),
-	),
-	'excerpt' => array(
-		'label' => __d('webshop', 'Excerpt'),
-	),
-	'body' => array(
-		'label' => __d('webshop', 'Body'),
-	),
+    'title' => array(
+        'label' => __d('webshop', 'Title'),
+    ),
+    'slug' => array(
+        'label' => __d('webshop', 'Slug'),
+    ),
+    'excerpt' => array(
+        'label' => __d('webshop', 'Excerpt'),
+    ),
+    'body' => array(
+        'label' => __d('webshop', 'Body'),
+    ),
     'price' => array(
         'label' => __d('webshop', 'Price'),
     ),
-	'tax_id' => array(
-		'label' => __d('webshop', 'Tax'),
-	),
+    'tax_id' => array(
+        'label' => __d('webshop', 'Tax'),
+    ),
 
 ));
 

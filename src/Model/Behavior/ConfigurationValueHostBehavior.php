@@ -5,7 +5,8 @@ namespace Webshop\Model\Behavior;
 use Cake\ORM\Behavior;
 use Cake\Utility\Hash;
 
-class ConfigurationValueHostBehavior extends Behavior {
+class ConfigurationValueHostBehavior extends Behavior
+{
 
     public function initialize(array $config)
     {
@@ -40,38 +41,39 @@ class ConfigurationValueHostBehavior extends Behavior {
 //		return $results;
 //	}
 
-	public function parseConfiguration(array $configurationValues) {
-		$aliases = $this->_table->ConfigurationValues->ConfigurationOptions->find('list', [
+    public function parseConfiguration(array $configurationValues)
+    {
+        $aliases = $this->_table->ConfigurationValues->ConfigurationOptions->find('list', [
             'valueField' => 'alias'
         ])->where([
             'ConfigurationOptions.id IN' => Hash::extract($configurationValues, '{n}.configuration_option_id')
         ])->toArray();
 
-		$configuration = array();
-		foreach ($configurationValues as $configurationValue) {
-			if (!isset($aliases[(int) $configurationValue['configuration_option_id']])) {
-				continue;
-			}
-			$alias = $aliases[(int) $configurationValue['configuration_option_id']];
+        $configuration = array();
+        foreach ($configurationValues as $configurationValue) {
+            if (!isset($aliases[(int)$configurationValue['configuration_option_id']])) {
+                continue;
+            }
+            $alias = $aliases[(int)$configurationValue['configuration_option_id']];
 
-			$value = null;
+            $value = null;
 
-			if (isset($configurationValue['value'])) {
-				$value = $configurationValue['value'];
-			}
+            if (isset($configurationValue['value'])) {
+                $value = $configurationValue['value'];
+            }
 
-			if (isset($configurationValue['configuration_option_item_id'])) {
-				$value = $configurationValue['configuration_option_item_id'];
-			}
+            if (isset($configurationValue['configuration_option_item_id'])) {
+                $value = $configurationValue['configuration_option_item_id'];
+            }
 
-			if (is_null($value)) {
-				continue;
-			}
+            if (is_null($value)) {
+                continue;
+            }
 
-			$configuration[$alias] = $value;
-		}
+            $configuration[$alias] = $value;
+        }
 
-		return $configuration;
-	}
+        return $configuration;
+    }
 
 }

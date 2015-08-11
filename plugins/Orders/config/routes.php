@@ -31,7 +31,7 @@ CroogoRouter::connect('/admin/orders/:action/*', array(
 ));
 
 CroogoRouter::connect('/panel/orders/:action/*', array(
-	'prefix' => 'panel',
-	'plugin' => 'Webshop/Orders',
-	'controller' => 'Orders'
+    'prefix' => 'panel',
+    'plugin' => 'Webshop/Orders',
+    'controller' => 'Orders'
 ));

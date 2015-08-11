@@ -21,6 +21,14 @@ class PriceContainer
         return $this;
     }
 
+    public function __debugInfo()
+    {
+        return [
+            'prices' => $this->prices(),
+            'taxes' => $this->taxes()
+        ];
+    }
+
     public function prices()
     {
         return $this->_prices;
@@ -38,14 +46,6 @@ class PriceContainer
         }
 
         return $taxes;
-    }
-
-    public function __debugInfo()
-    {
-        return [
-            'prices' => $this->prices(),
-            'taxes' => $this->taxes()
-        ];
     }
 
 }

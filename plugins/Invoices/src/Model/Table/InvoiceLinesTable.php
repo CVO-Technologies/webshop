@@ -12,7 +12,7 @@ class InvoiceLinesTable extends Table
         parent::initialize($config);
 
         $this->belongsTo('Invoices', [
-           'className' => 'Webshop/Invoices.Invoices',
+            'className' => 'Webshop/Invoices.Invoices',
         ]);
         $this->belongsTo('Products', [
             'className' => 'Webshop.Products',

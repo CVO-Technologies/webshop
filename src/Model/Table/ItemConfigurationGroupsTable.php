@@ -4,7 +4,8 @@ namespace Webshop\Model\Table;
 
 use Cake\ORM\Table;
 
-class ItemConfigurationGroupsTable extends Table {
+class ItemConfigurationGroupsTable extends Table
+{
 
     public function initialize(array $config)
     {

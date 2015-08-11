@@ -12,7 +12,8 @@ class ConfigurationOption extends Entity
      * @param $value
      * @return Price|null
      */
-    public function price($value) {
+    public function price($value)
+    {
         switch ($this->type) {
             case 'list':
                 return Price::fromDirectInput($this->configuration_option_item->price)

@@ -8,7 +8,8 @@ use Webshop\Invoices\Model\Table\InvoicesTable;
 /**
  * @property InvoicesTable Invoices
  */
-class InvoicesController extends CroogoAppController {
+class InvoicesController extends CroogoAppController
+{
 
     public $helpers = [
         'SocialSeo.Title'
@@ -22,7 +23,8 @@ class InvoicesController extends CroogoAppController {
     }
 
 
-    public function index() {
+    public function index()
+    {
         $query = $this->Invoices->find('customer', [
             'customerId' => $this->CustomerAccess->getCustomerId($this)
         ]);
@@ -31,7 +33,8 @@ class InvoicesController extends CroogoAppController {
         $this->set(compact('invoices'));
     }
 
-    public function view($id) {
+    public function view($id)
+    {
         $invoice = $this->Invoices->get($id, [
             'contain' => [
                 'Customers' => [
@@ -65,11 +68,13 @@ class InvoicesController extends CroogoAppController {
         $this->set('_serialize', array('invoice'));
     }
 
-    public function get_prices($id) {
+    public function get_prices($id)
+    {
         return $this->Invoice->getPrices($id);
     }
 
-    public function panel_count() {
+    public function panel_count()
+    {
         $total = $this->Invoice->find('count', array(
             'conditions' => array(
                 $this->Invoice->alias . '.customer_id' => $this->CustomerAccess->getCustomerId()

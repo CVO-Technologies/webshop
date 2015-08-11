@@ -1,11 +1,11 @@
 <?php
 
 echo $this->Form->input(
-	$fieldName,
-		$this->ConfigurationOption->inputOptions(
-				$option['alias'],
-				array(
-						'type' => 'select',
-				)
-		)
+    $fieldName,
+    $this->ConfigurationOption->inputOptions(
+        $option['alias'],
+        array(
+            'type' => 'select',
+        )
+    )
 );

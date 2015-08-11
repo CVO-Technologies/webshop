@@ -8,11 +8,6 @@ use Cake\ORM\Table;
 trait ItemContainerTrait
 {
 
-    public function items()
-    {
-        return $this->items;
-    }
-
     public function duplicateItemContainer(Entity $itemContainer, Table $table)
     {
         if (!in_array('Webshop\Model\Entity\ItemContainerTrait', class_uses($itemContainer))) {
@@ -34,6 +29,11 @@ trait ItemContainerTrait
         }
 
         debug($this);
+    }
+
+    public function items()
+    {
+        return $this->items;
     }
 
 }

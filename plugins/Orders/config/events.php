@@ -1,7 +1,7 @@
 <?php
 
 $config = array(
-	'EventHandlers' => array(
-		'WebshopOrders.OrdersHandler',
-	),
+    'EventHandlers' => array(
+        'WebshopOrders.OrdersHandler',
+    ),
 );

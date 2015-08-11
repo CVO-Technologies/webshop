@@ -5,7 +5,8 @@ namespace Webshop\Model\Behavior;
 use Cake\ORM\Behavior;
 use Cake\ORM\Query;
 
-class ConfigurableItemBehavior extends Behavior {
+class ConfigurableItemBehavior extends Behavior
+{
 
     public function initialize(array $config)
     {
@@ -51,7 +52,8 @@ class ConfigurableItemBehavior extends Behavior {
 //		$Model->findMethods['options'] = true;
 //	}
 
-	public function findOptions(Query $query) {
+    public function findOptions(Query $query)
+    {
 //		if ($state === 'before') {
 //			$query['fields'] = array(
 //				$Model->alias . '.' . $Model->primaryKey
@@ -88,50 +90,50 @@ class ConfigurableItemBehavior extends Behavior {
 
         return $query;
 
-		$configurationOptionsResults = array();
-		foreach ($results as $index => $result) {
-			$configurationOptions = array();
-			foreach ($result['ItemConfigurationGroup'] as $itemConfigurationGroup) {
-				$configurationOptions = Hash::merge(
-					$configurationOptions,
-					Hash::combine(
-						$itemConfigurationGroup,
-						'ConfigurationGroup.ConfigurationOption.{n}.id',
-						'ConfigurationGroup.ConfigurationOption.{n}'
-					)
-				);
-			}
+        $configurationOptionsResults = array();
+        foreach ($results as $index => $result) {
+            $configurationOptions = array();
+            foreach ($result['ItemConfigurationGroup'] as $itemConfigurationGroup) {
+                $configurationOptions = Hash::merge(
+                    $configurationOptions,
+                    Hash::combine(
+                        $itemConfigurationGroup,
+                        'ConfigurationGroup.ConfigurationOption.{n}.id',
+                        'ConfigurationGroup.ConfigurationOption.{n}'
+                    )
+                );
+            }
 
-			$overwrites = Hash::combine(
-				$result,
-				'ItemConfigurationOptionOverwrite.{n}.configuration_option_id',
-				'ItemConfigurationOptionOverwrite.{n}'
-			);
+            $overwrites = Hash::combine(
+                $result,
+                'ItemConfigurationOptionOverwrite.{n}.configuration_option_id',
+                'ItemConfigurationOptionOverwrite.{n}'
+            );
 
-			foreach ($configurationOptions as $configurationOptionIndex => $configurationOption) {
-				if (!isset($overwrites[$configurationOptionIndex])) {
-					continue;
-				}
+            foreach ($configurationOptions as $configurationOptionIndex => $configurationOption) {
+                if (!isset($overwrites[$configurationOptionIndex])) {
+                    continue;
+                }
 
-				$overwrite = $overwrites[$configurationOptionIndex];
+                $overwrite = $overwrites[$configurationOptionIndex];
 
-				foreach ($overwrite as $field => $value) {
-					if ($value === null) {
-						continue;
-					}
-					if (in_array($field, array('id', 'foreign_key', 'model', 'configuration_option_id'))) {
-						continue;
-					}
+                foreach ($overwrite as $field => $value) {
+                    if ($value === null) {
+                        continue;
+                    }
+                    if (in_array($field, array('id', 'foreign_key', 'model', 'configuration_option_id'))) {
+                        continue;
+                    }
 
-					$configurationOptions[$configurationOptionIndex][$field] = $value;
-				}
-			}
+                    $configurationOptions[$configurationOptionIndex][$field] = $value;
+                }
+            }
 
-			$configurationOptionsResults[$index] = $configurationOptions;
-		}
+            $configurationOptionsResults[$index] = $configurationOptions;
+        }
 
-		return $configurationOptionsResults;
-	}
+        return $configurationOptionsResults;
+    }
 
 
 }

@@ -7,7 +7,8 @@ use Cake\Routing\Router;
 use Croogo\Core\Croogo;
 use Croogo\Core\Nav;
 
-function addWebshopPluginPath($basePluginName) {
+function addWebshopPluginPath($basePluginName)
+{
     $pluginPaths = Configure::read('plugins');
     $pluginPaths['Webshop/' . $basePluginName] = $pluginPaths['Webshop'] . 'plugins' . DS . $basePluginName . DS;
 
@@ -18,75 +19,75 @@ addWebshopPluginPath('Invoices');
 addWebshopPluginPath('Orders');
 
 Nav::add('sidebar', 'webshop', array(
-	'title' => __d('webshop', 'Webshop'),
-	'url' => '#',
-	'weight' => 30,
-	'children' => array(
-		'customers' => array(
-			'title' => __d('webshop', 'Customers'),
-			'url' => array(
-				'plugin' => 'Webshop',
-				'controller' => 'Customers',
-				'action' => 'index',
-			)
-		),
-		'products' => array(
-			'title' => __d('webshop', 'Products'),
-			'url' => array(
-				'plugin' => 'Webshop',
-				'controller' => 'Products',
-				'action' => 'index',
-			)
-		),
-		'Configuration groups' => array(
-			'title' => __d('webshop', 'Configuration groups'),
-			'url' => array(
-				'plugin' => 'Webshop',
-				'controller' => 'ConfigurationGroups',
-				'action0' => 'index',
-			)
-		),
-		'Configuration options' => array(
-			'title' => __d('webshop', 'Configuration options'),
-			'url' => array(
-				'plugin' => 'Webshop',
-				'controller' => 'ConfigurationOptions',
-				'action' => 'index',
-			)
-		),
-		'configuration' => array(
-			'title' => __d('webshop', 'Configuration'),
-			'url' => '#',
-		)
-	)
+    'title' => __d('webshop', 'Webshop'),
+    'url' => '#',
+    'weight' => 30,
+    'children' => array(
+        'customers' => array(
+            'title' => __d('webshop', 'Customers'),
+            'url' => array(
+                'plugin' => 'Webshop',
+                'controller' => 'Customers',
+                'action' => 'index',
+            )
+        ),
+        'products' => array(
+            'title' => __d('webshop', 'Products'),
+            'url' => array(
+                'plugin' => 'Webshop',
+                'controller' => 'Products',
+                'action' => 'index',
+            )
+        ),
+        'Configuration groups' => array(
+            'title' => __d('webshop', 'Configuration groups'),
+            'url' => array(
+                'plugin' => 'Webshop',
+                'controller' => 'ConfigurationGroups',
+                'action0' => 'index',
+            )
+        ),
+        'Configuration options' => array(
+            'title' => __d('webshop', 'Configuration options'),
+            'url' => array(
+                'plugin' => 'Webshop',
+                'controller' => 'ConfigurationOptions',
+                'action' => 'index',
+            )
+        ),
+        'configuration' => array(
+            'title' => __d('webshop', 'Configuration'),
+            'url' => '#',
+        )
+    )
 ));
 
 Nav::add('sidebar', 'settings.children.webshop', array(
-	'title' => __d('webshop', 'Webshop'),
-	'url' => '#',
+    'title' => __d('webshop', 'Webshop'),
+    'url' => '#',
 ));
 
 Nav::add('webshop-dashboard-address_details-actions', 'edit', array(
-	'title' => __d('webshop', 'Edit'),
-	'url' => array(
-		'controller' => 'AddressDetails',
-		'action' => 'edit',
-		'_id'
-	),
-	'htmlAttributes' => array(
-		'class' => 'btn-primary'
-	)
+    'title' => __d('webshop', 'Edit'),
+    'url' => array(
+        'controller' => 'AddressDetails',
+        'action' => 'edit',
+        '_id'
+    ),
+    'htmlAttributes' => array(
+        'class' => 'btn-primary'
+    )
 ));
 Nav::add('webshop-dashboard-customer_contacts-actions', 'edit', array(
-	'title' => __d('webshop', 'Edit'),
-	'url' => array(
-		'controller' => 'customer_contacts',
-		'action' => 'edit',
-		'_id'
-	),
-	'htmlAttributes' => array(
-		'class' => 'btn-primary'
-	)
+    'title' => __d('webshop', 'Edit'),
+    'url' => array(
+        'controller' => 'customer_contacts',
+        'action' => 'edit',
+        '_id'
+    ),
+    'htmlAttributes' => array(
+        'class' => 'btn-primary'
+    )
 ));
 
 //endregion
@@ -122,20 +123,18 @@ if (Plugin::loaded('Sites')) {
 Croogo::hookComponent('*', 'Webshop.CustomerAccess');
 //endregion
 
-Configure::write('Webshop.customer_access_providers', array(
-
-));
+Configure::write('Webshop.customer_access_providers', array());
 
 Croogo::mergeConfig('Translate.models.ConfigurationOption', array(
-		'fields' => array(
-				'name' => 'nameTranslation',
-		),
-		'translateModel' => 'Webshop.ConfigurationOption',
+    'fields' => array(
+        'name' => 'nameTranslation',
+    ),
+    'translateModel' => 'Webshop.ConfigurationOption',
 ));
 
 //region Panel prefix setup
 Croogo::mergeConfig('Routing.prefixes', array(
-	'panel'
+    'panel'
 ));
 
 Router::reload();

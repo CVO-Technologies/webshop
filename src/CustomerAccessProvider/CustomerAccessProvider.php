@@ -5,20 +5,23 @@ namespace Webshop\CustomerAccessProvider;
 use Cake\Controller\Controller;
 use Cake\Core\App;
 
-class CustomerAccessProvider {
+class CustomerAccessProvider
+{
 
     /**
      * @param $class
      * @return CustomerAccessProvider
      */
-	static public function get($class) {
+    static public function get($class)
+    {
         $class = App::className($class, 'CustomerAccessProvider', 'AccessProvider');
 
-		return new $class;
-	}
+        return new $class;
+    }
 
-	public function getAccessibleCustomers(Controller $Controller) {
-		return false;
-	}
+    public function getAccessibleCustomers(Controller $Controller)
+    {
+        return false;
+    }
 
 }

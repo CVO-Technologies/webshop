@@ -21,6 +21,14 @@ class TaxInformation
         }
     }
 
+    /**
+     * @return array
+     */
+    public function vat()
+    {
+        return $this->_calculated['vat'];
+    }
+
     public function addVat($percentage)
     {
         $this->_vat[] = $percentage;
@@ -33,14 +41,6 @@ class TaxInformation
         }
 
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function vat()
-    {
-        return $this->_calculated['vat'];
     }
 
     public function calculated()

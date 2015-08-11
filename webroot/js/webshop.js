@@ -57,55 +57,55 @@
 //})
 
 $(function () {
-	var reloadAddressDetailLists = function () {
-		var wasDisabled = $('[data-model="AddressDetail"]').attr('disabled');
-		if (!wasDisabled) {
-			$('[data-model="AddressDetail"]').attr('disabled', true);
-		}
+    var reloadAddressDetailLists = function () {
+        var wasDisabled = $('[data-model="AddressDetail"]').attr('disabled');
+        if (!wasDisabled) {
+            $('[data-model="AddressDetail"]').attr('disabled', true);
+        }
 
-		$.ajax({
-			url: Croogo.basePath + 'panel/webshop/address_details.json',
-			success: function (json) {
-				var addressDetailInput = $('[data-model="AddressDetail"]');
-				addressDetailInput.empty();
-				$.each(json.addressDetails, function(index, addressDetail) {
-					addressDetailInput
-						.append($("<option></option>").attr('value', addressDetail.AddressDetail.id).text(addressDetail.AddressDetail.name));
-				});
+        $.ajax({
+            url: Croogo.basePath + 'panel/webshop/address_details.json',
+            success: function (json) {
+                var addressDetailInput = $('[data-model="AddressDetail"]');
+                addressDetailInput.empty();
+                $.each(json.addressDetails, function (index, addressDetail) {
+                    addressDetailInput
+                        .append($("<option></option>").attr('value', addressDetail.AddressDetail.id).text(addressDetail.AddressDetail.name));
+                });
 
-				if (!wasDisabled) {
-					$('[data-model="AddressDetail"]').attr('disabled', false);
-				}
-			}
-		});
-	};
-	var hookAddressDetailModalEvents = function () {
-		$('.modal-overall .modal-content').find('form').on('submit', function (event) {
-			var data = {};
-			$.each($(this).serializeArray(), function (index, value) {
-				data[value.name] = value.value;
-			});
+                if (!wasDisabled) {
+                    $('[data-model="AddressDetail"]').attr('disabled', false);
+                }
+            }
+        });
+    };
+    var hookAddressDetailModalEvents = function () {
+        $('.modal-overall .modal-content').find('form').on('submit', function (event) {
+            var data = {};
+            $.each($(this).serializeArray(), function (index, value) {
+                data[value.name] = value.value;
+            });
 
-			$('.modal-overall .modal-content').load($(this).attr('action'), data, function (html) {
-				hookAddressDetailModalEvents();
+            $('.modal-overall .modal-content').load($(this).attr('action'), data, function (html) {
+                hookAddressDetailModalEvents();
 
-				console.log(html.indexOf('<form'));
-				if (html.indexOf('<form') !== -1) {
-					return;
-				}
+                console.log(html.indexOf('<form'));
+                if (html.indexOf('<form') !== -1) {
+                    return;
+                }
 
-				reloadAddressDetailLists();
-				$('.modal-overall').modal('hide');
-			});
+                reloadAddressDetailLists();
+                $('.modal-overall').modal('hide');
+            });
 
-			event.preventDefault();
-		});
-	};
-	$(document).on('click', '.add-address-detail', function () {
-		$('.modal-overall .modal-content').load(Croogo.basePath + 'panel/webshop/address_details/add?modal=true', function () {
-			hookAddressDetailModalEvents();
-		});
-		$('.modal-overall').modal();
-	});
-	$('.nav-tabs > li:first-child a').tab('show');
+            event.preventDefault();
+        });
+    };
+    $(document).on('click', '.add-address-detail', function () {
+        $('.modal-overall .modal-content').load(Croogo.basePath + 'panel/webshop/address_details/add?modal=true', function () {
+            hookAddressDetailModalEvents();
+        });
+        $('.modal-overall').modal();
+    });
+    $('.nav-tabs > li:first-child a').tab('show');
 });

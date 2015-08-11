@@ -1,20 +1,21 @@
 <?php
 
-class ProductConfigurationOption extends AppModel {
+class ProductConfigurationOption extends AppModel
+{
 
-	public $belongsTo = array(
-		'Product' => array(
-			'className' => 'Webshop.Product'
-		),
-		'ConfigurationOption' => array(
-			'className' => 'Webshop.ConfigurationOption'
-		)
-	);
+    public $belongsTo = array(
+        'Product' => array(
+            'className' => 'Webshop.Product'
+        ),
+        'ConfigurationOption' => array(
+            'className' => 'Webshop.ConfigurationOption'
+        )
+    );
 
-	public $hasMany = array(
+    public $hasMany = array(
 //		'ConfigurationOptionItem' => array(
 //			'className' => 'Webshop.ConfigurationOptionItem'
 //		)
-	);
+    );
 
 }

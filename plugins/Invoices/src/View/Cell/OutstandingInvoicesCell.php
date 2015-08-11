@@ -18,7 +18,7 @@ class OutstandingInvoicesCell extends Cell
         $invoices = $this->Invoices
             ->find('outstanding')
             ->find('customer', [
-                 'customerId' => $this->request->session()->read('Customer.current')
+                'customerId' => $this->request->session()->read('Customer.current')
             ]);
         if (!is_null($limit)) {
             $invoices->limit($limit);

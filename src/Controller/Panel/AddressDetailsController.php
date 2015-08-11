@@ -19,43 +19,46 @@ class AddressDetailsController extends CroogoAppController
         $this->loadComponent('Paginator');
     }
 
-    public function index() {
+    public function index()
+    {
         $query = $this->AddressDetails->find('ownedByCustomer', [
             'customer' => $this->CustomerAccess->getCustomer()
         ]);
 
-		$addressDetails = $this->Paginator->paginate($query);
+        $addressDetails = $this->Paginator->paginate($query);
 
-		if ($this->request->is('requested')) {
-			return $addressDetails;
-		}
+        if ($this->request->is('requested')) {
+            return $addressDetails;
+        }
 
-		$this->set(compact('addressDetails'));
-		$this->set('_serialize', array('addressDetails'));
-	}
+        $this->set(compact('addressDetails'));
+        $this->set('_serialize', array('addressDetails'));
+    }
 
-	public function add() {
-		$addressDetail = $this->AddressDetails->newEntity([
+    public function add()
+    {
+        $addressDetail = $this->AddressDetails->newEntity([
             'customer_id' => $this->CustomerAccess->getCustomerId()
         ]);
 
         $this->set('addressDetail', $addressDetail);
 
-		if (!$this->request->is('post')) {
-			return;
-		}
+        if (!$this->request->is('post')) {
+            return;
+        }
 
         $addressDetail = $this->AddressDetails->patchEntity($addressDetail, $this->request->data());
-		if (!$this->AddressDetails->save($addressDetail)) {
-			return;
-		}
+        if (!$this->AddressDetails->save($addressDetail)) {
+            return;
+        }
 
-		return $this->redirect(array(
-			'action' => 'index'
-		));
-	}
+        return $this->redirect(array(
+            'action' => 'index'
+        ));
+    }
 
-	public function edit($id) {
+    public function edit($id)
+    {
         $addressDetail = $this->AddressDetails->get($id, [
             'finder' => 'ownedByCustomer',
             'customer' => $this->CustomerAccess->getCustomer()
@@ -63,87 +66,88 @@ class AddressDetailsController extends CroogoAppController
 
         $this->set('addressDetail', $addressDetail);
 
-		if (!$this->request->is('put')) {
-			return;
-		}
+        if (!$this->request->is('put')) {
+            return;
+        }
 
-		$addressDetail = $this->AddressDetails->patchEntity($addressDetail, $this->request->data());
-		if (!$this->AddressDetails->save($addressDetail)) {
-			$this->Flash->error(__d('webshop', 'Could not save address details'));
+        $addressDetail = $this->AddressDetails->patchEntity($addressDetail, $this->request->data());
+        if (!$this->AddressDetails->save($addressDetail)) {
+            $this->Flash->error(__d('webshop', 'Could not save address details'));
 
-			return;
-		}
+            return;
+        }
 
-		return $this->redirect(array(
-			'action' => 'index'
-		));
-	}
+        return $this->redirect(array(
+            'action' => 'index'
+        ));
+    }
 
-	public function check($modelName) {
-		$this->loadModel($modelName);
+    public function check($modelName)
+    {
+        $this->loadModel($modelName);
 
-		$transformedFields = array();
-		foreach ($this->request->query['data'] as $association => $fields) {
-			$Model = ($association === $modelName) ? $this->{$modelName} : $this->{$modelName}->{$association};
-			if (!$Model) {
-				continue;
-			}
+        $transformedFields = array();
+        foreach ($this->request->query['data'] as $association => $fields) {
+            $Model = ($association === $modelName) ? $this->{$modelName} : $this->{$modelName}->{$association};
+            if (!$Model) {
+                continue;
+            }
 
-			$transformedFields[$Model->name] = $this->__transformFields($Model, array($Model->alias), $fields);
-		}
+            $transformedFields[$Model->name] = $this->__transformFields($Model, array($Model->alias), $fields);
+        }
 
-		$ChangeEvent = new CakeEvent('Form.change', $this, array(
-			'fields' => $transformedFields
-		));
+        $ChangeEvent = new CakeEvent('Form.change', $this, array(
+            'fields' => $transformedFields
+        ));
 
-		$this->getEventManager()->dispatch($ChangeEvent);
+        $this->getEventManager()->dispatch($ChangeEvent);
 
-		$fields = array();
-		foreach (Hash::flatten($ChangeEvent->data['fields']) as $key => $value) {
-			$fieldParts = explode('.', $key);
-			$lastPart = array_pop($fieldParts);
-			if (is_numeric($lastPart)) {
-				$lastPart = array_pop($fieldParts);
-				$fields[implode('.', $fieldParts)][$lastPart][] = $value;
-			} else {
-				$fields[implode('.', $fieldParts)][$lastPart] = $value;
-			}
-		}
+        $fields = array();
+        foreach (Hash::flatten($ChangeEvent->data['fields']) as $key => $value) {
+            $fieldParts = explode('.', $key);
+            $lastPart = array_pop($fieldParts);
+            if (is_numeric($lastPart)) {
+                $lastPart = array_pop($fieldParts);
+                $fields[implode('.', $fieldParts)][$lastPart][] = $value;
+            } else {
+                $fields[implode('.', $fieldParts)][$lastPart] = $value;
+            }
+        }
 
-		$this->set('fields', $fields);
-		$this->set('_serialize', array('fields'));
-	}
+        $this->set('fields', $fields);
+        $this->set('_serialize', array('fields'));
+    }
 
-	public function admin_listing() {
-		$this->Paginator->settings['AddressDetail']['type'] = 'list';
-		$addressDetails = $this->Paginator->paginate('AddressDetail');
+    private function __transformFields(Model $Model, array $stack, $fields)
+    {
+        $transformedFields = array();
 
-		if ($this->request->is('requested')) {
-			return $addressDetails;
-		}
+        foreach ($fields as $fieldName => $fieldValue) {
+            $fieldStack = $stack;
+            $fieldStack[] = $fieldName;
 
-		$this->set(compact('addressDetails'));
-	}
+            $transformedFields[$fieldName] = array(
+                'name' => 'data[' . implode('][', $fieldStack) . ']',
+                'disabled' => null,
+                'errors' => array(),
+                'value' => $fieldValue,
+                'changed' => false
+            );
+        }
 
-	private function __transformFields(Model $Model, array $stack, $fields) {
-		$transformedFields = array();
+        return $transformedFields;
+    }
 
-		foreach ($fields as $fieldName => $fieldValue) {
-			$fieldStack = $stack;
-			$fieldStack[] = $fieldName;
+    public function admin_listing()
+    {
+        $this->Paginator->settings['AddressDetail']['type'] = 'list';
+        $addressDetails = $this->Paginator->paginate('AddressDetail');
 
-			$transformedFields[$fieldName] = array(
-				'name' => 'data[' . implode('][', $fieldStack) . ']',
-				'disabled' => null,
-				'errors' => array(
+        if ($this->request->is('requested')) {
+            return $addressDetails;
+        }
 
-				),
-				'value' => $fieldValue,
-				'changed' => false
-			);
-		}
-
-		return $transformedFields;
-	}
+        $this->set(compact('addressDetails'));
+    }
 
 }
