@@ -24,6 +24,12 @@
 //
 use Croogo\Core\CroogoRouter;
 
+CroogoRouter::connect('/admin/orders/:action/*', array(
+    'prefix' => 'admin',
+    'plugin' => 'Webshop/Orders',
+    'controller' => 'Orders'
+));
+
 CroogoRouter::connect('/panel/orders/:action/*', array(
 	'prefix' => 'panel',
 	'plugin' => 'Webshop/Orders',

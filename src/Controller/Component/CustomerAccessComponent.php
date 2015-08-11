@@ -4,49 +4,66 @@ namespace Webshop\Controller\Component;
 
 use Cake\Controller\Component;
 use Cake\Controller\Controller;
+use Cake\Controller\Event\ControllerEvent;
 use Cake\Core\Configure;
 use Cake\Event\Event;
 use Cake\Network\Exception\ForbiddenException;
+use Cake\Network\Response;
+use Cake\ORM\Entity;
 use Cake\ORM\TableRegistry;
+use Cake\Routing\Router;
 use Webshop\CustomerAccessProvider\CustomerAccessProvider;
+use Webshop\Model\Entity\Customer;
 
 class CustomerAccessComponent extends Component
 {
 
-    public function beforeRender(Event $event)
+    public function beforeFilter(Event $event)
     {
         /** @var Controller $controller */
         $controller = $event->subject();
 
-        if ($controller->request->param('prefix') === 'admin') {
+        if ($controller->request->param('prefix') !== 'panel') {
             return;
         }
 
-        $accessibleCustomers = $this->getAccessibleCustomers();
-
-        if (($this->getCustomerId(false)) && (!in_array($this->getCustomerId(false), $accessibleCustomers))) {
-            throw new ForbiddenException();
-        }
-
-        $Customer = TableRegistry::get('Webshop.Customers');
-        if ($this->getCustomerId($controller)) {
-            $controller->set('customer', $Customer->get($this->getCustomerId(false)));
-        }
-
-        $controller->set('customers', $Customer->find('list')->where([
-            'Customers.id IN' => $accessibleCustomers
-        ])->toArray());
-
-        if ((!isset($controller->request->params['prefix'])) || ($controller->request->params['prefix'] !== 'panel')) {
-            return;
-        }
-
-        if (empty($accessibleCustomers)) {
-            throw new ForbiddenException();
+        $customerSelect = ($this->request->params['controller'] === 'Customers') && ($this->request->params['action'] === 'select');
+        if ((!$this->getCustomerId()) && (!$customerSelect)) {
+            return $controller->redirect(
+                ['_name' => 'panel_customers_select']
+            );
         }
     }
 
-    public function getCustomerId($redirect = true)
+//    public function startup(ControllerEvent $event)
+//    {
+//        $controller = $event->controller();
+//
+//        if ($controller->request->param('prefix') === 'admin') {
+//            return;
+//        }
+//
+//        $accessibleCustomers = $this->getAccessibleCustomers();
+//
+//        if (($this->getCustomerId()) && (!in_array($this->getCustomerId(), $accessibleCustomers))) {
+//            throw new ForbiddenException();
+//        }
+//
+//        $Customer = TableRegistry::get('Webshop.Customers');
+//        if ($this->getCustomerId()) {
+//            $controller->set('customer', $this->getCustomer());
+//        }
+//
+//        $controller->set('customers', $Customer->find('list')->where([
+//            'Customers.id IN' => $accessibleCustomers
+//        ])->toArray());
+//
+//        if (($this->request->param('prefix') === 'panel') && (empty($accessibleCustomers))) {
+//            throw new ForbiddenException();
+//        }
+//    }
+
+    public function getCustomerId()
     {
         $controller = $this->_registry->getController();
 
@@ -66,19 +83,7 @@ class CustomerAccessComponent extends Component
         if (($customerId !== false) && (!in_array($customerId, $this->getAccessibleCustomers()))) {
             $controller->request->session()->delete('Customer.current');
 
-            return $this->getCustomerId($redirect);
-        }
-
-        if (($customerId === false) && ($redirect) && (count($this->getAccessibleCustomers()) > 1)) {
-            if (($controller->request->param('prefix') !== 'admin') && ($controller->request->param('action') != 'select') && (!$controller->request->is(array('ajax', 'requested')))) {
-//				debug($controller->request);exit();
-//				debug($controller->request)
-                if (!$this->request->session()->check('Customer.select.redirect')) {
-                    $this->request->session()->write('Customer.select.redirect', $controller->request->here);
-                }
-
-                return $controller->redirect(array('prefix' => 'panel', 'plugin' => 'Webshop', 'controller' => 'Customers', 'action' => 'select'));
-            }
+            return $this->getCustomerId();
         }
 
         return $customerId;
@@ -89,8 +94,8 @@ class CustomerAccessComponent extends Component
      */
     public function getCustomer()
     {
-        if ($this->getCustomerId() instanceof Response) {
-            return $this->getCustomerId();
+        if (!$this->getCustomerId()) {
+            return false;
         }
 
         $customers = TableRegistry::get('Webshop.Customers');
@@ -115,5 +120,4 @@ class CustomerAccessComponent extends Component
 
         return $accessibleCustomers;
     }
-
 }

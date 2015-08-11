@@ -4,7 +4,7 @@ namespace Webshop\Orders\Model\Table;
 
 use Cake\ORM\Table;
 
-class OrderProductsTable extends Table
+class OrderItemsTable extends Table
 {
 
     public function initialize(array $config)

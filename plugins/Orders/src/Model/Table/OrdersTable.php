@@ -4,6 +4,8 @@ namespace Webshop\Orders\Model\Table;
 
 use Cake\ORM\Query;
 use Cake\ORM\Table;
+use Webshop\Model\Entity\Customer;
+use Webshop\Orders\Model\Entity\Order;
 
 class OrdersTable extends Table
 {
@@ -42,8 +44,8 @@ class OrdersTable extends Table
             'foreignKey' => 'invoice_address_detail_id'
         ]);
 
-        $this->hasMany('OrderProducts', [
-            'className' => 'Webshop/Orders.OrderProducts',
+        $this->hasMany('Items', [
+            'className' => 'Webshop/Orders.OrderItems',
             'foreignKey' => 'order_id'
         ]);
         $this->hasMany('OrderPayments', [
@@ -61,6 +63,23 @@ class OrdersTable extends Table
         return $query->andWhere([
             'status' => 'open'
         ]);
+    }
+
+    /**
+     * @param Customer $customer
+     * @return Order
+     */
+    public function prepare(Customer $customer)
+    {
+        if ($customer->isNew()) {
+            throw new \InvalidArgumentException('Customer is not supposed to be marked as new');
+        }
+
+        $order = $this->newEntity();
+
+        $order->customer = $customer;
+
+        return $order;
     }
 
     public function createFromProductList($customerId, $productsList)

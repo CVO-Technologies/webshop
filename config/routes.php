@@ -16,6 +16,11 @@ Router::prefix('panel', function (RouteBuilder $routeBuilder) {
         ['_name' => 'panel_dashboard']
     );
     $routeBuilder->plugin('Webshop', function (RouteBuilder $routeBuilder) {
+        $routeBuilder->connect(
+            '/customers/select',
+            ['controller' => 'Customers', 'action' => 'select'],
+            ['_name' => 'panel_customers_select']
+        );
         $routeBuilder->fallbacks('DashedRoute');
     });
 });

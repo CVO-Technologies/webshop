@@ -57,4 +57,26 @@ trait ConfigurableItemTrait
         return $priceContainer;
     }
 
+    public function applyConfiguration(Entity $entity)
+    {
+        /** @var ConfigurableItemTrait $entity */
+
+        $this->configuration_values = [];
+
+        /** @var ItemConfigurationValue $sourceConfigurationValue */
+        foreach ($entity->configuration_values as $sourceConfigurationValue) {
+            $configurationValue = clone $sourceConfigurationValue;
+
+            $configurationValue->isNew(true);
+
+            $configurationValue->unsetProperty('id');
+            $configurationValue->model = get_class($this);
+            $configurationValue->unsetProperty('foreign_key');
+
+            $this->configuration_values[] = $configurationValue;
+        }
+
+//        $entity->
+    }
+
 }
