@@ -8,6 +8,10 @@
         "cvo-technologies/webshop-taxes": "3.0.*@dev",
         "cvo-technologies/socialseo": "3.0.*@dev"
     },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "cakephp/cakephp-codesniffer": "dev-master"
+    },
     "replace": {
         "cvo-technologies/webshop-invoices": "3.0.*@dev"
     },
