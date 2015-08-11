@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "eecff1dc33c01b457632056c8d619fe1",
+    "hash": "394043e2b64f813c6df5e5acf5a8c06e",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -231,7 +231,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/f12f686a01ea39ebbf4687b36e02e0b05490038b",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/1cf4fb76dda92a3a512b905326ecfbb622db601e",
                 "reference": "f12f686a01ea39ebbf4687b36e02e0b05490038b",
                 "shasum": ""
             },
@@ -1068,6 +1068,46 @@
                 }
             ],
             "time": "2015-08-11 08:02:13"
+        },
+        {
+            "name": "cvo-technologies/macro",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cvo-technologies/macro.git",
+                "reference": "9177467d03f30ccab7540aa6afb092a7da41b58c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cvo-technologies/macro/zipball/9177467d03f30ccab7540aa6afb092a7da41b58c",
+                "reference": "9177467d03f30ccab7540aa6afb092a7da41b58c",
+                "shasum": ""
+            },
+            "require": {
+                "cakephp/cakephp": "3.*"
+            },
+            "require-dev": {
+                "cakephp/cakephp-codesniffer": "dev-master",
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "cakephp-plugin",
+            "autoload": {
+                "psr-4": {
+                    "Macro\\": "src",
+                    "Macro\\Test\\Fixture\\": "tests\\Fixture"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marlin Cremers",
+                    "email": "m.cremers@cvo-technologies.com"
+                }
+            ],
+            "time": "2015-08-11 22:19:38"
         },
         {
             "name": "cvo-technologies/socialseo",
@@ -2170,6 +2210,7 @@
         "cvo-technologies/croogo-webshop-payments-plugin": 20,
         "cvo-technologies/webshop-taxes": 20,
         "cvo-technologies/socialseo": 20,
+        "cvo-technologies/macro": 20,
         "cakephp/cakephp-codesniffer": 20,
         "friendsofcake/cakephp-test-utilities": 20
     },

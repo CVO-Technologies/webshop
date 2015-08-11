@@ -71,6 +71,7 @@ Cake\Core\Configure::write('Session', [
     'defaults' => 'php'
 ]);
 
+Cake\Core\Plugin::load('Macro', ['path' => ROOT . DS . 'cvo-technologies' . DS . 'macro' . DS, 'autoload' => true]);
 Cake\Core\Plugin::load('Croogo/Core', ['path' => ROOT . DS . 'croogo' . DS . 'core' . DS, 'autoload' => true]);
 Cake\Core\Plugin::load('Croogo/Nodes', ['path' => ROOT . DS . 'croogo' . DS . 'nodes' . DS, 'autoload' => true]);
 Cake\Core\Plugin::load('Webshop', ['path' => ROOT . DS, 'autoload' => true]);
