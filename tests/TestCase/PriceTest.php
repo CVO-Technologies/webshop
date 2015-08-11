@@ -96,4 +96,100 @@ class PriceTest extends TestCase
 
         $this->assertEquals(1.3500000000000001, $price->taxes()->calculated());
     }
+
+    /**
+     * Tests repeating of a price
+     *
+     * @return void
+     */
+    public function testRepeat()
+    {
+        $price = Price::fromDirectInput(10);
+
+        $price->repeat(5);
+
+        $this->assertEquals(50, $price->total());
+    }
+
+    /**
+     * Tests using a base price
+     *
+     * @return void
+     */
+    public function testBasePrice()
+    {
+        $container = PriceContainer::construct();
+        $container->add(Price::fromDirectInput(1.5));
+        $container->add(Price::fromDirectInput(1.5));
+        $container->add(Price::fromDirectInput(2));
+
+        $price = Price::createFromCollection($container);
+
+        $this->assertInstanceOf('\Webshop\Price', $price->basePrice(Price::fromDirectInput(10)));
+        $this->assertEquals(15, $price->total());
+    }
+
+    /**
+     * Tests if an empty returns a total of 0
+     *
+     * @return void
+     */
+    public function testEmptyTotal()
+    {
+        $price = Price::emptyPrice();
+
+        $this->assertEquals(0, $price->total());
+    }
+
+    /**
+     * Makes sure there is a difference between the subtotal and total
+     *
+     * @return void
+     */
+    public function testSubTotalDifference()
+    {
+        $price = Price::fromDirectInput(5);
+        $price->addVat(21);
+
+        $this->assertEquals(5, $price->subTotal());
+        $this->assertEquals(6.0499999999999998, $price->total());
+    }
+
+    /**
+     * Basic debug info checks
+     *
+     * @return void
+     */
+    public function testDebugInfo()
+    {
+        $price = Price::create();
+
+        $this->assertInternalType('array', $price->__debugInfo());
+        $this->assertArrayHasKey('collections', $price->__debugInfo());
+    }
+
+    /**
+     * Basis debug info with direct input
+     *
+     * @return void
+     */
+    public function testDebugInfoDirectInput()
+    {
+        $price = Price::fromDirectInput(10);
+
+        $this->assertArrayHasKey('directInput', $price->__debugInfo());
+    }
+
+    /**
+     * Basis debug info with empty price
+     *
+     * @return void
+     */
+    public function testDebugInfoEmpty()
+    {
+        $price = Price::emptyPrice();
+
+        $this->assertArrayHasKey('markedEmpty', $price->__debugInfo());
+        $this->assertTrue($price->__debugInfo()['markedEmpty']);
+    }
 }
