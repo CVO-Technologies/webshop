@@ -73,3 +73,7 @@ script:
 notifications:
   email: false
   irc: "irc.freenode.net#webshop"
+
+cache:
+  directories:
+  - vendor
