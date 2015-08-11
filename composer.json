@@ -2,15 +2,17 @@
     "name": "cvo-technologies/croogo-webshop-plugin",
     "type": "cakephp-plugin",
     "require": {
-        "croogo/croogo": "3.0.*@dev",
+        "croogo/core": "3.0.*@dev",
+        "croogo/nodes": "3.0.*@dev",
         "cvo-technologies/croogo-nodes-datasource-plugin": "3.0.*@dev",
         "cvo-technologies/croogo-webshop-payments-plugin": "3.0.*@dev",
         "cvo-technologies/webshop-taxes": "3.0.*@dev",
         "cvo-technologies/socialseo": "3.0.*@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "cakephp/cakephp-codesniffer": "dev-master"
+        "cakephp/cakephp-codesniffer": "dev-master",
+        "phpunit/phpunit": "4.1.*",
+        "friendsofcake/cakephp-test-utilities": "dev-master"
     },
     "replace": {
         "cvo-technologies/webshop-invoices": "3.0.*@dev"
