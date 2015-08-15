@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "394043e2b64f813c6df5e5acf5a8c06e",
+    "hash": "c6bebfd164ebabfca0087b1264d2cc38",
     "packages": [
         {
             "name": "aura/installer-default",
@@ -231,7 +231,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/1cf4fb76dda92a3a512b905326ecfbb622db601e",
+                "url": "https://api.github.com/repos/cakephp/cakephp/zipball/b73e3f60337583ea126b44d3c2113692888a0a95",
                 "reference": "f12f686a01ea39ebbf4687b36e02e0b05490038b",
                 "shasum": ""
             },
@@ -1586,7 +1586,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-token-stream/zipball/09fc125d65c344c53a7c7ad8f261e3f3af9f76c5",
                 "reference": "7a9b0969488c3c54fd62b4d504b3ec758fd005d9",
                 "shasum": ""
             },
