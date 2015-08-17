@@ -232,7 +232,7 @@ class Price
      */
     public function basePrice(Price $basePrice = null)
     {
-        if (!$basePrice) {
+        if (is_null($basePrice)) {
             return $this->_basePrice;
         }
 

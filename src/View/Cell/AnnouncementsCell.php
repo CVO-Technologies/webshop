@@ -3,6 +3,7 @@
 namespace Webshop\View\Cell;
 
 use Cake\View\Cell;
+use Cake\View\CellTrait;
 use Croogo\Nodes\Model\Table\NodesTable;
 
 /**
@@ -10,6 +11,11 @@ use Croogo\Nodes\Model\Table\NodesTable;
  */
 class AnnouncementsCell extends Cell
 {
+
+    public $helpers = [
+        'Croogo/Core.Layout',
+        'Croogo/Nodes.Nodes',
+    ];
 
     /**
      * @param int $limit limit of announcements

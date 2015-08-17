@@ -42,33 +42,33 @@ class CustomerAccessComponent extends Component
         }
     }
 
-//    public function startup(ControllerEvent $event)
-//    {
-//        $controller = $event->controller();
-//
-//        if ($controller->request->param('prefix') === 'admin') {
-//            return;
-//        }
-//
-//        $accessibleCustomers = $this->getAccessibleCustomers();
-//
-//        if (($this->getCustomerId()) && (!in_array($this->getCustomerId(), $accessibleCustomers))) {
-//            throw new ForbiddenException();
-//        }
-//
-//        $Customer = TableRegistry::get('Webshop.Customers');
-//        if ($this->getCustomerId()) {
-//            $controller->set('customer', $this->getCustomer());
-//        }
-//
-//        $controller->set('customers', $Customer->find('list')->where([
-//            'Customers.id IN' => $accessibleCustomers
-//        ])->toArray());
-//
-//        if (($this->request->param('prefix') === 'panel') && (empty($accessibleCustomers))) {
-//            throw new ForbiddenException();
-//        }
-//    }
+    public function startup(Event $event)
+    {
+        $controller = $event->subject();
+
+        if ($controller->request->param('prefix') === 'admin') {
+            return;
+        }
+
+        $accessibleCustomers = $this->getAccessibleCustomers();
+
+        if (($this->getCustomerId()) && (!in_array($this->getCustomerId(), $accessibleCustomers))) {
+            throw new ForbiddenException();
+        }
+
+        $Customer = TableRegistry::get('Webshop.Customers');
+        if ($this->getCustomerId()) {
+            $controller->set('customer', $this->getCustomer());
+        }
+
+        $controller->set('customers', $Customer->find('list')->where([
+            'Customers.id IN' => $accessibleCustomers
+        ])->toArray());
+
+        if (($this->request->param('prefix') === 'panel') && (empty($accessibleCustomers))) {
+            throw new ForbiddenException();
+        }
+    }
 
     /**
      * Returns the id of the currently selected customer

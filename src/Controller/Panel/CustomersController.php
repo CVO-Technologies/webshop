@@ -9,10 +9,6 @@ use Croogo\Core\Controller\CroogoAppController;
 class CustomersController extends CroogoAppController
 {
 
-    public $helpers = [
-        'SocialSeo.Title'
-    ];
-
     /**
      * Shows the customer dashboard
      *
