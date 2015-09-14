@@ -1,6 +1,6 @@
 <?php
 
-$this->extend('Croogo/Croogo./Common/admin_index');
+$this->extend('Croogo/Core./Common/admin_index');
 //$this->Croogo->adminScript(array('Nodes.admin'));
 
 $this->CroogoHtml
