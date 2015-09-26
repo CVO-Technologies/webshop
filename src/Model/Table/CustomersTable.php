@@ -30,7 +30,7 @@ class CustomersTable extends Table
             'className' => 'Webshop.AddressDetails',
         ]);
 
-        $this->hasMany('CustomerContacts', [
+        $this->hasMany('Contacts', [
             'className' => 'Webshop.CustomerContacts',
         ]);
         $this->hasMany('AddressDetails', [
