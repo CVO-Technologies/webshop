@@ -6,7 +6,7 @@ use Croogo\Core\Nav;
 Nav::add('sidebar', 'webshop.children.invoices', array(
     'title' => __d('webshop_invoices', 'Invoices'),
     'url' => array(
-        'admin' => true,
+        'prefix' => 'admin',
         'plugin' => 'Webshop/Invoices',
         'controller' => 'Invoices',
         'action' => 'index'

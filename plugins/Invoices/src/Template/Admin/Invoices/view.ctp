@@ -4,16 +4,16 @@
             <div class="row-fluid">
                 <div class="span6">
                     <h2>Customer</h2>
-                    <strong><?php echo h($invoice['Customer']['name']); ?></strong>
+                    <strong><?php echo h($invoice->customer->name); ?></strong>
                     <ul>
-                        <li><strong>Type</strong>: <?php echo h($invoice['Customer']['type']); ?></li>
-                        <li><strong>VAT number</strong>: <?php echo h($invoice['Customer']['vat_number']); ?></li>
+                        <li><strong>Type</strong>: <?php echo h($invoice->customer->type); ?></li>
+                        <li><strong>VAT number</strong>: <?php echo h($invoice->customer->vat_number); ?></li>
                     </ul>
                 </div>
                 <div class="span6">
                     <h2>Invoice address</h2>
                     <strong></strong>
-                    <?php echo $this->element('Webshop.address', array('addressDetail' => $invoice['AddressDetail'])); ?>
+                    <?php echo $this->element('Webshop.address_detail', array('addressDetail' => $invoice->address_detail)); ?>
                 </div>
             </div>
         </div>
@@ -31,14 +31,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($invoice['InvoiceLine'] as $invoiceLine): ?>
+                <?php foreach ($invoice->lines as $invoiceLine): ?>
                     <tr>
-                        <td><?php echo h($invoiceLine['title']); ?></td>
-                        <td><?php echo h($invoiceLine['description']); ?></td>
-                        <td><?php echo h($this->Number->currency($invoiceLine['individual_price'], 'EUR')); ?></td>
-                        <td><?php echo h($this->Number->precision($invoiceLine['amount'], 2)); ?></td>
+                        <td><?php echo h($invoiceLine->title); ?></td>
+                        <td><?php echo h($invoiceLine->description); ?></td>
+                        <td><?php echo h($this->Number->currency($invoiceLine->individual_price, 'EUR')); ?></td>
+                        <td><?php echo h($this->Number->precision($invoiceLine->amount, 2)); ?></td>
                         <td><?php echo h(($invoiceLine['tax_revision_id']) ? $invoiceLine['TaxRevision']['Tax']['name'] : 'None'); ?></td>
-                        <td><?php echo h($this->Number->currency($invoiceLine['price'], 'EUR')); ?></td>
+                        <td><?php echo h($this->Number->currency($invoiceLine->price, 'EUR')); ?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>

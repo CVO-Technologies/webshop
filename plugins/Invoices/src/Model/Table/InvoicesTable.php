@@ -38,6 +38,8 @@ class InvoicesTable extends Table
 //            ]
 //        ]);
         $this->addBehavior('Webshop.Status');
+        $this->addBehavior('Search.Searchable');
+
         $this->belongsTo('Customers', [
             'className' => 'Webshop.Customers'
         ]);
@@ -47,7 +49,7 @@ class InvoicesTable extends Table
         $this->hasMany('InvoiceProducts', [
             'className' => 'Webshop/Invoices.InvoiceProducts'
         ]);
-        $this->hasMany('InvoiceLines', [
+        $this->hasMany('Lines', [
             'className' => 'Webshop/Invoices.InvoiceLines'
         ]);
         $this->hasMany('InvoiceShippingCosts', [

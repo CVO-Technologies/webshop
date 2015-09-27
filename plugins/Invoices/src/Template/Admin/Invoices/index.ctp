@@ -1,6 +1,6 @@
 <?php
 
-$this->extend('/Common/admin_index');
+$this->extend('Croogo/Core./Common/admin_index');
 $this->Croogo->adminScript(array('Nodes.admin'));
 
 $this->Html
@@ -49,7 +49,7 @@ $this->set('showActions', false);
 $this->start('table-body');
 
 foreach ($invoices as $invoice):
-    switch ($invoice['Invoice']['status']):
+    switch ($invoice->status):
         case 'open':
             $invoiceColor = 'warning';
             break;
@@ -65,16 +65,16 @@ foreach ($invoices as $invoice):
     endswitch;
     ?>
     <tr class="<?php echo h($invoiceColor); ?>">
-        <td><?php echo $this->Form->checkbox('Invoice.' . $invoice['Invoice']['id'] . '.id', array('class' => 'row-select')); ?></td>
-        <td><?php echo $this->Html->link('#' . $invoice['Invoice']['number'], array('action' => 'view', $invoice['Invoice']['id'])); ?></td>
-        <td><?php echo $this->Html->link($invoice['Customer']['name'], array('plugin' => 'webshop', 'controller' => 'customers', 'action' => 'view', $invoice['Customer']['id'])); ?></td>
-        <td><?php echo $this->Html->link($this->Invoices->statusText($invoice['Invoice']['status']), array('?' => array('status' => $invoice['Invoice']['status']))); ?></td>
+        <td><?php echo $this->Form->checkbox('Invoice.' . $invoice->id . '.id', array('class' => 'row-select')); ?></td>
+        <td><?php echo $this->Html->link('#' . $invoice->number, array('action' => 'view', $invoice->id)); ?></td>
+        <td><?php echo $this->Html->link($invoice->customer->name, array('plugin' => 'Webshop', 'controller' => 'Customers', 'action' => 'view', $invoice['Customer']['id'])); ?></td>
+        <td><?php echo $this->Html->link($this->Invoices->statusText($invoice->status), array('?' => array('status' => $invoice->status))); ?></td>
         <td><?php echo h($this->Number->currency($invoice['Invoice']['prices']['total'], 'EUR')); ?></td>
-        <td><?php echo h($this->Time->i18nFormat($invoice['Invoice']['created'], '%c')); ?></td>
+        <td><?php echo h($invoice->created->i18nFormat([IntlDateFormatter::LONG, IntlDateFormatter::SHORT])); ?></td>
         <td>
             <div class="item-actions">
                 <?php
-                if ($invoice['Invoice']['status'] === 'arrived'):
+                if ($invoice->status === 'arrived'):
 //					echo $this->Croogo->adminRowAction(
 //						__d('webshop_Invoices', 'Mark as done'),
 //						array('action' => 'mark_done', $Invoice['Invoice']['id']),
@@ -88,7 +88,7 @@ foreach ($invoices as $invoice):
                 //						array('button' => 'warning', 'method' => 'post')
                 //					);
                 //				endif;
-                echo $this->Croogo->adminRowActions($invoice['Invoice']['id']);
+                echo $this->Croogo->adminRowActions($invoice->id);
                 ?>
             </div>
         </td>
