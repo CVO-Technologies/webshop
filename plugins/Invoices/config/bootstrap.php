@@ -26,3 +26,5 @@ Nav::add('webshop-customer-dashboard', 'invoices', array(
 Croogo::hookBehavior('Order', 'Webshop/Invoices.InvoiceTemplate');
 
 Croogo::hookHelper('*', 'Webshop/Invoices.Invoices');
+
+Croogo::hookAdminTab('Admin/Customers/view', __d('webshop_invoices', 'Invoices'), 'Webshop/Invoices.admin/tab/customer_invoices');
