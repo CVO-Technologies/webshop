@@ -6,7 +6,6 @@ namespace Webshop\Controller\Admin;
 
 use Cake\Event\Event;
 use Cake\ORM\Query;
-use Webshop\Controller\AppController;
 use Webshop\Model\Entity\AddressDetail;
 use Webshop\Model\Entity\Customer;
 use Webshop\Model\Entity\CustomerContact;

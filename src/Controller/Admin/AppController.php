@@ -1,15 +1,11 @@
 <?php
 
-namespace Webshop\Controller;
+namespace Webshop\Controller\Admin;
 
-use App\Controller\AppController as BaseController;
-use Crud\Controller\Component\CrudComponent;
+use Croogo\Core\Controller\Admin\AppController as CroogoController;
 use Crud\Controller\ControllerTrait;
 
-/**
- * @property CrudComponent Crud
- */
-class AppController extends BaseController
+class AppController extends CroogoController
 {
 
     use ControllerTrait;
@@ -36,16 +32,5 @@ class AppController extends BaseController
                 'Crud.Delete'
             ]
         ]);
-        $this->loadComponent('Search.Prg', [
-            'presetForm' => [
-                'paramType' => 'querystring',
-            ],
-            'commonProcess' => [
-                'paramType' => 'querystring',
-                'filterEmpty' => true,
-            ],
-        ]);
-
-        $this->Crud->addListener('search', 'Search.Search');
     }
 }
