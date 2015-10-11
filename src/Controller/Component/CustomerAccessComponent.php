@@ -88,11 +88,12 @@ class CustomerAccessComponent extends Component
             $customerId = $controller->request->session()->read('Customer.current');
         }
 
-        if (count($this->getAccessibleCustomers()) === 1) {
-            $customerId = $this->getAccessibleCustomers()[0];
+        $accessibleCustomers = $this->getAccessibleCustomers();
+        if (count($accessibleCustomers) === 1) {
+            $customerId = current($accessibleCustomers);
         }
 
-        if (($customerId !== false) && (!in_array($customerId, $this->getAccessibleCustomers()))) {
+        if (($customerId !== false) && (!in_array($customerId, $accessibleCustomers))) {
             $controller->request->session()->delete('Customer.current');
 
             return $this->getCustomerId();
