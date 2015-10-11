@@ -2,13 +2,12 @@
 
 namespace Webshop\Controller\Panel;
 
-use Croogo\Core\Controller\CroogoAppController;
 use Webshop\Model\Table\AddressDetailsTable;
 
 /**
  * @property AddressDetailsTable AddressDetails
  */
-class AddressDetailsController extends CroogoAppController
+class AddressDetailsController extends AppController
 {
 
     /**

@@ -4,9 +4,8 @@ namespace Webshop\Controller\Panel;
 
 use Cake\Network\Exception\NotFoundException;
 use Cake\Routing\Router;
-use Croogo\Core\Controller\CroogoAppController;
 
-class CustomersController extends CroogoAppController
+class CustomersController extends AppController
 {
 
     /**
