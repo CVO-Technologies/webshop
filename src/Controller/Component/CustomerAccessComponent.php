@@ -130,10 +130,11 @@ class CustomerAccessComponent extends Component
             $AccessProvider = CustomerAccessProvider::get($options['provider']);
 
             $accessibleCustomersTemp = $AccessProvider->getAccessibleCustomers($controller);
-
-            if (is_array($accessibleCustomersTemp)) {
-                $accessibleCustomers += $accessibleCustomersTemp;
+            if (!$accessibleCustomersTemp) {
+                continue;
             }
+
+            $accessibleCustomers += $accessibleCustomersTemp;
         }
 
         return $accessibleCustomers;
