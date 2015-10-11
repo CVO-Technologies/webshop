@@ -8,7 +8,8 @@
         "cvo-technologies/croogo-webshop-payments-plugin": "3.0.*@dev",
         "cvo-technologies/webshop-taxes": "3.0.*@dev",
         "cvo-technologies/socialseo": "3.0.*@dev",
-        "cvo-technologies/macro": "dev-master"
+        "cvo-technologies/macro": "dev-master",
+        "friendsofcake/crud": "4.*"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "dev-master",
