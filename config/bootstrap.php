@@ -96,6 +96,7 @@ Nav::add('webshop-dashboard-customer_contacts-actions', 'edit', array(
 Croogo::hookHelper('*', 'Webshop.Product');
 Croogo::hookHelper('*', 'Webshop.ConfigurationOption');
 Croogo::hookHelper('*', 'Webshop.Webshop');
+Croogo::hookHelper('*', 'CvoTechnologies/SocialSeo.Title');
 //endregion
 
 //region Behaviors
