@@ -1,5 +1,6 @@
 {
     "name": "cvo-technologies/croogo-webshop-plugin",
+    "description": "A webshop plugin for Croogo",
     "type": "cakephp-plugin",
     "require": {
         "croogo/core": "3.0.*@dev",
@@ -10,6 +11,10 @@
         "cvo-technologies/socialseo": "3.0.*@dev",
         "cvo-technologies/macro": "dev-master",
         "friendsofcake/crud": "4.*"
+    },
+    "suggest": {
+        "cvo-technologies/webshop-shopping-basket": "A basic shopping basket implementation",
+        "cvo-technologies/webshop-customer-users": "Allows users to be tied to customers"
     },
     "require-dev": {
         "cakephp/cakephp-codesniffer": "dev-master",
