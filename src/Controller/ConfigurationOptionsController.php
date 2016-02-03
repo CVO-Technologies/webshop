@@ -1,6 +1,8 @@
 <?php
 
-// @codingStandardsIgnoreStart
+namespace Webshop\Controller;
+
+use Croogo\Core\Controller\AppController as CroogoAppController;
 
 class ConfigurationOptionsController extends AppController
 {

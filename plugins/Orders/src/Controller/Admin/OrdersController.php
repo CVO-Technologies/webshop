@@ -2,6 +2,8 @@
 
 namespace Webshop\Orders\Controller\Admin;
 
+use Croogo\Core\Controller\AppController as CroogoAppController;
+
 /**
  * Class OrdersController
  *
@@ -18,7 +20,7 @@ class OrdersController extends CroogoAppController
                 )
             )
         ),
-        'Croogo.BulkProcess',
+        'Croogo/Core.BulkProcess',
         'Search.Prg' => array(
             'presetForm' => array(
                 'paramType' => 'querystring',

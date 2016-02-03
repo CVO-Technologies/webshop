@@ -2,7 +2,7 @@
 
 namespace Webshop\Invoices\Controller\Panel;
 
-use Croogo\Core\Controller\CroogoAppController;
+use Croogo\Core\Controller\AppController as CroogoAppController;
 use Webshop\Invoices\Model\Table\InvoicesTable;
 
 /**
@@ -12,7 +12,7 @@ class InvoicesController extends CroogoAppController
 {
 
     public $helpers = [
-        'SocialSeo.Title'
+        'CvoTechnologies/SocialSeo.Title'
     ];
 
     public function initialize()

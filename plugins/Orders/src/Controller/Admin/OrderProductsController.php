@@ -2,6 +2,8 @@
 
 namespace Webshop\Orders\Controller\Admin;
 
+use Croogo\Core\Controller\AppController as CroogoAppController;
+
 class OrderProductsController extends CroogoAppController
 {
 

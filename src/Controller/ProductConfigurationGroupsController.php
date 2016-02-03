@@ -1,8 +1,10 @@
 <?php
 
-// @codingStandardsIgnoreStart
+namespace Webshop\Controller;
 
-class ProductConfigurationGroupsController extends AppController
+use Croogo\Core\Controller\AppController as CroogoAppController;
+
+class ProductConfigurationGroupsController extends CroogoAppController
 {
 
     public function view($id)

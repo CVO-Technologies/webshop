@@ -1,8 +1,10 @@
 <?php
 
-// @codingStandardsIgnoreStart
+namespace Webshop\Controller;
 
-class CustomerContactsController extends AppController
+use Croogo\Core\Controller\AppController as CroogoAppController;
+
+class CustomerContactsController extends CroogoAppController
 {
 
     public $components = array(

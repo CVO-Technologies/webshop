@@ -2,7 +2,7 @@
 
 namespace Webshop\Orders\Controller\Panel;
 
-use Croogo\Core\Controller\CroogoAppController;
+use Croogo\Core\Controller\AppController as CroogoAppController;
 
 class OrdersController extends CroogoAppController
 {

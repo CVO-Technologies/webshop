@@ -61,6 +61,10 @@ class CustomerAccessComponent extends Component
             $controller->set('customer', $this->getCustomer());
         }
 
+        if (empty($accessibleCustomers)) {
+            return;
+        }
+
         $controller->set('customers', $Customer->find('list')->where([
             'Customers.id IN' => $accessibleCustomers
         ])->toArray());
